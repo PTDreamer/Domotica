@@ -1,0 +1,41 @@
+/*
+ * math.h tester.
+ */
+
+#include "math.h"
+
+string test_strings[] = {
+  "0.100in",
+  "0.5mm",
+  "30#",
+  ".05",
+  ".7",
+  "5#",
+  ""
+};
+
+int answers_mu[] = {
+  2540,
+   500,
+//  if you get far enough away, you'll be on your way home.
+  3276,
+  1270,
+  700,
+  5232
+};
+
+int i;
+string str;
+int val;
+
+for (i = 0; test_strings[i] != ""; i++) {
+  val = conv_to_units(test_strings[i]);
+  if ( val != answers_mu[i]) {
+    sprintf(str, "String: '%s' converted to %dmu", test_strings[i], val);
+    dlgMessageBox(str);
+  }
+}
+
+if (inches_to_microns(1) != 25400.000) {
+  dlgMessageBox("inches_to_microns failed");
+}

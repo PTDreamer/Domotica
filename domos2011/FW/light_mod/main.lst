@@ -1,0 +1,6274 @@
+CCS PCH C Compiler, Version 4.106, 32200               27-Mai-11 15:08
+
+               Filename: C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\main.lst
+
+               ROM used: 10920 bytes (11%)
+                         Largest free fragment is 54612
+               RAM used: 1044 (31%) at main() level
+                         1316 (40%) worst case
+               Stack:    7 worst case (3 in main + 4 for interrupts)
+
+*
+00000:  GOTO   23D8
+*
+00008:  MOVWF  04
+0000A:  MOVFF  FD8,05
+0000E:  MOVFF  FE0,06
+00012:  MOVLB  0
+00014:  MOVFF  FE9,0C
+00018:  MOVFF  FEA,07
+0001C:  MOVFF  FE1,08
+00020:  MOVFF  FE2,09
+00024:  MOVFF  FD9,0A
+00028:  MOVFF  FDA,0B
+0002C:  MOVFF  FF3,12
+00030:  MOVFF  FF4,13
+00034:  MOVFF  FFA,14
+00038:  MOVFF  FF5,15
+0003C:  MOVFF  FF6,16
+00040:  MOVFF  FF7,17
+00044:  MOVFF  FF8,18
+00048:  MOVFF  FFB,19
+0004C:  MOVFF  00,0E
+00050:  MOVFF  01,0F
+00054:  MOVFF  02,10
+00058:  MOVFF  03,11
+0005C:  BTFSS  FF2.5
+0005E:  GOTO   0068
+00062:  BTFSC  FF2.2
+00064:  GOTO   091A
+00068:  BTFSS  F9D.0
+0006A:  GOTO   0074
+0006E:  BTFSC  F9E.0
+00070:  GOTO   093E
+00074:  BTFSS  FF2.4
+00076:  GOTO   0080
+0007A:  BTFSC  FF2.1
+0007C:  GOTO   0946
+00080:  BTFSS  F9D.5
+00082:  GOTO   008C
+00086:  BTFSC  F9E.5
+00088:  GOTO   0A8E
+0008C:  BTFSS  F9D.4
+0008E:  GOTO   0098
+00092:  BTFSC  F9E.4
+00094:  GOTO   0A94
+00098:  BTFSS  F9D.2
+0009A:  GOTO   00A4
+0009E:  BTFSC  F9E.2
+000A0:  GOTO   14D8
+000A4:  BTFSS  FA0.3
+000A6:  GOTO   00B0
+000AA:  BTFSC  FA1.3
+000AC:  GOTO   0A9A
+000B0:  BTFSS  FA3.7
+000B2:  GOTO   00BC
+000B6:  BTFSC  FA4.7
+000B8:  GOTO   14CC
+000BC:  BTFSS  FA3.5
+000BE:  GOTO   00C8
+000C2:  BTFSC  FA4.5
+000C4:  GOTO   14D2
+000C8:  BTFSS  FA3.4
+000CA:  GOTO   00D4
+000CE:  BTFSC  FA4.4
+000D0:  GOTO   14C4
+000D4:  BTFSS  FA3.3
+000D6:  GOTO   00E0
+000DA:  BTFSC  FA4.3
+000DC:  GOTO   14BC
+000E0:  BTFSS  FA3.2
+000E2:  GOTO   00EC
+000E6:  BTFSC  FA4.2
+000E8:  GOTO   14B4
+000EC:  BTFSS  FA3.1
+000EE:  GOTO   00F8
+000F2:  BTFSC  FA4.1
+000F4:  GOTO   1084
+000F8:  BTFSS  FA3.0
+000FA:  GOTO   0104
+000FE:  BTFSC  FA4.0
+00100:  GOTO   107C
+00104:  BTFSS  FA0.7
+00106:  GOTO   0110
+0010A:  BTFSC  FA1.7
+0010C:  GOTO   0AA0
+00110:  MOVFF  0E,00
+00114:  MOVFF  0F,01
+00118:  MOVFF  10,02
+0011C:  MOVFF  11,03
+00120:  MOVFF  0C,FE9
+00124:  MOVFF  07,FEA
+00128:  BSF    07.7
+0012A:  MOVFF  08,FE1
+0012E:  MOVFF  09,FE2
+00132:  MOVFF  0A,FD9
+00136:  MOVFF  0B,FDA
+0013A:  MOVFF  12,FF3
+0013E:  MOVFF  13,FF4
+00142:  MOVFF  14,FFA
+00146:  MOVFF  15,FF5
+0014A:  MOVFF  16,FF6
+0014E:  MOVFF  17,FF7
+00152:  MOVFF  18,FF8
+00156:  MOVFF  19,FFB
+0015A:  MOVF   04,W
+0015C:  MOVFF  06,FE0
+00160:  MOVFF  05,FD8
+00164:  RETFIE 0
+....................  
+.................... #include "main.h" 
+.................... #include <18F4685.h> 
+.................... //////// Standard Header file for the PIC18F4685 device //////////////// 
+.................... #device PIC18F4685 
+.................... #list 
+....................  
+.................... #device adc=8 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES WDT128                	//Watch Dog Timer uses 1:128 Postscale 
+.................... #FUSES H4                    	//High speed osc with HW enabled 4X PLL 
+.................... #FUSES NOPROTECT             	//Code not protected from reading 
+.................... #FUSES BROWNOUT              	//Reset when brownout detected 
+.................... #FUSES BORV20                	//Brownout reset at 2.0V 
+.................... #FUSES NOPUT                 	//No Power Up Timer 
+.................... #FUSES NOCPD                 	//No EE protection 
+.................... #FUSES STVREN                	//Stack full/underflow will cause reset 
+.................... #FUSES NODEBUG               	//No Debug mode for ICD 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOWRT                 	//Program memory not write protected 
+.................... #FUSES NOWRTD                	//Data EEPROM not write protected 
+.................... #FUSES IESO                  	//Internal External Switch Over mode enabled 
+.................... #FUSES FCMEN                 	//Fail-safe clock monitor enabled 
+.................... #FUSES PBADEN                	//PORTB pins are configured as analog input channels on RESET 
+.................... #FUSES BBSIZ4K               	//4K words Boot Block size 
+.................... #FUSES NOWRTC                	//configuration not registers write protected 
+.................... #FUSES NOWRTB                	//Boot block not write protected 
+.................... #FUSES NOEBTR                	//Memory not protected from table reads 
+.................... #FUSES NOEBTRB               	//Boot block not protected from table reads 
+.................... #FUSES NOCPB                 	//No Boot Block code protection 
+.................... #FUSES LPT1OSC               	//Timer1 configured for low-power operation 
+.................... #FUSES MCLR                  	//Master Clear pin enabled 
+.................... #FUSES NOXINST               	//Extended set extension and Indexed Addressing mode disabled (Legacy mode) 
+....................  
+.................... #use delay(clock=40000000,RESTART_WDT) 
+*
+022FE:  MOVLW  04
+02300:  MOVWF  FEA
+02302:  MOVLW  A3
+02304:  MOVWF  FE9
+02306:  MOVF   FEF,W
+02308:  BZ    232C
+0230A:  MOVLW  0C
+0230C:  MOVWF  01
+0230E:  MOVLW  BF
+02310:  MOVWF  00
+02312:  CLRWDT
+02314:  DECFSZ 00,F
+02316:  BRA    2312
+02318:  DECFSZ 01,F
+0231A:  BRA    230E
+0231C:  MOVLW  F7
+0231E:  MOVWF  00
+02320:  DECFSZ 00,F
+02322:  BRA    2320
+02324:  NOP   
+02326:  CLRWDT
+02328:  DECFSZ FEF,F
+0232A:  BRA    230A
+0232C:  RETLW  00
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_B5,rcv=PIN_B4,bits=8,restart_wdt) 
+*
+0036C:  BCF    F93.5
+0036E:  BCF    F8A.5
+00370:  MOVLW  08
+00372:  MOVWF  01
+00374:  BRA    0376
+00376:  NOP   
+00378:  BSF    01.7
+0037A:  BRA    039C
+0037C:  BCF    01.7
+0037E:  MOVLB  4
+00380:  RRCF   xFE,F
+00382:  MOVLB  0
+00384:  BTFSC  FD8.0
+00386:  BSF    F8A.5
+00388:  BTFSS  FD8.0
+0038A:  BCF    F8A.5
+0038C:  BSF    01.6
+0038E:  BRA    039C
+00390:  BCF    01.6
+00392:  DECFSZ 01,F
+00394:  BRA    037E
+00396:  BRA    0398
+00398:  NOP   
+0039A:  BSF    F8A.5
+0039C:  MOVLW  01
+0039E:  MOVWF  00
+003A0:  CLRF   FE9
+003A2:  DECFSZ FE9,F
+003A4:  BRA    03A2
+003A6:  DECFSZ 00,F
+003A8:  BRA    03A0
+003AA:  MOVLW  53
+003AC:  MOVWF  FE9
+003AE:  DECFSZ FE9,F
+003B0:  BRA    03AE
+003B2:  BRA    03B4
+003B4:  CLRWDT
+003B6:  BTFSC  01.7
+003B8:  BRA    037C
+003BA:  BTFSC  01.6
+003BC:  BRA    0390
+003BE:  RETLW  00
+....................  
+....................  
+.................... #include "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h" 
+.................... #define  NUMBER_OF_SWITCHES 8 
+.................... #define  LED PIN_E2 
+.................... #define  OUT1  PIN_C0 
+.................... #define  OUT2  PIN_C1 
+.................... #define  OUT3  PIN_C2 
+.................... #define  OUT4  PIN_C3 
+.................... #define  OUT5  PIN_C4 
+.................... #define  OUT6  PIN_C5 
+.................... #define  OUT7  PIN_C6 
+.................... #define  OUT8  PIN_C7 
+.................... #define  OUT9  PIN_D1 
+.................... #define  OUT10  PIN_D0 
+.................... #define  OUT11  PIN_D2 
+.................... #define  OUT12  PIN_D3 
+.................... #define  OUT13  PIN_D7 
+.................... #define  OUT14  PIN_D6 
+.................... #define  OUT15  PIN_D5 
+.................... #define  OUT16  PIN_D4 
+.................... #define  INP1  PIN_A0 
+.................... #define  INP2  PIN_A1 
+.................... #define  INP3  PIN_A2 
+.................... #define  INP4  PIN_A3 
+.................... #define  INP5  PIN_A4 
+.................... #define  INP6  PIN_A5 
+.................... #define  INP7  PIN_E0 
+.................... #define  INP8  PIN_E1 
+....................  
+.................... #byte porta=0xf80 
+.................... #byte portb=0xf81 
+.................... #byte portc=0xf82 
+.................... #byte portd=0xf83 
+.................... #byte porte=0xf84 
+.................... #byte trisa=0xf92 
+.................... #byte trisb=0xf93 
+.................... #byte trisc=0xf94 
+.................... #byte trisd=0xf95 
+.................... #byte trise=0xf96 
+....................  
+.................... static int inputs[8]={INP1,INP2,INP3,INP4,INP5,INP6,INP7,INP8}; 
+....................  
+.................... #include "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c" 
+.................... #define CAN_USE_EXTENDED_ID FALSE 
+.................... #include <can-18xxx8.c> 
+.................... ///////////////////////////////////////////////////////////////////////// 
+.................... ////                        can-18xxx8.c                             //// 
+.................... //// CAN Library routines for Microchip's PIC18Cxx8 and 18Fxx8 line  //// 
+.................... ////                                                                 //// 
+.................... //// This library provides the following functions:                  //// 
+.................... ////  (for more information on these functions see the comment       //// 
+.................... ////   header above each function)                                   //// 
+.................... ////                                                                 //// 
+.................... ////    can_init - Configures the PIC18xxx8 CAN peripheral           //// 
+.................... ////                                                                 //// 
+.................... ////    can_set_baud - Sets the baud rate control registers          //// 
+.................... ////                                                                 //// 
+.................... ////    can_set_mode - Sets the CAN module into a specific mode      //// 
+.................... ////                                                                 //// 
+.................... ////    can_set_id - Sets the standard and extended ID               //// 
+.................... ////                                                                 //// 
+.................... ////    can_get_id - Gets the standard and extended ID               //// 
+.................... ////                                                                 //// 
+.................... ////    can_putd - Sends a message/request with specified ID         //// 
+.................... ////                                                                 //// 
+.................... ////    can_getd - Returns specifid message/request and ID           //// 
+.................... ////                                                                 //// 
+.................... ////    can_kbhit - Returns true if there is data in one of the      //// 
+.................... ////                receive buffers                                  //// 
+.................... ////                                                                 //// 
+.................... ////    can_tbe - Returns true if the transmit buffer is ready to    //// 
+.................... ////              send more data                                     //// 
+.................... ////                                                                 //// 
+.................... ////    can_abort - Aborts all pending transmissions                 //// 
+.................... ////                                                                 //// 
+.................... //// PIN_B3 is CANRX, and PIN_B2 is CANTX.  You will need a CAN      //// 
+.................... //// transeiver to connect these pins to CANH and CANL bus lines.    //// 
+.................... ////                                                                 //// 
+.................... //// CCS provides an example, ex_can.c, which shows how to use this  //// 
+.................... //// library.                                                        //// 
+.................... ////                                                                 //// 
+.................... ///////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                 //// 
+.................... //// Version History                                                 //// 
+.................... ////                                                                 //// 
+.................... ////  Jul 27 04 - can_init() uses CAN_USE_EXTENDED_ID instead of     //// 
+.................... ////              setting all RX filters to extended.                //// 
+.................... ////                                                                 //// 
+.................... ////  Feb 24 04 - can_get_id() fixed for EID<18:20>.                 //// 
+.................... ////                                                                 //// 
+.................... ////  Mar 30 09 - added CANTX2 code for PIC18F6585/8585/6680/8680    //// 
+.................... ////                                                                 //// 
+.................... ///////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2003 Custom Computer Services         //// 
+.................... //// This source code may only be used by licensed users of the CCS  //// 
+.................... //// C compiler.  This source code may only be distributed to other  //// 
+.................... //// licensed users of the CCS C compiler.  No other use,            //// 
+.................... //// reproduction or distribution is permitted without written       //// 
+.................... //// permission.  Derivative programs created using this software    //// 
+.................... //// in object code form are not restricted in any way.              //// 
+.................... ///////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #include <can-18xxx8.h> 
+.................... ///////////////////////////////////////////////////////////////////////// 
+.................... ////                        can-18xxx8.h                             //// 
+.................... ////                                                                 //// 
+.................... //// Prototypes, definitions, defines and macros used for and with   //// 
+.................... //// the CCS CAN library for PIC18Fxx8 and PIC18Cxx8.                //// 
+.................... ////                                                                 //// 
+.................... //// (see can-18xxx8.c)                                              //// 
+.................... ////                                                                 //// 
+.................... ///////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2003 Custom Computer Services         //// 
+.................... //// This source code may only be used by licensed users of the CCS  //// 
+.................... //// C compiler.  This source code may only be distributed to other  //// 
+.................... //// licensed users of the CCS C compiler.  No other use,            //// 
+.................... //// reproduction or distribution is permitted without written       //// 
+.................... //// permission.  Derivative programs created using this software    //// 
+.................... //// in object code form are not restricted in any way.              //// 
+.................... ///////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #ifndef __CCS_CAN18xxx8_LIB_DEFINES__ 
+.................... #define __CCS_CAN18xxx8_LIB_DEFINES__ 
+....................  
+.................... #ifndef CAN_DO_DEBUG 
+....................  #define CAN_DO_DEBUG FALSE 
+.................... #endif 
+....................  
+.................... #IFNDEF CAN_USE_EXTENDED_ID 
+....................   #define CAN_USE_EXTENDED_ID         TRUE 
+.................... #ENDIF 
+....................  
+.................... #IFNDEF CAN_BRG_SYNCH_JUMP_WIDTH 
+....................   #define CAN_BRG_SYNCH_JUMP_WIDTH  0  //synchronized jump width (def: 1 x Tq) 
+.................... #ENDIF 
+....................  
+.................... #IFNDEF CAN_BRG_PRESCALAR 
+....................   #define CAN_BRG_PRESCALAR  4  //baud rate generator prescalar (def: 4) ( Tq = (2 x (PRE + 1))/Fosc ) 
+.................... #ENDIF 
+....................  
+.................... #ifndef CAN_BRG_SEG_2_PHASE_TS 
+....................  #define CAN_BRG_SEG_2_PHASE_TS   TRUE //phase segment 2 time select bit (def: freely programmable) 
+.................... #endif 
+....................  
+.................... #ifndef CAN_BRG_SAM 
+....................  #define CAN_BRG_SAM 0 //sample of the can bus line (def: bus line is sampled 1 times prior to sample point) 
+.................... #endif 
+....................  
+.................... #ifndef CAN_BRG_PHASE_SEGMENT_1 
+....................  #define CAN_BRG_PHASE_SEGMENT_1  5 //phase segment 1 (def: 6 x Tq) 
+.................... #endif 
+....................  
+.................... #ifndef CAN_BRG_PROPAGATION_TIME 
+....................  #define CAN_BRG_PROPAGATION_TIME 2 //propagation time select (def: 3 x Tq) 
+.................... #endif 
+....................  
+.................... #ifndef CAN_BRG_WAKE_FILTER 
+....................  #define CAN_BRG_WAKE_FILTER FALSE   //selects can bus line filter for wake up bit 
+.................... #endif 
+....................  
+.................... #ifndef CAN_BRG_PHASE_SEGMENT_2 
+....................  #define CAN_BRG_PHASE_SEGMENT_2 5 //phase segment 2 time select (def: 6 x Tq) 
+.................... #endif 
+....................  
+.................... #ifndef CAN_USE_RX_DOUBLE_BUFFER 
+....................  #define CAN_USE_RX_DOUBLE_BUFFER TRUE   //if buffer 0 overflows, do NOT use buffer 1 to put buffer 0 data 
+.................... #endif 
+....................  
+.................... #ifndef CAN_ENABLE_DRIVE_HIGH 
+....................  #define CAN_ENABLE_DRIVE_HIGH 0 
+.................... #endif 
+....................  
+.................... #ifndef CAN_ENABLE_CAN_CAPTURE 
+....................  #define CAN_ENABLE_CAN_CAPTURE 0 
+.................... #endif 
+....................  
+.................... #ifndef CAN_ENABLE_CANTX2           // added 03/30/09 for PIC18F6585/8585/6680/8680 
+....................    #define CAN_ENABLE_CANTX2 0      // 0 CANTX2 disabled, 1 CANTX2 enabled 
+.................... #endif 
+....................  
+.................... #ifndef CAN_CANTX2_SOURCE           // added 03/30/09 for PIC18F6585/8585/6680/8680 
+....................    #define CAN_CANTX2_SOURCE 0      // 0 source is invert of CANTX1, 1 source is CAN Clock 
+.................... #endif 
+....................  
+.................... enum CAN_OP_MODE {CAN_OP_CONFIG=4, CAN_OP_LISTEN=3, CAN_OP_LOOPBACK=2, CAN_OP_DISABLE=1, CAN_OP_NORMAL=0}; 
+.................... enum CAN_WIN_ADDRESS {CAN_WIN_RX0=0, CAN_WIN_RX1=5, CAN_WIN_TX0=4, CAN_WIN_TX1=3, CAN_WIN_TX2=2}; 
+....................  
+.................... //can control 
+.................... struct { 
+....................    int1 void0; //0 
+....................    CAN_WIN_ADDRESS win:3;   //1:3 //window address bits 
+....................    int1 abat;   //4 //abort all pending transmissions 
+....................    CAN_OP_MODE reqop:3;   //5:7   //request can operation mode bits 
+.................... } CANCON; 
+.................... #byte CANCON = 0xF6F 
+....................  
+....................  
+.................... enum CAN_INT_CODE {CAN_INT_WAKEUP=7, CAN_INT_RX0=6, CAN_INT_RX1=5, CAN_INT_TX0=4, CAN_INT_TX1=3, CAN_INT_TX2=2, CAN_INT_ERROR=1, CAN_INT_NO=0}; 
+....................  
+.................... //can status register READ-ONLY 
+.................... struct { 
+....................    int1 void0;   //0 
+....................    CAN_INT_CODE icode:3;   //1:3   //interrupt code 
+....................    int1 void4;   //4 
+....................    CAN_OP_MODE opmode:3;   //5:7   //operation mode status 
+.................... } CANSTAT; 
+.................... #byte CANSTAT = 0xF6E 
+....................  
+.................... //communication status register READ-ONLY 
+.................... struct { 
+....................    int1 ewarn;      //0 //error warning 
+....................    int1 rxwarn;      //1 //receiver warning 
+....................    int1 txwarn;      //2 //transmitter warning 
+....................    int1 rxbp;   //3 //receiver bus passive 
+....................    int1 txbp;   //4 //transmitter bus passive bit 
+....................    int1 txbo;   //5   //transmitter bus off 
+....................    int1 rx1ovfl;   //6   //receive buffer 1 overflow 
+....................    int1 rx0ovfl;   //7   //receive buffer 0 overflow 
+.................... } COMSTAT; 
+.................... #byte COMSTAT=0xF74 
+....................  
+.................... //baud rate control register 1 
+.................... struct { 
+....................    int brp:6;   //0:5   //baud rate prescalar 
+....................    int sjw:2;   //6:7   //synchronized jump width 
+.................... } BRGCON1; 
+.................... #byte BRGCON1=0xF70 
+....................  
+.................... //baud rate control register 2 
+.................... struct { 
+....................    int prseg:3; //0:2 //propagation time select 
+....................    int seg1ph:3; //3:5 //phase segment 1 
+....................    int1 sam; //6 //sample of the can bus line 
+....................    int1 seg2phts; //7 //phase segment 2 time select 
+.................... } BRGCON2; 
+.................... #byte BRGCON2=0xF71 
+....................  
+.................... //baud rate control register 3 
+.................... struct { 
+....................    int seg2ph:3;   //0:2   //phase segment 2 time select 
+....................    int void543:3;   //3:5 
+....................    int1 wakfil;   //6 //selects can bus line filter for wake-up 
+....................    int1 void7;   //7 
+.................... } BRGCON3; 
+.................... #byte BRGCON3=0xF72 
+....................  
+.................... //can i/o control register 
+.................... struct { 
+....................    int void3210:4;   //0:3 
+....................    int1 cancap;   //4 //can message receive caputre 
+....................    int1 endrhi;   //5 //enable drive high 
+....................    int1 tx2en;    //6   //CANTX2 Pin Enable bit       //added 3/30/09 for PIC18F6585/8585/6680/8680 
+....................    int1 tx2src;   //7   //CANTX2 Pin Data Source bit  //added 3/30/09 for PIC18F6585/8585/6680/8680 
+.................... } CIOCON; 
+.................... #byte CIOCON=0xF73 
+....................  
+.................... //transmit buffer n control register 
+.................... struct txbNcon_struct { 
+....................    int  txpri:2;   //0:1   //transmit priority bits 
+....................    int1 void2; //2 
+....................    int1 txreq;   //3   //transmit request status (clear to request message abort) 
+....................    int1 txerr;   //4   //transmission error detected 
+....................    int1 txlarb;   //5   //transmission lost arbitration status 
+....................    int1 txabt;   //6   //transmission aborted status 
+....................    int1 void7; 
+.................... }; 
+.................... struct txbNcon_struct TXB0CON; 
+.................... struct txbNcon_struct TXB1CON; 
+.................... struct txbNcon_struct TXB2CON; 
+.................... struct txbNcon_struct TXBaCON; 
+.................... #byte   TXB0CON=0xF40 
+.................... #byte   TXB1CON=0xF30 
+.................... #byte   TXB2CON=0xF20 
+.................... #byte TXBaCON=0xF60 //txbXcon when in the access bank 
+....................  
+....................  
+.................... //transmit buffer n standard identifier 
+.................... #byte TXB0SIDH=0xF41 
+.................... #byte TXB0SIDL=0xF42 
+.................... #byte TXB1SIDH=0xF31 
+.................... #byte TXB1SIDL=0xF32 
+.................... #byte TXB2SIDH=0xF21 
+.................... #byte TXB2SIDL=0xF22 
+....................  
+.................... //transmit buffer n extended identifier 
+.................... #byte TXB0EIDH=0xF43 
+.................... #byte TXB0EIDL=0xF44 
+.................... #byte TXB1EIDH=0xF33 
+.................... #byte TXB1EIDL=0xF34 
+.................... #byte TXB2EIDH=0xF23 
+.................... #byte TXB2EIDL=0xF24 
+....................  
+.................... #define RX0MASK      0xF1B    //rxm0eidl 
+.................... #define RX1MASK      0xF1F    //rxm1eidl 
+.................... #define RX0FILTER0   0xF03    //rxf0eidl 
+.................... #define RX0FILTER1   0xF07    //rxf1eidl 
+.................... #define RX1FILTER2   0xF0B    //rxf2eidl 
+.................... #define RX1FILTER3   0xF0F    //rxf3eidl 
+.................... #define RX1FILTER4   0xF13    //rxf4eidl 
+.................... #define RX1FILTER5   0xF17    //rxf5eidl 
+.................... #define RXB0ID       0xF64    //rxb0eidl 
+.................... #define RXB1ID       0xF54    //rxb1eidl 
+.................... #define TXB0ID       0xF44    //txb0eidl 
+.................... #define TXB1ID       0xF34    //txb1eidl 
+.................... #define TXB2ID       0xF24    //tsb2eidl 
+.................... #define TXRXBaID     0xF64 
+....................  
+.................... //transmit buffer n data byte m 
+.................... #byte TXB0D0=0xF46 
+.................... #byte TXB0D7=0xF4D 
+.................... #byte TXB1D0=0xF36 
+.................... #byte TXB1D7=0xF3D 
+.................... #byte TXB2D0=0xF26 
+.................... #byte TXB2D7=0xF2D 
+....................  
+.................... //transmit buffer n data length 
+.................... struct txbNdlc_struct { 
+....................    int dlc:4;   //0:3 
+....................    int void54:2; //4:5 
+....................    int1 rtr; //6 //transmission frame remote tranmission 
+....................    int1 void7; //7 
+.................... }; 
+.................... struct txbNdlc_struct TXB0DLC; 
+.................... struct txbNdlc_struct TXB1DLC; 
+.................... struct txbNdlc_struct TXB2DLC; 
+.................... struct txbNdlc_struct TXBaDLC; 
+.................... #byte TXB0DLC=0xF45 
+.................... #byte TXB1DLC=0xF35 
+.................... #byte TXB2DLC=0xF25 
+.................... #byte TXBaDLC=0xF65  //txbXdlc when in the access bank 
+....................  
+....................  
+.................... //transmit error count register 
+.................... #byte TXERRCNT=0xF76 
+....................  
+....................  
+.................... enum CAN_RX_MODE {CAN_RX_ALL=3, CAN_RX_EXT=2, CAN_RX_STD=1, CAN_RX_VALID=0}; 
+....................  
+.................... //receive buffer 0 control register 
+.................... struct { 
+....................    int1 filthit0;   //0 //filter hit 
+....................    int1 jtoff;   //1 //jump table offset 
+....................    int1 rxb0dben;   //2 //receive buffer 0 double buffer enable 
+....................    int1 rxrtrro;   //3 //receive remote transfer request 
+....................    int1 void4;   //4 
+....................    CAN_RX_MODE rxm:2;   //5:6 //receiver buffer mode 
+....................    int1 rxful;   //7 //receive full status 
+.................... } RXB0CON; 
+.................... #byte RXB0CON=0xF60 
+....................  
+.................... //receive buffer 1 control register 
+.................... struct { 
+....................    int filthit:3;   //0:2 
+....................    int1 rxrtrro;   //3 //receive remote transfer request 
+....................    int1 void4;   //4 
+....................    CAN_RX_MODE rxm:2;   //5:6 //receive buffer mode 
+....................    int1 rxful;   //7   //receive full 
+.................... } RXB1CON; 
+.................... #byte   RXB1CON=0xF50 
+....................  
+....................  
+.................... //receive buffer n standard identifier 
+.................... #byte   RXB0SIDH=0xF61 
+.................... #byte   RXB0SIDL=0xF62 
+.................... #byte   RXB1SIDH=0xF51 
+.................... #byte   RXB1SIDL=0xF52 
+....................  
+.................... //receive buffer n extended identifier 
+.................... #byte   RXB0EIDH=0xF63 
+.................... #byte   RXB0EIDL=0xF64 
+.................... #byte   RXB1EIDH=0xF53 
+.................... #byte   RXB1EIDL=0xF54 
+....................  
+.................... #byte TXRXBaEIDL=0xF64 
+....................  
+.................... struct { 
+....................    int void012:3; //0:3 
+....................    int1 ext;   //extendid id 
+....................    int1 srr;   //substitute remove request bit 
+....................    int void567:3; //5:7 
+.................... } TXRXBaSIDL; 
+.................... #byte TXRXBaSIDL=0xF62 
+....................  
+.................... //receive buffer n data length code register 
+.................... struct rxbNdlc_struct { 
+....................    int dlc:4;   //0:3 //data length code 
+....................    int1 rb0; //4 //reserved 
+....................    int1 rb1;   //5 //reserved 
+....................    int1 rtr;   //6 //receiver remote transmission request bit 
+....................    int1 void7;   //7 
+.................... }; 
+.................... struct rxbNdlc_struct RXB0DLC; 
+.................... struct rxbNdlc_struct RXB1DLC; 
+.................... struct rxbNdlc_struct RXBaDLC; 
+.................... #byte   RXB0DLC=0xF65 
+.................... #byte   RXB1DLC=0xF55 
+.................... #byte   RXBaDLC=0xF65 
+....................  
+.................... //receive buffer n data field byte m register 
+.................... #byte RXB0D0=0xF66 
+.................... #byte RXB0D7=0xF6D 
+.................... #byte TXRXBaD0=0xF66 
+.................... #byte TXRXBaD7=0xF6D 
+....................  
+.................... //receive error count 
+.................... #byte RXERRCNT=0xF75 
+....................  
+.................... //receive acceptance filter n standard indifier 
+.................... #byte RXF0SIDH=0xF00 
+.................... #byte RXF0SIDL=0xF01 
+.................... #byte RXF1SIDH=0xF04 
+.................... #byte RXF1SIDL=0xF05 
+.................... #byte RXF2SIDH=0xF08 
+.................... #byte RXF2SIDL=0xF09 
+.................... #byte RXF3SIDH=0xF0C 
+.................... #byte RXF3SIDL=0xF0D 
+.................... #byte RXF4SIDH=0xF10 
+.................... #byte RXF4SIDL=0xF11 
+.................... #byte RXF5SIDH=0xF14 
+.................... #byte RXF5SIDL=0xF15 
+....................  
+.................... //receive acceptance filter n extended indifier 
+.................... #byte RXF0EIDH=0xF02 
+.................... #byte RXF0EIDL=0xF03 
+.................... #byte RXF1EIDH=0xF06 
+.................... #byte RXF1EIDL=0xF07 
+.................... #byte RXF2EIDH=0xF0A 
+.................... #byte RXF2EIDL=0xF0B 
+.................... #byte RXF3EIDH=0xF0E 
+.................... #byte RXF3EIDL=0xF0F 
+.................... #byte RXF4EIDH=0xF12 
+.................... #byte RXF4EIDL=0xF13 
+.................... #byte RXF5EIDH=0xF16 
+.................... #byte RXF5EIDL=0xF17 
+....................  
+.................... //receive acceptance mask n standard identifer mask 
+.................... #byte RXM0SIDH=0xF18 
+.................... #byte RXM0SIDL=0xF19 
+.................... #byte RXM1SIDH=0xF1C 
+.................... #byte RXM1SIDL=0xF1D 
+....................  
+.................... //receive acceptance mask n extended identifer mask 
+.................... #byte RXM0EIDH=0xF1A 
+.................... #byte RXM0EIDL=0xF1B 
+.................... #byte RXM1EIDH=0xF1E 
+.................... #byte RXM1EIDL=0xF1F 
+....................  
+.................... //value to put in mask field to accept all incoming id's 
+.................... #define CAN_MASK_ACCEPT_ALL   0 
+....................  
+.................... //can interrupt flags 
+.................... #bit CAN_INT_IRXIF = 0xFA4.7 
+.................... #bit CAN_INT_WAKIF = 0xFA4.6 
+.................... #bit CAN_INT_ERRIF = 0xFA4.5 
+.................... #bit CAN_INT_TXB2IF = 0xFA4.4 
+.................... #bit CAN_INT_TXB1IF = 0xFA4.3 
+.................... #bit CAN_INT_TXB0IF = 0xFA4.2 
+.................... #bit CAN_INT_RXB1IF = 0xFA4.1 
+.................... #bit CAN_INT_RXB0IF = 0xFA4.0 
+....................  
+.................... //PROTOTYPES 
+....................  
+.................... struct rx_stat { 
+....................    int1 err_ovfl; 
+....................    int filthit:3; 
+....................    int1 buffer; 
+....................    int1 rtr; 
+....................    int1 ext; 
+....................    int1 inv; 
+.................... }; 
+....................  
+.................... void  can_init(void); 
+.................... void  can_set_baud(void); 
+.................... void  can_set_mode(CAN_OP_MODE mode); 
+.................... void  can_set_id(int* addr, int32 id, int1 ext); 
+.................... int32 can_get_id(int * addr, int1 ext); 
+.................... int   can_putd(int32 id, int * data, int len, int priority, int1 ext, int1 rtr); 
+.................... int1  can_getd(int32 & id, int * data, int & len, struct rx_stat & stat); 
+....................  
+.................... #endif 
+....................  
+....................  
+.................... #if CAN_DO_DEBUG 
+....................  #define can_debug printf 
+.................... #else 
+....................  #define can_debug 
+.................... #endif 
+....................  
+....................  
+.................... //macros 
+.................... #define can_kbhit()                 (RXB0CON.rxful || RXB1CON.rxful) 
+.................... #define can_tbe()                   (!TXB0CON.txreq || !TXB1CON.txreq || !TXB2CON.txreq) 
+.................... #define can_abort()                 (CANCON.abat=1) 
+....................  
+....................  
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... // 
+.................... // can_init() 
+.................... // 
+.................... // Initializes PIC18xxx8 CAN peripheral.  Sets the RX filter and masks so the 
+.................... // CAN peripheral will receive all incoming IDs.  Configures both RX buffers 
+.................... // to only accept valid valid messages (as opposed to all messages, or all 
+.................... // extended message, or all standard messages).  Also sets the tri-state 
+.................... // setting of B2 to output, and B3 to input (apparently the CAN peripheral 
+.................... // doesn't keep track of this) 
+.................... // 
+.................... // The constants (CAN_USE_RX_DOUBLE_BUFFER, CAN_ENABLE_DRIVE_HIGH, 
+.................... // CAN_ENABLE_CAN_CAPTURE) are given a default define in the can-18xxx8.h file. 
+.................... // These default values can be overwritten in the main code, but most 
+.................... // applications will be fine with these defaults. 
+.................... // 
+.................... ////////////////////////////////////////////////////////////////////////////// 
+.................... void can_init(void) { 
+....................    can_set_mode(CAN_OP_CONFIG);   //must be in config mode before params can be set 
+*
+016A2:  MOVLW  04
+016A4:  MOVLB  4
+016A6:  MOVWF  xA2
+016A8:  MOVLB  0
+016AA:  RCALL  164C
+....................    can_set_baud(); 
+016AC:  BRA    1672
+....................  
+....................    RXB0CON=0; 
+016AE:  CLRF   F60
+....................    RXB0CON.rxm=CAN_RX_VALID; 
+016B0:  MOVLW  9F
+016B2:  ANDWF  F60,W
+016B4:  MOVWF  F60
+....................    RXB0CON.rxb0dben=CAN_USE_RX_DOUBLE_BUFFER; 
+016B6:  BSF    F60.2
+....................    RXB1CON=RXB0CON; 
+016B8:  MOVFF  F60,F50
+....................  
+....................    CIOCON.endrhi=CAN_ENABLE_DRIVE_HIGH; 
+016BC:  BCF    F73.5
+....................    CIOCON.cancap=CAN_ENABLE_CAN_CAPTURE; 
+016BE:  BCF    F73.4
+....................    CIOCON.tx2src=CAN_CANTX2_SOURCE;       //added 3/30/09 for PIC18F6585/8585/6680/8680 
+016C0:  BCF    F73.7
+....................    CIOCON.tx2en=CAN_ENABLE_CANTX2;        //added 3/30/09 for PIC18F6585/8585/6680/8680 
+016C2:  BCF    F73.6
+016C4:  CLRF   1B
+016C6:  BTFSC  FF2.7
+016C8:  BSF    1B.7
+016CA:  BCF    FF2.7
+....................  
+....................    can_set_id(RX0MASK, CAN_MASK_ACCEPT_ALL, CAN_USE_EXTENDED_ID);  //set mask 0 
+016CC:  MOVLW  0F
+016CE:  MOVLB  5
+016D0:  MOVWF  x18
+016D2:  MOVLW  1B
+016D4:  MOVWF  x17
+016D6:  CLRF   x1C
+016D8:  CLRF   x1B
+016DA:  CLRF   x1A
+016DC:  CLRF   x19
+016DE:  CLRF   x1D
+016E0:  MOVLB  0
+016E2:  RCALL  108C
+016E4:  BTFSC  1B.7
+016E6:  BSF    FF2.7
+016E8:  CLRF   1B
+016EA:  BTFSC  FF2.7
+016EC:  BSF    1B.7
+016EE:  BCF    FF2.7
+....................    can_set_id(RX0FILTER0, 0, CAN_USE_EXTENDED_ID);  //set filter 0 of mask 0 
+016F0:  MOVLW  0F
+016F2:  MOVLB  5
+016F4:  MOVWF  x18
+016F6:  MOVLW  03
+016F8:  MOVWF  x17
+016FA:  CLRF   x1C
+016FC:  CLRF   x1B
+016FE:  CLRF   x1A
+01700:  CLRF   x19
+01702:  CLRF   x1D
+01704:  MOVLB  0
+01706:  RCALL  108C
+01708:  BTFSC  1B.7
+0170A:  BSF    FF2.7
+0170C:  CLRF   1B
+0170E:  BTFSC  FF2.7
+01710:  BSF    1B.7
+01712:  BCF    FF2.7
+....................    can_set_id(RX0FILTER1, 0, CAN_USE_EXTENDED_ID);  //set filter 1 of mask 0 
+01714:  MOVLW  0F
+01716:  MOVLB  5
+01718:  MOVWF  x18
+0171A:  MOVLW  07
+0171C:  MOVWF  x17
+0171E:  CLRF   x1C
+01720:  CLRF   x1B
+01722:  CLRF   x1A
+01724:  CLRF   x19
+01726:  CLRF   x1D
+01728:  MOVLB  0
+0172A:  RCALL  108C
+0172C:  BTFSC  1B.7
+0172E:  BSF    FF2.7
+01730:  CLRF   1B
+01732:  BTFSC  FF2.7
+01734:  BSF    1B.7
+01736:  BCF    FF2.7
+....................  
+....................    can_set_id(RX1MASK, CAN_MASK_ACCEPT_ALL, CAN_USE_EXTENDED_ID);  //set mask 1 
+01738:  MOVLW  0F
+0173A:  MOVLB  5
+0173C:  MOVWF  x18
+0173E:  MOVLW  1F
+01740:  MOVWF  x17
+01742:  CLRF   x1C
+01744:  CLRF   x1B
+01746:  CLRF   x1A
+01748:  CLRF   x19
+0174A:  CLRF   x1D
+0174C:  MOVLB  0
+0174E:  RCALL  108C
+01750:  BTFSC  1B.7
+01752:  BSF    FF2.7
+01754:  CLRF   1B
+01756:  BTFSC  FF2.7
+01758:  BSF    1B.7
+0175A:  BCF    FF2.7
+....................    can_set_id(RX1FILTER2, 0, CAN_USE_EXTENDED_ID);  //set filter 0 of mask 1 
+0175C:  MOVLW  0F
+0175E:  MOVLB  5
+01760:  MOVWF  x18
+01762:  MOVLW  0B
+01764:  MOVWF  x17
+01766:  CLRF   x1C
+01768:  CLRF   x1B
+0176A:  CLRF   x1A
+0176C:  CLRF   x19
+0176E:  CLRF   x1D
+01770:  MOVLB  0
+01772:  RCALL  108C
+01774:  BTFSC  1B.7
+01776:  BSF    FF2.7
+01778:  CLRF   1B
+0177A:  BTFSC  FF2.7
+0177C:  BSF    1B.7
+0177E:  BCF    FF2.7
+....................    can_set_id(RX1FILTER3, 0, CAN_USE_EXTENDED_ID);  //set filter 1 of mask 1 
+01780:  MOVLW  0F
+01782:  MOVLB  5
+01784:  MOVWF  x18
+01786:  MOVWF  x17
+01788:  CLRF   x1C
+0178A:  CLRF   x1B
+0178C:  CLRF   x1A
+0178E:  CLRF   x19
+01790:  CLRF   x1D
+01792:  MOVLB  0
+01794:  RCALL  108C
+01796:  BTFSC  1B.7
+01798:  BSF    FF2.7
+0179A:  CLRF   1B
+0179C:  BTFSC  FF2.7
+0179E:  BSF    1B.7
+017A0:  BCF    FF2.7
+....................    can_set_id(RX1FILTER4, 0, CAN_USE_EXTENDED_ID);  //set filter 2 of mask 1 
+017A2:  MOVLW  0F
+017A4:  MOVLB  5
+017A6:  MOVWF  x18
+017A8:  MOVLW  13
+017AA:  MOVWF  x17
+017AC:  CLRF   x1C
+017AE:  CLRF   x1B
+017B0:  CLRF   x1A
+017B2:  CLRF   x19
+017B4:  CLRF   x1D
+017B6:  MOVLB  0
+017B8:  RCALL  108C
+017BA:  BTFSC  1B.7
+017BC:  BSF    FF2.7
+017BE:  CLRF   1B
+017C0:  BTFSC  FF2.7
+017C2:  BSF    1B.7
+017C4:  BCF    FF2.7
+....................    can_set_id(RX1FILTER5, 0, CAN_USE_EXTENDED_ID);  //set filter 3 of mask 1 
+017C6:  MOVLW  0F
+017C8:  MOVLB  5
+017CA:  MOVWF  x18
+017CC:  MOVLW  17
+017CE:  MOVWF  x17
+017D0:  CLRF   x1C
+017D2:  CLRF   x1B
+017D4:  CLRF   x1A
+017D6:  CLRF   x19
+017D8:  CLRF   x1D
+017DA:  MOVLB  0
+017DC:  RCALL  108C
+017DE:  BTFSC  1B.7
+017E0:  BSF    FF2.7
+....................  
+....................    set_tris_b((*0xF93 & 0xFB ) | 0x08);   //b3 is out, b2 is in 
+017E2:  MOVF   F93,W
+017E4:  ANDLW  FB
+017E6:  IORLW  08
+017E8:  MOVLB  4
+017EA:  MOVWF  F93
+....................  
+....................    can_set_mode(CAN_OP_NORMAL); 
+017EC:  CLRF   xA2
+017EE:  MOVLB  0
+017F0:  RCALL  164C
+.................... } 
+017F2:  GOTO   25BA (RETURN)
+....................  
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... // 
+.................... // can_set_baud() 
+.................... // 
+.................... // Configures the baud rate control registers.  All the defines here 
+.................... // are defaulted in the can-18xxx8.h file.  These defaults can, and 
+.................... // probably should, be overwritten in the main code. 
+.................... // 
+.................... // Current defaults are set to work with Microchip's MCP250xxx CAN 
+.................... // Developers Kit if this PIC is running at 20Mhz. 
+.................... // 
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... void can_set_baud(void) { 
+....................    BRGCON1.brp=CAN_BRG_PRESCALAR; 
+*
+01672:  MOVLW  C0
+01674:  ANDWF  F70,W
+01676:  IORLW  04
+01678:  MOVWF  F70
+....................    BRGCON1.sjw=CAN_BRG_SYNCH_JUMP_WIDTH; 
+0167A:  MOVLW  3F
+0167C:  ANDWF  F70,W
+0167E:  MOVWF  F70
+....................  
+....................    BRGCON2.prseg=CAN_BRG_PROPAGATION_TIME; 
+01680:  MOVLW  F8
+01682:  ANDWF  F71,W
+01684:  IORLW  02
+01686:  MOVWF  F71
+....................    BRGCON2.seg1ph=CAN_BRG_PHASE_SEGMENT_1; 
+01688:  MOVLW  C7
+0168A:  ANDWF  F71,W
+0168C:  IORLW  28
+0168E:  MOVWF  F71
+....................    BRGCON2.sam=CAN_BRG_SAM; 
+01690:  BCF    F71.6
+....................    BRGCON2.seg2phts=CAN_BRG_SEG_2_PHASE_TS; 
+01692:  BSF    F71.7
+....................  
+....................    BRGCON3.seg2ph=CAN_BRG_PHASE_SEGMENT_2; 
+01694:  MOVLW  F8
+01696:  ANDWF  F72,W
+01698:  IORLW  05
+0169A:  MOVWF  F72
+....................    BRGCON3.wakfil=CAN_BRG_WAKE_FILTER; 
+0169C:  BCF    F72.6
+.................... } 
+0169E:  GOTO   16AE (RETURN)
+....................  
+.................... void can_set_mode(CAN_OP_MODE mode) { 
+....................    CANCON.reqop=mode; 
+*
+0164C:  MOVLB  4
+0164E:  SWAPF  xA2,W
+01650:  ANDLW  70
+01652:  MOVWF  00
+01654:  BCF    FD8.0
+01656:  RLCF   00,F
+01658:  MOVLW  1F
+0165A:  ANDWF  F6F,W
+0165C:  IORWF  00,W
+0165E:  MOVWF  F6F
+....................    while( (CANSTAT.opmode) != mode ); 
+01660:  MOVFF  F6E,00
+01664:  SWAPF  00,F
+01666:  RRCF   00,W
+01668:  ANDLW  07
+0166A:  SUBWF  xA2,W
+0166C:  BNZ   1660
+.................... } 
+0166E:  MOVLB  0
+01670:  RETLW  00
+....................  
+....................  
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... // 
+.................... // can_set_id() 
+.................... // 
+.................... // Configures the xxxxEIDL, xxxxEIDH, xxxxSIDL and xxxxSIDH registers to 
+.................... // configure the defined buffer to use the specified ID 
+.................... // 
+.................... //   Paramaters: 
+.................... //     addr - pointer to first byte of ID register, starting with xxxxEIDL. 
+.................... //            For example, a pointer to RXM1EIDL 
+.................... //     id - ID to set buffer to 
+.................... //     ext - Set to TRUE if this buffer uses an extended ID, FALSE if not 
+.................... // 
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... void can_set_id(int* addr, int32 id, int1 ext) { 
+....................    int *ptr; 
+....................  
+....................    ptr=addr; 
+*
+0108C:  MOVFF  518,51F
+01090:  MOVFF  517,51E
+....................  
+....................    if (ext) {  //extended 
+01094:  MOVLB  5
+01096:  MOVF   x1D,F
+01098:  BZ    113E
+....................       //eidl 
+....................       *ptr=make8(id,0); //0:7 
+0109A:  MOVFF  51E,FE9
+0109E:  MOVFF  51F,FEA
+010A2:  MOVFF  519,FEF
+....................  
+....................       //eidh 
+....................       ptr--; 
+010A6:  MOVF   x1E,W
+010A8:  BTFSC  FD8.2
+010AA:  DECF   x1F,F
+010AC:  DECF   x1E,F
+....................       *ptr=make8(id,1); //8:15 
+010AE:  MOVFF  51E,FE9
+010B2:  MOVFF  51F,FEA
+010B6:  MOVFF  51A,FEF
+....................  
+....................       //sidl 
+....................       ptr--; 
+010BA:  MOVF   x1E,W
+010BC:  BTFSC  FD8.2
+010BE:  DECF   x1F,F
+010C0:  DECF   x1E,F
+....................       *ptr=make8(id,2) & 0x03;   //16:17 
+010C2:  MOVFF  51E,FE9
+010C6:  MOVFF  51F,FEA
+010CA:  MOVF   x1B,W
+010CC:  ANDLW  03
+010CE:  MOVWF  FEF
+....................       *ptr|=(make8(id,2) << 3) & 0xE0; //18:20 
+010D0:  MOVFF  51E,FE9
+010D4:  MOVFF  51F,FEA
+010D8:  MOVFF  51B,00
+010DC:  RLCF   00,F
+010DE:  RLCF   00,F
+010E0:  RLCF   00,F
+010E2:  MOVLW  F8
+010E4:  ANDWF  00,F
+010E6:  MOVF   00,W
+010E8:  ANDLW  E0
+010EA:  IORWF  FEF,W
+010EC:  MOVWF  FEF
+....................       *ptr|=0x08; 
+010EE:  MOVFF  51E,FE9
+010F2:  MOVFF  51F,FEA
+010F6:  MOVF   FEF,W
+010F8:  IORLW  08
+010FA:  MOVWF  FEF
+....................  
+....................  
+....................       //sidh 
+....................       ptr--; 
+010FC:  MOVF   x1E,W
+010FE:  BTFSC  FD8.2
+01100:  DECF   x1F,F
+01102:  DECF   x1E,F
+....................       *ptr=((make8(id,2) >> 5) & 0x07 ); //21:23 
+01104:  MOVFF  51E,FE9
+01108:  MOVFF  51F,FEA
+0110C:  MOVFF  51B,00
+01110:  SWAPF  00,F
+01112:  RRCF   00,F
+01114:  MOVLW  07
+01116:  ANDWF  00,F
+01118:  MOVF   00,W
+0111A:  ANDLW  07
+0111C:  MOVWF  FEF
+....................       *ptr|=((make8(id,3) << 3) & 0xF8);//24:28 
+0111E:  MOVFF  51E,FE9
+01122:  MOVFF  51F,FEA
+01126:  MOVFF  51C,00
+0112A:  RLCF   00,F
+0112C:  RLCF   00,F
+0112E:  RLCF   00,F
+01130:  MOVLW  F8
+01132:  ANDWF  00,F
+01134:  MOVF   00,W
+01136:  ANDLW  F8
+01138:  IORWF  FEF,W
+0113A:  MOVWF  FEF
+....................    } 
+....................    else {   //standard 
+0113C:  BRA    11BC
+....................       //eidl 
+....................       *ptr=0; 
+0113E:  MOVFF  51E,FE9
+01142:  MOVFF  51F,FEA
+01146:  CLRF   FEF
+....................  
+....................       //eidh 
+....................       ptr--; 
+01148:  MOVF   x1E,W
+0114A:  BTFSC  FD8.2
+0114C:  DECF   x1F,F
+0114E:  DECF   x1E,F
+....................       *ptr=0; 
+01150:  MOVFF  51E,FE9
+01154:  MOVFF  51F,FEA
+01158:  CLRF   FEF
+....................  
+....................       //sidl 
+....................       ptr--; 
+0115A:  MOVF   x1E,W
+0115C:  BTFSC  FD8.2
+0115E:  DECF   x1F,F
+01160:  DECF   x1E,F
+....................       *ptr=(make8(id,0) << 5) & 0xE0; 
+01162:  MOVFF  51E,FE9
+01166:  MOVFF  51F,FEA
+0116A:  MOVFF  519,00
+0116E:  SWAPF  00,F
+01170:  RLCF   00,F
+01172:  MOVLW  E0
+01174:  ANDWF  00,F
+01176:  MOVF   00,W
+01178:  ANDLW  E0
+0117A:  MOVWF  FEF
+....................  
+....................       //sidh 
+....................       ptr--; 
+0117C:  MOVF   x1E,W
+0117E:  BTFSC  FD8.2
+01180:  DECF   x1F,F
+01182:  DECF   x1E,F
+....................       *ptr=(make8(id,0) >> 3) & 0x1F; 
+01184:  MOVFF  51E,FE9
+01188:  MOVFF  51F,FEA
+0118C:  MOVFF  519,00
+01190:  RRCF   00,F
+01192:  RRCF   00,F
+01194:  RRCF   00,F
+01196:  MOVLW  1F
+01198:  ANDWF  00,F
+0119A:  MOVF   00,W
+0119C:  ANDLW  1F
+0119E:  MOVWF  FEF
+....................       *ptr|=(make8(id,1) << 5) & 0xE0; 
+011A0:  MOVFF  51E,FE9
+011A4:  MOVFF  51F,FEA
+011A8:  MOVFF  51A,00
+011AC:  SWAPF  00,F
+011AE:  RLCF   00,F
+011B0:  MOVLW  E0
+011B2:  ANDWF  00,F
+011B4:  MOVF   00,W
+011B6:  ANDLW  E0
+011B8:  IORWF  FEF,W
+011BA:  MOVWF  FEF
+....................    } 
+.................... } 
+011BC:  MOVLB  0
+011BE:  RETLW  00
+....................  
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... // 
+.................... // can_get_id() 
+.................... // 
+.................... // Returns the ID of the specified buffer.  (The opposite of can_set_id()) 
+.................... // This is used after receiving a message, to see which ID sent the message. 
+.................... // 
+.................... //   Paramaters: 
+.................... //     addr - pointer to first byte of ID register, starting with xxxxEIDL. 
+.................... //            For example, a pointer to RXM1EIDL 
+.................... //     ext - Set to TRUE if this buffer uses an extended ID, FALSE if not 
+.................... // 
+.................... //   Returns: 
+.................... //     The ID of the buffer 
+.................... // 
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... int32 can_get_id(int * addr, int1 ext) { 
+....................    int32 ret; 
+....................    int * ptr; 
+....................  
+....................    ret=0; 
+*
+00AA6:  MOVLB  5
+00AA8:  CLRF   x19
+00AAA:  CLRF   x18
+00AAC:  CLRF   x17
+00AAE:  CLRF   x16
+....................    ptr=addr; 
+00AB0:  MOVFF  514,51B
+00AB4:  MOVFF  513,51A
+....................  
+....................    if (ext) { 
+00AB8:  MOVF   x15,F
+00ABA:  BTFSC  FD8.2
+00ABC:  BRA    0BE4
+....................       ret=*ptr;  //eidl 
+00ABE:  MOVFF  51B,03
+00AC2:  MOVFF  51A,FE9
+00AC6:  MOVFF  51B,FEA
+00ACA:  MOVFF  FEF,00
+00ACE:  CLRF   01
+00AD0:  CLRF   02
+00AD2:  CLRF   03
+00AD4:  MOVFF  03,519
+00AD8:  MOVFF  02,518
+00ADC:  MOVFF  01,517
+00AE0:  MOVFF  00,516
+....................  
+....................       ptr--;     //eidh 
+00AE4:  MOVF   x1A,W
+00AE6:  BTFSC  FD8.2
+00AE8:  DECF   x1B,F
+00AEA:  DECF   x1A,F
+....................       ret|=((int32)*ptr << 8); 
+00AEC:  MOVFF  51A,FE9
+00AF0:  MOVFF  51B,FEA
+00AF4:  MOVF   FEF,W
+00AF6:  CLRF   x1E
+00AF8:  CLRF   x1D
+00AFA:  MOVWF  x1C
+00AFC:  CLRF   00
+00AFE:  MOVF   00,W
+00B00:  IORWF  x16,F
+00B02:  MOVF   x1C,W
+00B04:  IORWF  x17,F
+00B06:  MOVF   x1D,W
+00B08:  IORWF  x18,F
+00B0A:  MOVF   x1E,W
+00B0C:  IORWF  x19,F
+....................  
+....................       ptr--;     //sidl 
+00B0E:  MOVF   x1A,W
+00B10:  BTFSC  FD8.2
+00B12:  DECF   x1B,F
+00B14:  DECF   x1A,F
+....................       ret|=((int32)*ptr & 0x03) << 16; 
+00B16:  MOVFF  51A,FE9
+00B1A:  MOVFF  51B,FEA
+00B1E:  MOVF   FEF,W
+00B20:  CLRF   x1F
+00B22:  CLRF   x1E
+00B24:  CLRF   x1D
+00B26:  MOVWF  x1C
+00B28:  MOVLW  03
+00B2A:  ANDWF  x1C,F
+00B2C:  CLRF   x1D
+00B2E:  CLRF   x1E
+00B30:  CLRF   x1F
+00B32:  CLRF   00
+00B34:  CLRF   01
+00B36:  MOVF   00,W
+00B38:  IORWF  x16,F
+00B3A:  MOVF   01,W
+00B3C:  IORWF  x17,F
+00B3E:  MOVF   x1C,W
+00B40:  IORWF  x18,F
+00B42:  MOVF   x1D,W
+00B44:  IORWF  x19,F
+....................       ret|=((int32)*ptr & 0xE0) << 13; 
+00B46:  MOVFF  51A,FE9
+00B4A:  MOVFF  51B,FEA
+00B4E:  MOVF   FEF,W
+00B50:  CLRF   x1F
+00B52:  CLRF   x1E
+00B54:  CLRF   x1D
+00B56:  MOVWF  x1C
+00B58:  MOVLW  E0
+00B5A:  ANDWF  x1C,F
+00B5C:  CLRF   x1D
+00B5E:  CLRF   x1E
+00B60:  CLRF   x1F
+00B62:  CLRF   00
+00B64:  RLCF   x1C,W
+00B66:  MOVWF  01
+00B68:  RLCF   x1D,W
+00B6A:  MOVWF  02
+00B6C:  RLCF   x1E,W
+00B6E:  MOVWF  03
+00B70:  RLCF   01,F
+00B72:  RLCF   02,F
+00B74:  RLCF   03,F
+00B76:  RLCF   01,F
+00B78:  RLCF   02,F
+00B7A:  RLCF   03,F
+00B7C:  RLCF   01,F
+00B7E:  RLCF   02,F
+00B80:  RLCF   03,F
+00B82:  RLCF   01,F
+00B84:  RLCF   02,F
+00B86:  RLCF   03,F
+00B88:  MOVLW  E0
+00B8A:  ANDWF  01,F
+00B8C:  MOVF   00,W
+00B8E:  IORWF  x16,F
+00B90:  MOVF   01,W
+00B92:  IORWF  x17,F
+00B94:  MOVF   02,W
+00B96:  IORWF  x18,F
+00B98:  MOVF   03,W
+00B9A:  IORWF  x19,F
+....................  
+....................       ptr--;     //sidh 
+00B9C:  MOVF   x1A,W
+00B9E:  BTFSC  FD8.2
+00BA0:  DECF   x1B,F
+00BA2:  DECF   x1A,F
+....................       ret|=((int32)*ptr << 21); 
+00BA4:  MOVFF  51A,FE9
+00BA8:  MOVFF  51B,FEA
+00BAC:  MOVF   FEF,W
+00BAE:  CLRF   x1D
+00BB0:  MOVWF  x1C
+00BB2:  CLRF   00
+00BB4:  CLRF   01
+00BB6:  RLCF   x1C,W
+00BB8:  MOVWF  02
+00BBA:  RLCF   x1D,W
+00BBC:  MOVWF  03
+00BBE:  RLCF   02,F
+00BC0:  RLCF   03,F
+00BC2:  RLCF   02,F
+00BC4:  RLCF   03,F
+00BC6:  RLCF   02,F
+00BC8:  RLCF   03,F
+00BCA:  RLCF   02,F
+00BCC:  RLCF   03,F
+00BCE:  MOVLW  E0
+00BD0:  ANDWF  02,F
+00BD2:  MOVF   00,W
+00BD4:  IORWF  x16,F
+00BD6:  MOVF   01,W
+00BD8:  IORWF  x17,F
+00BDA:  MOVF   02,W
+00BDC:  IORWF  x18,F
+00BDE:  MOVF   03,W
+00BE0:  IORWF  x19,F
+....................  
+....................    } 
+....................    else { 
+00BE2:  BRA    0C8A
+....................       ptr-=2;    //sidl 
+00BE4:  MOVLW  02
+00BE6:  SUBWF  x1A,F
+00BE8:  MOVLW  00
+00BEA:  SUBWFB x1B,F
+....................       ret=((int32)*ptr & 0xE0) >> 5; 
+00BEC:  MOVFF  51A,FE9
+00BF0:  MOVFF  51B,FEA
+00BF4:  MOVF   FEF,W
+00BF6:  CLRF   x1F
+00BF8:  CLRF   x1E
+00BFA:  CLRF   x1D
+00BFC:  MOVWF  x1C
+00BFE:  MOVLW  E0
+00C00:  ANDWF  x1C,F
+00C02:  CLRF   x1D
+00C04:  CLRF   x1E
+00C06:  CLRF   x1F
+00C08:  RRCF   x1F,W
+00C0A:  MOVWF  x19
+00C0C:  RRCF   x1E,W
+00C0E:  MOVWF  x18
+00C10:  RRCF   x1D,W
+00C12:  MOVWF  x17
+00C14:  RRCF   x1C,W
+00C16:  MOVWF  x16
+00C18:  RRCF   x19,F
+00C1A:  RRCF   x18,F
+00C1C:  RRCF   x17,F
+00C1E:  RRCF   x16,F
+00C20:  RRCF   x19,F
+00C22:  RRCF   x18,F
+00C24:  RRCF   x17,F
+00C26:  RRCF   x16,F
+00C28:  RRCF   x19,F
+00C2A:  RRCF   x18,F
+00C2C:  RRCF   x17,F
+00C2E:  RRCF   x16,F
+00C30:  RRCF   x19,F
+00C32:  RRCF   x18,F
+00C34:  RRCF   x17,F
+00C36:  RRCF   x16,F
+00C38:  MOVLW  07
+00C3A:  ANDWF  x19,F
+....................  
+....................       ptr--;     //sidh 
+00C3C:  MOVF   x1A,W
+00C3E:  BTFSC  FD8.2
+00C40:  DECF   x1B,F
+00C42:  DECF   x1A,F
+....................       ret|=((int32)*ptr << 3); 
+00C44:  MOVFF  51A,FE9
+00C48:  MOVFF  51B,FEA
+00C4C:  MOVF   FEF,W
+00C4E:  CLRF   x1F
+00C50:  CLRF   x1E
+00C52:  CLRF   x1D
+00C54:  MOVWF  x1C
+00C56:  RLCF   x1C,W
+00C58:  MOVWF  00
+00C5A:  RLCF   x1D,W
+00C5C:  MOVWF  01
+00C5E:  RLCF   x1E,W
+00C60:  MOVWF  02
+00C62:  RLCF   x1F,W
+00C64:  MOVWF  03
+00C66:  RLCF   00,F
+00C68:  RLCF   01,F
+00C6A:  RLCF   02,F
+00C6C:  RLCF   03,F
+00C6E:  RLCF   00,F
+00C70:  RLCF   01,F
+00C72:  RLCF   02,F
+00C74:  RLCF   03,F
+00C76:  MOVLW  F8
+00C78:  ANDWF  00,F
+00C7A:  MOVF   00,W
+00C7C:  IORWF  x16,F
+00C7E:  MOVF   01,W
+00C80:  IORWF  x17,F
+00C82:  MOVF   02,W
+00C84:  IORWF  x18,F
+00C86:  MOVF   03,W
+00C88:  IORWF  x19,F
+....................    } 
+....................  
+....................    return(ret); 
+00C8A:  MOVFF  516,00
+00C8E:  MOVFF  517,01
+00C92:  MOVFF  518,02
+00C96:  MOVFF  519,03
+.................... } 
+00C9A:  MOVLB  0
+00C9C:  RETLW  00
+....................  
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... // 
+.................... // can_putd() 
+.................... // 
+.................... // Puts data on a transmit buffer, at which time the CAN peripheral will 
+.................... // send when the CAN bus becomes available. 
+.................... // 
+.................... //    Paramaters: 
+.................... //       id - ID to transmit data as 
+.................... //       data - pointer to data to send 
+.................... //       len - length of data to send 
+.................... //       priority - priority of message.  The higher the number, the 
+.................... //                  sooner the CAN peripheral will send the message. 
+.................... //                  Numbers 0 through 3 are valid. 
+.................... //       ext - TRUE to use an extended ID, FALSE if not 
+.................... //       rtr - TRUE to set the RTR (request) bit in the ID, false if NOT 
+.................... // 
+.................... //    Returns: 
+.................... //       If successful, it will return TRUE 
+.................... //       If un-successful, will return FALSE 
+.................... // 
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... int1 can_putd(int32 id, int * data, int len, int priority, int1 ext, int1 rtr) { 
+....................    int i; 
+....................    int * txd0; 
+....................    int port; 
+....................  
+....................    txd0=&TXRXBaD0; 
+*
+011C0:  MOVLW  0F
+011C2:  MOVLB  5
+011C4:  MOVWF  x15
+011C6:  MOVLW  66
+011C8:  MOVWF  x14
+....................  
+....................     // find emtpy transmitter 
+....................     //map access bank addresses to empty transmitter 
+....................    if (!TXB0CON.txreq) { 
+011CA:  MOVLB  F
+011CC:  BTFSC  x40.3
+011CE:  BRA    11E0
+....................       CANCON.win=CAN_WIN_TX0; 
+011D0:  MOVLW  F1
+011D2:  ANDWF  F6F,W
+011D4:  IORLW  08
+011D6:  MOVWF  F6F
+....................       port=0; 
+011D8:  MOVLB  5
+011DA:  CLRF   x16
+....................    } 
+....................    else if (!TXB1CON.txreq) { 
+011DC:  BRA    1214
+011DE:  MOVLB  F
+011E0:  BTFSC  x30.3
+011E2:  BRA    11F6
+....................       CANCON.win=CAN_WIN_TX1; 
+011E4:  MOVLW  F1
+011E6:  ANDWF  F6F,W
+011E8:  IORLW  06
+011EA:  MOVWF  F6F
+....................       port=1; 
+011EC:  MOVLW  01
+011EE:  MOVLB  5
+011F0:  MOVWF  x16
+....................    } 
+....................    else if (!TXB2CON.txreq) { 
+011F2:  BRA    1214
+011F4:  MOVLB  F
+011F6:  BTFSC  x20.3
+011F8:  BRA    120C
+....................       CANCON.win=CAN_WIN_TX2; 
+011FA:  MOVLW  F1
+011FC:  ANDWF  F6F,W
+011FE:  IORLW  04
+01200:  MOVWF  F6F
+....................       port=2; 
+01202:  MOVLW  02
+01204:  MOVLB  5
+01206:  MOVWF  x16
+....................    } 
+....................    else { 
+01208:  BRA    1214
+0120A:  MOVLB  F
+....................       #if CAN_DO_DEBUG 
+....................          can_debug("\r\nCAN_PUTD() FAIL: NO OPEN TX BUFFERS\r\n"); 
+....................       #endif 
+....................       return(0); 
+0120C:  MOVLW  00
+0120E:  MOVWF  01
+01210:  BRA    128C
+01212:  MOVLB  5
+....................    } 
+....................  
+....................    //set priority. 
+....................    TXBaCON.txpri=priority; 
+01214:  MOVF   x10,W
+01216:  ANDLW  03
+01218:  MOVWF  00
+0121A:  MOVLW  FC
+0121C:  ANDWF  F60,W
+0121E:  IORWF  00,W
+01220:  MOVWF  F60
+....................  
+....................    //set tx mask 
+....................    can_set_id(TXRXBaID, id, ext); 
+01222:  MOVLW  0F
+01224:  MOVWF  x18
+01226:  MOVLW  64
+01228:  MOVWF  x17
+0122A:  MOVFF  50C,51C
+0122E:  MOVFF  50B,51B
+01232:  MOVFF  50A,51A
+01236:  MOVFF  509,519
+0123A:  MOVFF  511,51D
+0123E:  MOVLB  0
+01240:  RCALL  108C
+....................  
+....................    //set tx data count 
+....................    TXBaDLC=len; 
+01242:  MOVFF  50F,F65
+....................    TXBaDLC.rtr=rtr; 
+01246:  BCF    F65.6
+01248:  MOVLB  5
+0124A:  BTFSC  x12.0
+0124C:  BSF    F65.6
+....................  
+....................     for (i=0; i<len; i++) { 
+0124E:  CLRF   x13
+01250:  MOVF   x0F,W
+01252:  SUBWF  x13,W
+01254:  BC    127E
+....................       *txd0=*data; 
+01256:  MOVFF  50D,FE9
+0125A:  MOVFF  50E,FEA
+0125E:  MOVFF  FEF,519
+01262:  MOVFF  515,FEA
+01266:  MOVFF  514,FE9
+0126A:  MOVFF  519,FEF
+....................       txd0++; 
+0126E:  INCF   x14,F
+01270:  BTFSC  FD8.2
+01272:  INCF   x15,F
+....................       data++; 
+01274:  INCF   x0D,F
+01276:  BTFSC  FD8.2
+01278:  INCF   x0E,F
+....................     } 
+0127A:  INCF   x13,F
+0127C:  BRA    1250
+....................  
+....................    //enable transmission 
+....................    TXBaCON.txreq=1; 
+0127E:  BSF    F60.3
+....................  
+....................    CANCON.win=CAN_WIN_RX0; 
+01280:  MOVLW  F1
+01282:  ANDWF  F6F,W
+01284:  MOVWF  F6F
+....................  
+....................    #if CAN_DO_DEBUG 
+....................             can_debug("\r\nCAN_PUTD(): BUFF=%U ID=%LX LEN=%U PRI=%U EXT=%U RTR=%U\r\n", port, id, len, priority, ext, rtr); 
+....................             if ((len)&&(!rtr)) { 
+....................                data-=len; 
+....................                can_debug("  DATA = "); 
+....................                for (i=0;i<len;i++) { 
+....................                   can_debug("%X ",*data); 
+....................                   data++; 
+....................                } 
+....................                can_debug("\r\n"); 
+....................             } 
+....................    #endif 
+....................  
+....................    return(1); 
+01286:  MOVLW  01
+01288:  MOVWF  01
+0128A:  MOVLB  F
+.................... } 
+0128C:  MOVLB  0
+0128E:  GOTO   14AC (RETURN)
+....................  
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... // 
+.................... // can_getd() 
+.................... // 
+.................... // Gets data from a receive buffer, if the data exists 
+.................... // 
+.................... //    Returns: 
+.................... //      id - ID who sent message 
+.................... //      data - pointer to array of data 
+.................... //      len - length of received data 
+.................... //      stat - structure holding some information (such as which buffer 
+.................... //             recieved it, ext or standard, etc) 
+.................... // 
+.................... //    Returns: 
+.................... //      Function call returns a TRUE if there was data in a RX buffer, FALSE 
+.................... //      if there was none. 
+.................... // 
+.................... //////////////////////////////////////////////////////////////////////// 
+.................... int1 can_getd(int32 & id, int * data, int & len, struct rx_stat & stat) 
+.................... { 
+....................     int i; 
+....................     int * ptr; 
+....................  
+....................     if (RXB0CON.rxful) { 
+*
+00CB8:  BTFSS  F60.7
+00CBA:  BRA    0CEC
+*
+00F62:  BTFSS  F60.7
+00F64:  BRA    0F96
+....................         CANCON.win=CAN_WIN_RX0; 
+*
+00CBC:  MOVLW  F1
+00CBE:  ANDWF  F6F,W
+00CC0:  MOVWF  F6F
+*
+00F66:  MOVLW  F1
+00F68:  ANDWF  F6F,W
+00F6A:  MOVWF  F6F
+....................         stat.buffer=0; 
+*
+00CC2:  MOVLB  4
+00CC4:  BCF    xFC.4
+*
+00F6C:  MOVLB  4
+00F6E:  BCF    xFC.4
+....................  
+....................         CAN_INT_RXB0IF=0; 
+*
+00CC6:  BCF    FA4.0
+*
+00F70:  BCF    FA4.0
+....................  
+....................         stat.err_ovfl=COMSTAT.rx0ovfl; 
+*
+00CC8:  BCF    xFC.0
+00CCA:  BTFSC  F74.7
+00CCC:  BSF    xFC.0
+*
+00F72:  BCF    xFC.0
+00F74:  BTFSC  F74.7
+00F76:  BSF    xFC.0
+....................         COMSTAT.rx0ovfl=0; 
+*
+00CCE:  BCF    F74.7
+*
+00F78:  BCF    F74.7
+....................  
+....................         if (RXB0CON.rxb0dben) { 
+*
+00CD0:  BTFSS  F60.2
+00CD2:  BRA    0CEA
+*
+00F7A:  BTFSS  F60.2
+00F7C:  BRA    0F94
+....................          stat.filthit=RXB0CON.filthit0; 
+*
+00CD4:  MOVLW  00
+00CD6:  BTFSC  F60.0
+00CD8:  MOVLW  01
+00CDA:  ANDLW  07
+00CDC:  MOVWF  00
+00CDE:  BCF    FD8.0
+00CE0:  RLCF   00,F
+00CE2:  MOVLW  F1
+00CE4:  ANDWF  xFC,W
+00CE6:  IORWF  00,W
+00CE8:  MOVWF  xFC
+*
+00F7E:  MOVLW  00
+00F80:  BTFSC  F60.0
+00F82:  MOVLW  01
+00F84:  ANDLW  07
+00F86:  MOVWF  00
+00F88:  BCF    FD8.0
+00F8A:  RLCF   00,F
+00F8C:  MOVLW  F1
+00F8E:  ANDWF  xFC,W
+00F90:  IORWF  00,W
+00F92:  MOVWF  xFC
+....................         } 
+....................     } 
+....................     else if ( RXB1CON.rxful ) 
+*
+00CEA:  BRA    0D2C
+00CEC:  MOVLB  F
+00CEE:  BTFSS  x50.7
+00CF0:  BRA    0D24
+*
+00F94:  BRA    0FD6
+00F96:  MOVLB  F
+00F98:  BTFSS  x50.7
+00F9A:  BRA    0FCE
+....................     { 
+....................         CANCON.win=CAN_WIN_RX1; 
+*
+00CF2:  MOVLW  F1
+00CF4:  ANDWF  F6F,W
+00CF6:  IORLW  0A
+00CF8:  MOVWF  F6F
+*
+00F9C:  MOVLW  F1
+00F9E:  ANDWF  F6F,W
+00FA0:  IORLW  0A
+00FA2:  MOVWF  F6F
+....................         stat.buffer=1; 
+*
+00CFA:  MOVLB  4
+00CFC:  BSF    xFC.4
+*
+00FA4:  MOVLB  4
+00FA6:  BSF    xFC.4
+....................  
+....................         CAN_INT_RXB1IF=0; 
+*
+00CFE:  BCF    FA4.1
+*
+00FA8:  BCF    FA4.1
+....................  
+....................         stat.err_ovfl=COMSTAT.rx1ovfl; 
+*
+00D00:  BCF    xFC.0
+00D02:  BTFSC  F74.6
+00D04:  BSF    xFC.0
+*
+00FAA:  BCF    xFC.0
+00FAC:  BTFSC  F74.6
+00FAE:  BSF    xFC.0
+....................         COMSTAT.rx1ovfl=0; 
+*
+00D06:  BCF    F74.6
+*
+00FB0:  BCF    F74.6
+....................  
+....................         stat.filthit=RXB1CON.filthit; 
+*
+00D08:  MOVLB  F
+00D0A:  MOVF   x50,W
+00D0C:  ANDLW  07
+00D0E:  ANDLW  07
+00D10:  MOVWF  00
+00D12:  BCF    FD8.0
+00D14:  RLCF   00,F
+00D16:  MOVLW  F1
+00D18:  MOVLB  4
+00D1A:  ANDWF  xFC,W
+00D1C:  IORWF  00,W
+00D1E:  MOVWF  xFC
+*
+00FB2:  MOVLB  F
+00FB4:  MOVF   x50,W
+00FB6:  ANDLW  07
+00FB8:  ANDLW  07
+00FBA:  MOVWF  00
+00FBC:  BCF    FD8.0
+00FBE:  RLCF   00,F
+00FC0:  MOVLW  F1
+00FC2:  MOVLB  4
+00FC4:  ANDWF  xFC,W
+00FC6:  IORWF  00,W
+00FC8:  MOVWF  xFC
+....................     } 
+....................     else { 
+*
+00D20:  BRA    0D2C
+00D22:  MOVLB  F
+*
+00FCA:  BRA    0FD6
+00FCC:  MOVLB  F
+....................       #if CAN_DO_DEBUG 
+....................          can_debug("\r\nFAIL ON CAN_GETD(): NO MESSAGE IN BUFFER\r\n"); 
+....................       #endif 
+....................       return (0); 
+*
+00D24:  MOVLW  00
+00D26:  MOVWF  01
+00D28:  BRA    0DCA
+00D2A:  MOVLB  4
+*
+00FCE:  MOVLW  00
+00FD0:  MOVWF  01
+00FD2:  BRA    1074
+00FD4:  MOVLB  4
+....................     } 
+....................  
+....................     len = RXBaDLC.dlc; 
+*
+00D2C:  MOVF   F65,W
+00D2E:  ANDLW  0F
+00D30:  MOVWF  xFB
+*
+00FD6:  MOVF   F65,W
+00FD8:  ANDLW  0F
+00FDA:  MOVWF  xFB
+....................     stat.rtr=RXBaDLC.rtr; 
+*
+00D32:  BCF    xFC.5
+00D34:  BTFSC  F65.6
+00D36:  BSF    xFC.5
+*
+00FDC:  BCF    xFC.5
+00FDE:  BTFSC  F65.6
+00FE0:  BSF    xFC.5
+....................  
+....................     stat.ext=TXRXBaSIDL.ext; 
+*
+00D38:  BCF    xFC.6
+00D3A:  BTFSC  F62.3
+00D3C:  BSF    xFC.6
+*
+00FE2:  BCF    xFC.6
+00FE4:  BTFSC  F62.3
+00FE6:  BSF    xFC.6
+....................     id=can_get_id(TXRXBaID,stat.ext); 
+*
+00D3E:  MOVLW  00
+00D40:  BTFSC  xFC.6
+00D42:  MOVLW  01
+00D44:  MOVLB  5
+00D46:  MOVWF  x0C
+00D48:  MOVLW  0F
+00D4A:  MOVWF  x14
+00D4C:  MOVLW  64
+00D4E:  MOVWF  x13
+00D50:  MOVFF  50C,515
+00D54:  MOVLB  0
+00D56:  RCALL  0AA6
+00D58:  MOVFF  03,4FA
+00D5C:  MOVFF  02,4F9
+00D60:  MOVFF  01,4F8
+00D64:  MOVFF  00,4F7
+*
+00FE8:  MOVLW  00
+00FEA:  BTFSC  xFC.6
+00FEC:  MOVLW  01
+00FEE:  MOVLB  5
+00FF0:  MOVWF  x0C
+00FF2:  MOVLW  0F
+00FF4:  MOVWF  x14
+00FF6:  MOVLW  64
+00FF8:  MOVWF  x13
+00FFA:  MOVFF  50C,515
+00FFE:  MOVLB  0
+01000:  RCALL  0AA6
+01002:  MOVFF  03,4FA
+01006:  MOVFF  02,4F9
+0100A:  MOVFF  01,4F8
+0100E:  MOVFF  00,4F7
+....................  
+....................     ptr = &TXRXBaD0; 
+*
+00D68:  MOVLW  0F
+00D6A:  MOVLB  5
+00D6C:  MOVWF  x0B
+00D6E:  MOVLW  66
+00D70:  MOVWF  x0A
+*
+01012:  MOVLW  0F
+01014:  MOVLB  5
+01016:  MOVWF  x0B
+01018:  MOVLW  66
+0101A:  MOVWF  x0A
+....................     for ( i = 0; i < len; i++ ) { 
+*
+00D72:  CLRF   x09
+00D74:  MOVLB  4
+00D76:  MOVF   xFB,W
+00D78:  MOVLB  5
+00D7A:  SUBWF  x09,W
+00D7C:  BC    0DA6
+*
+0101C:  CLRF   x09
+0101E:  MOVLB  4
+01020:  MOVF   xFB,W
+01022:  MOVLB  5
+01024:  SUBWF  x09,W
+01026:  BC    1050
+....................         *data = *ptr; 
+*
+00D7E:  MOVFF  50A,FE9
+00D82:  MOVFF  50B,FEA
+00D86:  MOVFF  FEF,50E
+00D8A:  MOVFF  508,FEA
+00D8E:  MOVFF  507,FE9
+00D92:  MOVFF  50E,FEF
+*
+01028:  MOVFF  50A,FE9
+0102C:  MOVFF  50B,FEA
+01030:  MOVFF  FEF,50E
+01034:  MOVFF  508,FEA
+01038:  MOVFF  507,FE9
+0103C:  MOVFF  50E,FEF
+....................         data++; 
+*
+00D96:  INCF   x07,F
+00D98:  BTFSC  FD8.2
+00D9A:  INCF   x08,F
+*
+01040:  INCF   x07,F
+01042:  BTFSC  FD8.2
+01044:  INCF   x08,F
+....................         ptr++; 
+*
+00D9C:  INCF   x0A,F
+00D9E:  BTFSC  FD8.2
+00DA0:  INCF   x0B,F
+*
+01046:  INCF   x0A,F
+01048:  BTFSC  FD8.2
+0104A:  INCF   x0B,F
+....................     } 
+*
+00DA2:  INCF   x09,F
+00DA4:  BRA    0D74
+*
+0104C:  INCF   x09,F
+0104E:  BRA    101E
+....................  
+....................     // return to default addressing 
+....................     CANCON.win=CAN_WIN_RX0; 
+*
+00DA6:  MOVLW  F1
+00DA8:  ANDWF  F6F,W
+00DAA:  MOVWF  F6F
+*
+01050:  MOVLW  F1
+01052:  ANDWF  F6F,W
+01054:  MOVWF  F6F
+....................  
+....................     stat.inv=CAN_INT_IRXIF; 
+*
+00DAC:  MOVLB  4
+00DAE:  BCF    xFC.7
+00DB0:  BTFSC  FA4.7
+00DB2:  BSF    xFC.7
+*
+01056:  MOVLB  4
+01058:  BCF    xFC.7
+0105A:  BTFSC  FA4.7
+0105C:  BSF    xFC.7
+....................     CAN_INT_IRXIF = 0; 
+*
+00DB4:  BCF    FA4.7
+*
+0105E:  BCF    FA4.7
+....................  
+....................     if (stat.buffer) { 
+*
+00DB6:  BTFSS  xFC.4
+00DB8:  BRA    0DC2
+*
+01060:  BTFSS  xFC.4
+01062:  BRA    106C
+....................       RXB1CON.rxful=0; 
+*
+00DBA:  MOVLB  F
+00DBC:  BCF    x50.7
+*
+01064:  MOVLB  F
+01066:  BCF    x50.7
+....................     } 
+....................     else { 
+*
+00DBE:  BRA    0DC6
+00DC0:  MOVLB  4
+*
+01068:  BRA    1070
+0106A:  MOVLB  4
+....................       RXB0CON.rxful=0; 
+*
+00DC2:  BCF    F60.7
+00DC4:  MOVLB  F
+*
+0106C:  BCF    F60.7
+0106E:  MOVLB  F
+....................     } 
+....................  
+....................     #if CAN_DO_DEBUG 
+....................        can_debug("\r\nCAN_GETD(): BUFF=%U ID=%LX LEN=%U OVF=%U ", stat.buffer, id, len, stat.err_ovfl); 
+....................        can_debug("FILT=%U RTR=%U EXT=%U INV=%U", stat.filthit, stat.rtr, stat.ext, stat.inv); 
+....................        if ((len)&&(!stat.rtr)) { 
+....................           data-=len; 
+....................           can_debug("\r\n    DATA = "); 
+....................           for (i=0;i<len;i++) { 
+....................             can_debug("%X ",*data); 
+....................             data++; 
+....................           } 
+....................        } 
+....................        can_debug("\r\n"); 
+....................     #endif 
+....................  
+....................     return(1); 
+*
+00DC6:  MOVLW  01
+00DC8:  MOVWF  01
+*
+01070:  MOVLW  01
+01072:  MOVWF  01
+01074:  MOVLB  5
+01076:  MOVLB  4
+.................... } 
+....................  
+....................  
+....................  
+....................  
+.................... /** 
+....................  * no comments 
+....................  */ 
+.................... #define dev1_ze 10 
+....................  
+.................... #define CAN_RECEIVE_STACK_SIZE 10 
+.................... int can_rspoint=0; 
+.................... int can_rstack [CAN_RECEIVE_STACK_SIZE] [14]; 
+.................... int1 can_rsfull=FALSE; 
+.................... #define can_receiver_full() can_rsfull 
+.................... #define CAN_TRANSMIT_STACK_SIZE 10 
+.................... int can_tspoint=0; 
+.................... int can_tstack [CAN_TRANSMIT_STACK_SIZE] [13]; 
+.................... int1 can_tsempty=TRUE; 
+.................... #define can_transmitter_empty() can_tsempty 
+.................... #define CAN_FILTER_SIZE 1 
+.................... int32 can_filter [CAN_FILTER_SIZE] = {11}; 
+....................  
+....................  
+.................... void canReceive ( ) 
+.................... { 
+....................    int32 rx_id; 
+....................    int8  rx_len, rx_stat; 
+....................    int8  buffer [8]; 
+....................    int8  i; 
+....................  
+....................    if(can_rspoint==-1) 
+*
+00C9E:  MOVF   24,W
+00CA0:  SUBLW  FF
+00CA2:  BNZ   0CA6
+....................       can_rspoint++; 
+00CA4:  INCF   24,F
+....................  
+....................    if(can_rspoint < CAN_RECEIVE_STACK_SIZE) 
+00CA6:  MOVF   24,W
+00CA8:  SUBLW  09
+00CAA:  BTFSS  FD8.0
+00CAC:  BRA    0F58
+....................    { 
+....................       can_getd(rx_id,buffer,rx_len,rx_stat); 
+00CAE:  MOVLW  04
+00CB0:  MOVLB  5
+00CB2:  MOVWF  x08
+00CB4:  MOVLW  FD
+00CB6:  MOVWF  x07
+....................    { 
+....................       int8 j; 
+....................       for(j=0;j<CAN_FILTER_SIZE;j++) 
+*
+00DCA:  MOVLB  5
+00DCC:  CLRF   x06
+00DCE:  MOVF   x06,F
+00DD0:  BNZ   0E16
+....................          if(rx_id==can_filter[j]) 
+00DD2:  MOVF   x06,W
+00DD4:  MULLW  04
+00DD6:  MOVF   FF3,W
+00DD8:  CLRF   03
+00DDA:  ADDLW  35
+00DDC:  MOVWF  FE9
+00DDE:  MOVLW  01
+00DE0:  ADDWFC 03,W
+00DE2:  MOVWF  FEA
+00DE4:  MOVFF  FEF,00
+00DE8:  MOVFF  FEC,01
+00DEC:  MOVFF  FEC,02
+00DF0:  MOVFF  FEC,03
+00DF4:  MOVF   00,W
+00DF6:  MOVLB  4
+00DF8:  SUBWF  xF7,W
+00DFA:  BNZ   0E10
+00DFC:  MOVF   01,W
+00DFE:  SUBWF  xF8,W
+00E00:  BNZ   0E10
+00E02:  MOVF   02,W
+00E04:  SUBWF  xF9,W
+00E06:  BNZ   0E10
+00E08:  MOVF   03,W
+00E0A:  SUBWF  xFA,W
+00E0C:  BNZ   0E10
+....................             return; 
+00E0E:  BRA    1078
+00E10:  MOVLB  5
+00E12:  INCF   x06,F
+00E14:  BRA    0DCE
+....................    } 
+....................       can_rstack[can_rspoint][0]=make8(rx_id,3); 
+00E16:  MOVF   24,W
+00E18:  MULLW  0E
+00E1A:  MOVF   FF3,W
+00E1C:  CLRF   x08
+00E1E:  MOVWF  x07
+00E20:  MOVLW  25
+00E22:  ADDWF  x07,W
+00E24:  MOVWF  FE9
+00E26:  MOVLW  00
+00E28:  ADDWFC x08,W
+00E2A:  MOVWF  FEA
+00E2C:  MOVLB  4
+00E2E:  MOVFF  4FA,FEF
+....................       can_rstack[can_rspoint][1]=make8(rx_id,2); 
+00E32:  MOVF   24,W
+00E34:  MULLW  0E
+00E36:  MOVF   FF3,W
+00E38:  MOVLB  5
+00E3A:  CLRF   x08
+00E3C:  MOVWF  x07
+00E3E:  MOVLW  01
+00E40:  ADDWF  x07,W
+00E42:  MOVWF  01
+00E44:  MOVLW  00
+00E46:  ADDWFC x08,W
+00E48:  MOVWF  03
+00E4A:  MOVF   01,W
+00E4C:  ADDLW  25
+00E4E:  MOVWF  FE9
+00E50:  MOVLW  00
+00E52:  ADDWFC 03,W
+00E54:  MOVWF  FEA
+00E56:  MOVLB  4
+00E58:  MOVFF  4F9,FEF
+....................       can_rstack[can_rspoint][2]=make8(rx_id,1); 
+00E5C:  MOVF   24,W
+00E5E:  MULLW  0E
+00E60:  MOVF   FF3,W
+00E62:  MOVLB  5
+00E64:  CLRF   x08
+00E66:  MOVWF  x07
+00E68:  MOVLW  02
+00E6A:  ADDWF  x07,W
+00E6C:  MOVWF  01
+00E6E:  MOVLW  00
+00E70:  ADDWFC x08,W
+00E72:  MOVWF  03
+00E74:  MOVF   01,W
+00E76:  ADDLW  25
+00E78:  MOVWF  FE9
+00E7A:  MOVLW  00
+00E7C:  ADDWFC 03,W
+00E7E:  MOVWF  FEA
+00E80:  MOVLB  4
+00E82:  MOVFF  4F8,FEF
+....................       can_rstack[can_rspoint][3]=make8(rx_id,0); 
+00E86:  MOVF   24,W
+00E88:  MULLW  0E
+00E8A:  MOVF   FF3,W
+00E8C:  MOVLB  5
+00E8E:  CLRF   x08
+00E90:  MOVWF  x07
+00E92:  MOVLW  03
+00E94:  ADDWF  x07,W
+00E96:  MOVWF  01
+00E98:  MOVLW  00
+00E9A:  ADDWFC x08,W
+00E9C:  MOVWF  03
+00E9E:  MOVF   01,W
+00EA0:  ADDLW  25
+00EA2:  MOVWF  FE9
+00EA4:  MOVLW  00
+00EA6:  ADDWFC 03,W
+00EA8:  MOVWF  FEA
+00EAA:  MOVLB  4
+00EAC:  MOVFF  4F7,FEF
+....................  
+....................       can_rstack[can_rspoint][4]=rx_len; 
+00EB0:  MOVF   24,W
+00EB2:  MULLW  0E
+00EB4:  MOVF   FF3,W
+00EB6:  MOVLB  5
+00EB8:  CLRF   x08
+00EBA:  MOVWF  x07
+00EBC:  MOVLW  04
+00EBE:  ADDWF  x07,W
+00EC0:  MOVWF  01
+00EC2:  MOVLW  00
+00EC4:  ADDWFC x08,W
+00EC6:  MOVWF  03
+00EC8:  MOVF   01,W
+00ECA:  ADDLW  25
+00ECC:  MOVWF  FE9
+00ECE:  MOVLW  00
+00ED0:  ADDWFC 03,W
+00ED2:  MOVWF  FEA
+00ED4:  MOVFF  4FB,FEF
+....................       can_rstack[can_rspoint][5]=rx_stat; 
+00ED8:  MOVF   24,W
+00EDA:  MULLW  0E
+00EDC:  MOVF   FF3,W
+00EDE:  CLRF   x08
+00EE0:  MOVWF  x07
+00EE2:  MOVLW  05
+00EE4:  ADDWF  x07,W
+00EE6:  MOVWF  01
+00EE8:  MOVLW  00
+00EEA:  ADDWFC x08,W
+00EEC:  MOVWF  03
+00EEE:  MOVF   01,W
+00EF0:  ADDLW  25
+00EF2:  MOVWF  FE9
+00EF4:  MOVLW  00
+00EF6:  ADDWFC 03,W
+00EF8:  MOVWF  FEA
+00EFA:  MOVFF  4FC,FEF
+....................  
+....................       for(i=0;i<rx_len;i++) 
+00EFE:  CLRF   x05
+00F00:  MOVLB  4
+00F02:  MOVF   xFB,W
+00F04:  MOVLB  5
+00F06:  SUBWF  x05,W
+00F08:  BC    0F52
+....................       { 
+....................          can_rstack[can_rspoint][i+6]=buffer[i]; 
+00F0A:  MOVF   24,W
+00F0C:  MULLW  0E
+00F0E:  MOVF   FF3,W
+00F10:  CLRF   x08
+00F12:  MOVWF  x07
+00F14:  MOVLW  06
+00F16:  ADDWF  x05,W
+00F18:  CLRF   03
+00F1A:  ADDWF  x07,W
+00F1C:  MOVWF  01
+00F1E:  MOVF   x08,W
+00F20:  ADDWFC 03,F
+00F22:  MOVF   01,W
+00F24:  ADDLW  25
+00F26:  MOVWF  01
+00F28:  MOVLW  00
+00F2A:  ADDWFC 03,F
+00F2C:  MOVFF  03,508
+00F30:  CLRF   03
+00F32:  MOVF   x05,W
+00F34:  ADDLW  FD
+00F36:  MOVWF  FE9
+00F38:  MOVLW  04
+00F3A:  ADDWFC 03,W
+00F3C:  MOVWF  FEA
+00F3E:  MOVFF  FEF,509
+00F42:  MOVFF  508,FEA
+00F46:  MOVFF  01,FE9
+00F4A:  MOVFF  509,FEF
+....................       } 
+00F4E:  INCF   x05,F
+00F50:  BRA    0F00
+....................  
+....................       can_rspoint++; 
+00F52:  INCF   24,F
+....................    } 
+....................    else 
+00F54:  BRA    1076
+00F56:  MOVLB  0
+....................       can_getd(rx_id,buffer,rx_len,rx_stat); 
+00F58:  MOVLW  04
+00F5A:  MOVLB  5
+00F5C:  MOVWF  x08
+00F5E:  MOVLW  FD
+00F60:  MOVWF  x07
+.................... } 
+*
+01078:  MOVLB  0
+0107A:  RETLW  00
+....................  
+....................  
+.................... int1 can_Pop ( int32 & rx_id, int * buffer, int & rx_len, int & rx_stat ) 
+.................... { 
+....................    int i; 
+....................  
+....................    if(can_rspoint==CAN_RECEIVE_STACK_SIZE) 
+....................       can_rspoint--; 
+....................  
+....................    if(can_rspoint!=-1) 
+....................    { 
+....................       rx_id=make32(can_rstack[can_rspoint][0], 
+....................                   can_rstack[can_rspoint][1], 
+....................                   can_rstack[can_rspoint][2], 
+....................                   can_rstack[can_rspoint][3]); 
+....................  
+....................       rx_len=can_rstack[can_rspoint][4]; 
+....................       rx_stat=can_rstack[can_rspoint][5]; 
+....................  
+....................       for(i=0;i<rx_len;i++) 
+....................       { 
+....................          buffer[i]=can_rstack[can_rspoint][i+6]; 
+....................       } 
+....................       can_rspoint--; 
+....................  
+....................       return TRUE; 
+....................    }    
+....................    else 
+....................    return FALSE; 
+.................... } 
+....................  
+.................... void canTransmit ( ) 
+.................... { 
+....................    int32 tx_id; 
+....................    int8  tx_length; 
+....................    int8  tx_priority; 
+....................    int8  tx_buffer[8]; 
+....................    int1  tx_extendedID; 
+....................    int1  tx_emptyframe; 
+....................    int8  i; 
+....................  
+....................    if(can_tspoint==CAN_TRANSMIT_STACK_SIZE) 
+*
+01292:  MOVF   xB2,W
+01294:  SUBLW  0A
+01296:  BNZ   129A
+....................    { 
+....................       can_tspoint--; 
+01298:  DECF   xB2,F
+....................    } 
+....................  
+....................    if(can_tspoint!=-1) 
+0129A:  MOVF   xB2,W
+0129C:  SUBLW  FF
+0129E:  BTFSC  FD8.2
+012A0:  BRA    14B0
+....................    { 
+....................  
+....................       tx_id=make32(can_tstack[can_tspoint][0], 
+....................                   can_tstack[can_tspoint][1], 
+....................                   can_tstack[can_tspoint][2], 
+....................                   can_tstack[can_tspoint][3]); 
+012A2:  MOVF   xB2,W
+012A4:  MULLW  0D
+012A6:  MOVF   FF3,W
+012A8:  MOVLB  5
+012AA:  CLRF   x08
+012AC:  MOVWF  x07
+012AE:  MOVLW  B3
+012B0:  ADDWF  x07,W
+012B2:  MOVWF  FE9
+012B4:  MOVLW  00
+012B6:  ADDWFC x08,W
+012B8:  MOVWF  FEA
+012BA:  MOVFF  FEF,507
+012BE:  MOVLB  0
+012C0:  MOVF   xB2,W
+012C2:  MULLW  0D
+012C4:  MOVF   FF3,W
+012C6:  MOVLB  5
+012C8:  CLRF   x09
+012CA:  MOVWF  x08
+012CC:  MOVLW  01
+012CE:  ADDWF  x08,W
+012D0:  MOVWF  01
+012D2:  MOVLW  00
+012D4:  ADDWFC x09,W
+012D6:  MOVWF  03
+012D8:  MOVF   01,W
+012DA:  ADDLW  B3
+012DC:  MOVWF  FE9
+012DE:  MOVLW  00
+012E0:  ADDWFC 03,W
+012E2:  MOVWF  FEA
+012E4:  MOVFF  FEF,508
+012E8:  MOVLB  0
+012EA:  MOVF   xB2,W
+012EC:  MULLW  0D
+012EE:  MOVF   FF3,W
+012F0:  MOVLB  5
+012F2:  CLRF   x0A
+012F4:  MOVWF  x09
+012F6:  MOVLW  02
+012F8:  ADDWF  x09,W
+012FA:  MOVWF  01
+012FC:  MOVLW  00
+012FE:  ADDWFC x0A,W
+01300:  MOVWF  03
+01302:  MOVF   01,W
+01304:  ADDLW  B3
+01306:  MOVWF  FE9
+01308:  MOVLW  00
+0130A:  ADDWFC 03,W
+0130C:  MOVWF  FEA
+0130E:  MOVFF  FEF,509
+01312:  MOVLB  0
+01314:  MOVF   xB2,W
+01316:  MULLW  0D
+01318:  MOVF   FF3,W
+0131A:  MOVLB  5
+0131C:  CLRF   x0B
+0131E:  MOVWF  x0A
+01320:  MOVLW  03
+01322:  ADDWF  x0A,W
+01324:  MOVWF  01
+01326:  MOVLW  00
+01328:  ADDWFC x0B,W
+0132A:  MOVWF  03
+0132C:  MOVF   01,W
+0132E:  ADDLW  B3
+01330:  MOVWF  FE9
+01332:  MOVLW  00
+01334:  ADDWFC 03,W
+01336:  MOVWF  FEA
+01338:  MOVFF  FEF,50A
+0133C:  MOVFF  507,4FA
+01340:  MOVFF  508,4F9
+01344:  MOVFF  509,4F8
+01348:  MOVFF  50A,4F7
+....................  
+....................       tx_length=can_tstack[can_tspoint][12]>>4; 
+0134C:  MOVLB  0
+0134E:  MOVF   xB2,W
+01350:  MULLW  0D
+01352:  MOVF   FF3,W
+01354:  MOVLB  5
+01356:  CLRF   x08
+01358:  MOVWF  x07
+0135A:  MOVLW  0C
+0135C:  ADDWF  x07,W
+0135E:  MOVWF  01
+01360:  MOVLW  00
+01362:  ADDWFC x08,W
+01364:  MOVWF  03
+01366:  MOVF   01,W
+01368:  ADDLW  B3
+0136A:  MOVWF  FE9
+0136C:  MOVLW  00
+0136E:  ADDWFC 03,W
+01370:  MOVWF  FEA
+01372:  SWAPF  FEF,W
+01374:  MOVLB  4
+01376:  MOVWF  xFB
+01378:  MOVLW  0F
+0137A:  ANDWF  xFB,F
+....................       tx_priority=(can_tstack[can_tspoint][12]&0x0c)>>2; 
+0137C:  MOVLB  0
+0137E:  MOVF   xB2,W
+01380:  MULLW  0D
+01382:  MOVF   FF3,W
+01384:  MOVLB  5
+01386:  CLRF   x08
+01388:  MOVWF  x07
+0138A:  MOVLW  0C
+0138C:  ADDWF  x07,W
+0138E:  MOVWF  01
+01390:  MOVLW  00
+01392:  ADDWFC x08,W
+01394:  MOVWF  03
+01396:  MOVF   01,W
+01398:  ADDLW  B3
+0139A:  MOVWF  FE9
+0139C:  MOVLW  00
+0139E:  ADDWFC 03,W
+013A0:  MOVWF  FEA
+013A2:  MOVF   FEF,W
+013A4:  ANDLW  0C
+013A6:  MOVWF  00
+013A8:  RRCF   00,W
+013AA:  MOVLB  4
+013AC:  MOVWF  xFC
+013AE:  RRCF   xFC,F
+013B0:  MOVLW  3F
+013B2:  ANDWF  xFC,F
+....................       tx_extendedID=bit_test(can_tstack[can_tspoint][12],1); 
+013B4:  MOVLB  0
+013B6:  MOVF   xB2,W
+013B8:  MULLW  0D
+013BA:  MOVF   FF3,W
+013BC:  MOVLB  5
+013BE:  CLRF   x08
+013C0:  MOVWF  x07
+013C2:  MOVLW  0C
+013C4:  ADDWF  x07,W
+013C6:  MOVWF  01
+013C8:  MOVLW  00
+013CA:  ADDWFC x08,W
+013CC:  MOVWF  03
+013CE:  MOVF   01,W
+013D0:  ADDLW  B3
+013D2:  MOVWF  FE9
+013D4:  MOVLW  00
+013D6:  ADDWFC 03,W
+013D8:  MOVWF  FEA
+013DA:  MOVFF  FEF,507
+013DE:  BCF    x05.0
+013E0:  BTFSC  x07.1
+013E2:  BSF    x05.0
+....................       tx_emptyframe=bit_test(can_tstack[can_tspoint][12],0); 
+013E4:  MOVLB  0
+013E6:  MOVF   xB2,W
+013E8:  MULLW  0D
+013EA:  MOVF   FF3,W
+013EC:  MOVLB  5
+013EE:  CLRF   x08
+013F0:  MOVWF  x07
+013F2:  MOVLW  0C
+013F4:  ADDWF  x07,W
+013F6:  MOVWF  01
+013F8:  MOVLW  00
+013FA:  ADDWFC x08,W
+013FC:  MOVWF  03
+013FE:  MOVF   01,W
+01400:  ADDLW  B3
+01402:  MOVWF  FE9
+01404:  MOVLW  00
+01406:  ADDWFC 03,W
+01408:  MOVWF  FEA
+0140A:  MOVFF  FEF,507
+0140E:  BCF    x05.1
+01410:  BTFSC  x07.0
+01412:  BSF    x05.1
+....................  
+....................       for(i=0;i<tx_length;i++) 
+01414:  CLRF   x06
+01416:  MOVLB  4
+01418:  MOVF   xFB,W
+0141A:  MOVLB  5
+0141C:  SUBWF  x06,W
+0141E:  BC    1470
+....................       { 
+....................          tx_buffer[i]=can_tstack[can_tspoint][i+4]; 
+01420:  CLRF   03
+01422:  MOVF   x06,W
+01424:  ADDLW  FD
+01426:  MOVWF  01
+01428:  MOVLW  04
+0142A:  ADDWFC 03,F
+0142C:  MOVFF  01,507
+01430:  MOVFF  03,508
+01434:  MOVLB  0
+01436:  MOVF   xB2,W
+01438:  MULLW  0D
+0143A:  MOVF   FF3,W
+0143C:  MOVLB  5
+0143E:  CLRF   x0A
+01440:  MOVWF  x09
+01442:  MOVLW  04
+01444:  ADDWF  x06,W
+01446:  CLRF   03
+01448:  ADDWF  x09,W
+0144A:  MOVWF  01
+0144C:  MOVF   x0A,W
+0144E:  ADDWFC 03,F
+01450:  MOVF   01,W
+01452:  ADDLW  B3
+01454:  MOVWF  FE9
+01456:  MOVLW  00
+01458:  ADDWFC 03,W
+0145A:  MOVWF  FEA
+0145C:  MOVFF  FEF,509
+01460:  MOVFF  508,FEA
+01464:  MOVFF  507,FE9
+01468:  MOVFF  509,FEF
+....................       } 
+0146C:  INCF   x06,F
+0146E:  BRA    1416
+....................  
+....................       can_putd(tx_id,tx_buffer,tx_length,tx_priority,tx_extendedID,tx_emptyframe); 
+01470:  MOVLW  00
+01472:  BTFSC  x05.0
+01474:  MOVLW  01
+01476:  MOVWF  x07
+01478:  MOVLW  00
+0147A:  BTFSC  x05.1
+0147C:  MOVLW  01
+0147E:  MOVWF  x08
+01480:  MOVFF  4FA,50C
+01484:  MOVFF  4F9,50B
+01488:  MOVFF  4F8,50A
+0148C:  MOVFF  4F7,509
+01490:  MOVLW  04
+01492:  MOVWF  x0E
+01494:  MOVLW  FD
+01496:  MOVWF  x0D
+01498:  MOVFF  4FB,50F
+0149C:  MOVFF  4FC,510
+014A0:  MOVFF  507,511
+014A4:  MOVFF  508,512
+014A8:  MOVLB  0
+014AA:  BRA    11C0
+....................  
+....................       can_tspoint--; 
+014AC:  DECF   xB2,F
+....................    } 
+....................    else 
+014AE:  BRA    14B2
+....................       return; 
+014B0:  BRA    14B2
+.................... } 
+014B2:  RETLW  00
+....................  
+....................  
+.................... int1 can_push (int32 tx_id, int8 * tx_buffer, int8 tx_length, int8 tx_priority, int1 tx_extendedID, int1 tx_emptyframe) 
+.................... { 
+....................    int8  i; 
+....................    if(can_tspoint==-1) 
+....................       can_tspoint++; 
+....................  
+....................    if(can_tspoint < CAN_TRANSMIT_STACK_SIZE) 
+....................    { 
+....................       can_tstack[can_tspoint][0]=make8(tx_id,3); 
+....................       can_tstack[can_tspoint][1]=make8(tx_id,2); 
+....................       can_tstack[can_tspoint][2]=make8(tx_id,1); 
+....................       can_tstack[can_tspoint][3]=make8(tx_id,0); 
+....................  
+....................       for(i=0;i<tx_length;i++) 
+....................       { 
+....................          can_tstack[can_tspoint][i+4]=tx_buffer[i]; 
+....................       } 
+....................  
+....................       can_tstack[can_tspoint][12]=(tx_length<<4)|(tx_priority<<2)|((int8)tx_extendedID<<1)|((int8)tx_emptyframe); 
+....................  
+....................       can_tspoint++; 
+....................    } 
+.................... } 
+....................  
+.................... int temp; 
+.................... #include "dimming_functions.c" 
+.................... #define N_LUZES 16 //numero maximo de dimmers 
+.................... int used_dimmers=16; 
+.................... #use fast_io(c) 
+.................... #use fast_io(d) 
+.................... int1 organizado;//flag que diz se os dimmings estao organizados 
+.................... int1 actmat;//matriz em uso 
+.................... int16 pointer;//apontador para matriz em uso 
+.................... int vez;//indice da matriz de dimming corrente 
+.................... int mnumluzes;//quantos valores de dimming diferentes temos 
+.................... int ltlevel[N_LUZES]={10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10}; 
+.................... int16 delays1[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15}; 
+.................... int16 delays2[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15}; 
+.................... const int16 lights[N_LUZES]={0b1111111011111111,0b1111110111111111,0b1111101111111111,0b1111011111111111,0b1110111111111111,0b1101111111111111,0b1011111111111111,0b0111111111111111, 
+....................          /*<........................................................................portC..................................................................................>*/ 
+.................... 0b1111111111111110,0b1111111111111101,0b1111111111111011,0b1111111111110111,0b1111111111101111,0b1111111111011111,0b1111111110111111,0b1111111101111111}; 
+.................... /*<.................................................................................portD.............................................................>*/ 
+.................... const long Matrizluz[128]={ 
+.................... 38400,38731 , 38492 , 38253 , 38014 , 37775 , 37536 , 37297 , 37058 , 36819 , 36580 
+.................... , 36341 , 36102 , 35863 , 35624 , 35385 , 35146 , 34907 , 34668 , 34429 , 34190 , 33951 
+....................  , 33712 , 33473 , 33234 , 32995 , 32756 , 32517 , 32278 , 32039 , 31800 , 31561 , 31322 
+....................  , 31083 , 30844 , 30605 , 30366 , 30127 , 29888 , 29649 , 29410 , 29171 , 28932 , 28693 
+....................  , 28454 , 28215 , 27976 , 27737 , 27498 , 27259 , 27020 , 26781 , 26542 , 26303 , 26064 
+....................  , 25825 , 25586 , 25347 , 25108 , 24869 , 24630 , 24391 , 24152 , 23913 , 23674 , 23435 
+....................  , 23196 , 22957 , 22718 , 22479 , 22240 , 22001 , 21762 , 21523 , 21284 , 21045 , 20806 
+....................  , 20567 , 20328 , 20089 , 19850 , 19611 , 19372 , 19133 , 18894 , 18655 , 18416 , 18177 
+....................  , 17938 , 17699 , 17460 , 17221 , 16982 , 16743 , 16504 , 16265 , 16026 , 15787 , 15548 
+....................  , 15309 , 15070 , 14831 , 14592 , 14353 , 14114 , 13875 , 13636 , 13397 , 13158 , 12919 
+....................  , 12680 , 12441 , 12202 , 11963 , 11724 , 11485 , 11246 , 11007 , 10768 , 10529 , 10290 
+....................  , 10051 , 9812 , 9573 , 9334 , 9095 , 8856 , 617 }; 
+....................   
+....................   
+....................  #INLINE 
+....................   INT16 fpointer(int ax,int ay) 
+....................    { 
+....................       int16 * p; 
+....................       p=(pointer + 2* ax * 2 + 2*ay); 
+*
+0097C:  BCF    FD8.0
+0097E:  RLCF   xF9,W
+00980:  MOVWF  00
+00982:  BCF    FD8.0
+00984:  RLCF   00,F
+00986:  MOVF   00,W
+00988:  MOVLB  1
+0098A:  ADDWF  x3B,W
+0098C:  MOVLB  4
+0098E:  MOVWF  xFD
+00990:  MOVLW  00
+00992:  MOVLB  1
+00994:  ADDWFC x3C,W
+00996:  MOVLB  4
+00998:  MOVWF  xFE
+0099A:  BCF    FD8.0
+0099C:  RLCF   xFA,W
+0099E:  ADDWF  xFD,W
+009A0:  MOVWF  xFB
+009A2:  MOVLW  00
+009A4:  ADDWFC xFE,W
+009A6:  MOVWF  xFC
+*
+00A14:  BCF    FD8.0
+00A16:  RLCF   xF9,W
+00A18:  MOVWF  00
+00A1A:  BCF    FD8.0
+00A1C:  RLCF   00,F
+00A1E:  MOVF   00,W
+00A20:  MOVLB  1
+00A22:  ADDWF  x3B,W
+00A24:  MOVLB  4
+00A26:  MOVWF  xFD
+00A28:  MOVLW  00
+00A2A:  MOVLB  1
+00A2C:  ADDWFC x3C,W
+00A2E:  MOVLB  4
+00A30:  MOVWF  xFE
+00A32:  BCF    FD8.0
+00A34:  RLCF   xFA,W
+00A36:  ADDWF  xFD,W
+00A38:  MOVWF  xFB
+00A3A:  MOVLW  00
+00A3C:  ADDWFC xFE,W
+00A3E:  MOVWF  xFC
+*
+014EE:  BCF    FD8.0
+014F0:  RLCF   xF9,W
+014F2:  MOVWF  00
+014F4:  BCF    FD8.0
+014F6:  RLCF   00,F
+014F8:  MOVF   00,W
+014FA:  MOVLB  1
+014FC:  ADDWF  x3B,W
+014FE:  MOVLB  4
+01500:  MOVWF  xFD
+01502:  MOVLW  00
+01504:  MOVLB  1
+01506:  ADDWFC x3C,W
+01508:  MOVLB  4
+0150A:  MOVWF  xFE
+0150C:  BCF    FD8.0
+0150E:  RLCF   xFA,W
+01510:  ADDWF  xFD,W
+01512:  MOVWF  xFB
+01514:  MOVLW  00
+01516:  ADDWFC xFE,W
+01518:  MOVWF  xFC
+*
+01576:  BCF    FD8.0
+01578:  RLCF   xF9,W
+0157A:  MOVWF  00
+0157C:  BCF    FD8.0
+0157E:  RLCF   00,F
+01580:  MOVF   00,W
+01582:  MOVLB  1
+01584:  ADDWF  x3B,W
+01586:  MOVLB  4
+01588:  MOVWF  xFD
+0158A:  MOVLW  00
+0158C:  MOVLB  1
+0158E:  ADDWFC x3C,W
+01590:  MOVLB  4
+01592:  MOVWF  xFE
+01594:  BCF    FD8.0
+01596:  RLCF   xFA,W
+01598:  ADDWF  xFD,W
+0159A:  MOVWF  xFB
+0159C:  MOVLW  00
+0159E:  ADDWFC xFE,W
+015A0:  MOVWF  xFC
+*
+0281C:  BCF    FD8.0
+0281E:  RLCF   xF9,W
+02820:  MOVWF  00
+02822:  BCF    FD8.0
+02824:  RLCF   00,F
+02826:  MOVF   00,W
+02828:  MOVLB  1
+0282A:  ADDWF  x3B,W
+0282C:  MOVLB  4
+0282E:  MOVWF  xFD
+02830:  MOVLW  00
+02832:  MOVLB  1
+02834:  ADDWFC x3C,W
+02836:  MOVLB  4
+02838:  MOVWF  xFE
+0283A:  BCF    FD8.0
+0283C:  RLCF   xFA,W
+0283E:  ADDWF  xFD,W
+02840:  MOVWF  xFB
+02842:  MOVLW  00
+02844:  ADDWFC xFE,W
+02846:  MOVWF  xFC
+*
+02896:  BCF    FD8.0
+02898:  RLCF   xF9,W
+0289A:  MOVWF  00
+0289C:  BCF    FD8.0
+0289E:  RLCF   00,F
+028A0:  MOVF   00,W
+028A2:  MOVLB  1
+028A4:  ADDWF  x3B,W
+028A6:  MOVLB  4
+028A8:  MOVWF  xFD
+028AA:  MOVLW  00
+028AC:  MOVLB  1
+028AE:  ADDWFC x3C,W
+028B0:  MOVLB  4
+028B2:  MOVWF  xFE
+028B4:  BCF    FD8.0
+028B6:  RLCF   xFA,W
+028B8:  ADDWF  xFD,W
+028BA:  MOVWF  xFB
+028BC:  MOVLW  00
+028BE:  ADDWFC xFE,W
+028C0:  MOVWF  xFC
+*
+02980:  BCF    FD8.0
+02982:  RLCF   xF9,W
+02984:  MOVWF  00
+02986:  BCF    FD8.0
+02988:  RLCF   00,F
+0298A:  MOVF   00,W
+0298C:  MOVLB  1
+0298E:  ADDWF  x3B,W
+02990:  MOVLB  4
+02992:  MOVWF  xFD
+02994:  MOVLW  00
+02996:  MOVLB  1
+02998:  ADDWFC x3C,W
+0299A:  MOVLB  4
+0299C:  MOVWF  xFE
+0299E:  BCF    FD8.0
+029A0:  RLCF   xFA,W
+029A2:  ADDWF  xFD,W
+029A4:  MOVWF  xFB
+029A6:  MOVLW  00
+029A8:  ADDWFC xFE,W
+029AA:  MOVWF  xFC
+....................      RETURN *(int16*)(pointer + 2* ax * 2 + 2*ay); 
+*
+009A8:  BCF    FD8.0
+009AA:  RLCF   xF9,W
+009AC:  MOVWF  00
+009AE:  BCF    FD8.0
+009B0:  RLCF   00,F
+009B2:  MOVF   00,W
+009B4:  MOVLB  1
+009B6:  ADDWF  x3B,W
+009B8:  MOVLB  4
+009BA:  MOVWF  xFD
+009BC:  MOVLW  00
+009BE:  MOVLB  1
+009C0:  ADDWFC x3C,W
+009C2:  MOVLB  4
+009C4:  MOVWF  xFE
+009C6:  BCF    FD8.0
+009C8:  RLCF   xFA,W
+009CA:  ADDWF  xFD,W
+009CC:  MOVWF  01
+009CE:  MOVLW  00
+009D0:  ADDWFC xFE,W
+009D2:  MOVWF  03
+009D4:  MOVFF  01,FE9
+009D8:  MOVWF  FEA
+009DA:  MOVFF  FEF,01
+009DE:  INCF   FE9,F
+009E0:  MOVF   FEF,W
+009E2:  DECF   FE9,F
+009E4:  MOVWF  02
+*
+00A40:  BCF    FD8.0
+00A42:  RLCF   xF9,W
+00A44:  MOVWF  00
+00A46:  BCF    FD8.0
+00A48:  RLCF   00,F
+00A4A:  MOVF   00,W
+00A4C:  MOVLB  1
+00A4E:  ADDWF  x3B,W
+00A50:  MOVLB  4
+00A52:  MOVWF  xFD
+00A54:  MOVLW  00
+00A56:  MOVLB  1
+00A58:  ADDWFC x3C,W
+00A5A:  MOVLB  4
+00A5C:  MOVWF  xFE
+00A5E:  BCF    FD8.0
+00A60:  RLCF   xFA,W
+00A62:  ADDWF  xFD,W
+00A64:  MOVWF  01
+00A66:  MOVLW  00
+00A68:  ADDWFC xFE,W
+00A6A:  MOVWF  03
+00A6C:  MOVFF  01,FE9
+00A70:  MOVWF  FEA
+00A72:  MOVFF  FEF,01
+00A76:  INCF   FE9,F
+00A78:  MOVF   FEF,W
+00A7A:  DECF   FE9,F
+00A7C:  MOVWF  02
+*
+0151A:  BCF    FD8.0
+0151C:  RLCF   xF9,W
+0151E:  MOVWF  00
+01520:  BCF    FD8.0
+01522:  RLCF   00,F
+01524:  MOVF   00,W
+01526:  MOVLB  1
+01528:  ADDWF  x3B,W
+0152A:  MOVLB  4
+0152C:  MOVWF  xFD
+0152E:  MOVLW  00
+01530:  MOVLB  1
+01532:  ADDWFC x3C,W
+01534:  MOVLB  4
+01536:  MOVWF  xFE
+01538:  BCF    FD8.0
+0153A:  RLCF   xFA,W
+0153C:  ADDWF  xFD,W
+0153E:  MOVWF  01
+01540:  MOVLW  00
+01542:  ADDWFC xFE,W
+01544:  MOVWF  03
+01546:  MOVFF  01,FE9
+0154A:  MOVWF  FEA
+0154C:  MOVFF  FEF,01
+01550:  INCF   FE9,F
+01552:  MOVF   FEF,W
+01554:  DECF   FE9,F
+01556:  MOVWF  02
+*
+015A2:  BCF    FD8.0
+015A4:  RLCF   xF9,W
+015A6:  MOVWF  00
+015A8:  BCF    FD8.0
+015AA:  RLCF   00,F
+015AC:  MOVF   00,W
+015AE:  MOVLB  1
+015B0:  ADDWF  x3B,W
+015B2:  MOVLB  4
+015B4:  MOVWF  xFD
+015B6:  MOVLW  00
+015B8:  MOVLB  1
+015BA:  ADDWFC x3C,W
+015BC:  MOVLB  4
+015BE:  MOVWF  xFE
+015C0:  BCF    FD8.0
+015C2:  RLCF   xFA,W
+015C4:  ADDWF  xFD,W
+015C6:  MOVWF  01
+015C8:  MOVLW  00
+015CA:  ADDWFC xFE,W
+015CC:  MOVWF  03
+015CE:  MOVFF  01,FE9
+015D2:  MOVWF  FEA
+015D4:  MOVFF  FEF,01
+015D8:  INCF   FE9,F
+015DA:  MOVF   FEF,W
+015DC:  DECF   FE9,F
+015DE:  MOVWF  02
+*
+02848:  BCF    FD8.0
+0284A:  RLCF   xF9,W
+0284C:  MOVWF  00
+0284E:  BCF    FD8.0
+02850:  RLCF   00,F
+02852:  MOVF   00,W
+02854:  MOVLB  1
+02856:  ADDWF  x3B,W
+02858:  MOVLB  4
+0285A:  MOVWF  xFD
+0285C:  MOVLW  00
+0285E:  MOVLB  1
+02860:  ADDWFC x3C,W
+02862:  MOVLB  4
+02864:  MOVWF  xFE
+02866:  BCF    FD8.0
+02868:  RLCF   xFA,W
+0286A:  ADDWF  xFD,W
+0286C:  MOVWF  01
+0286E:  MOVLW  00
+02870:  ADDWFC xFE,W
+02872:  MOVWF  03
+02874:  MOVFF  01,FE9
+02878:  MOVWF  FEA
+0287A:  MOVFF  FEF,01
+0287E:  INCF   FE9,F
+02880:  MOVF   FEF,W
+02882:  DECF   FE9,F
+02884:  MOVWF  02
+*
+028C2:  BCF    FD8.0
+028C4:  RLCF   xF9,W
+028C6:  MOVWF  00
+028C8:  BCF    FD8.0
+028CA:  RLCF   00,F
+028CC:  MOVF   00,W
+028CE:  MOVLB  1
+028D0:  ADDWF  x3B,W
+028D2:  MOVLB  4
+028D4:  MOVWF  xFD
+028D6:  MOVLW  00
+028D8:  MOVLB  1
+028DA:  ADDWFC x3C,W
+028DC:  MOVLB  4
+028DE:  MOVWF  xFE
+028E0:  BCF    FD8.0
+028E2:  RLCF   xFA,W
+028E4:  ADDWF  xFD,W
+028E6:  MOVWF  01
+028E8:  MOVLW  00
+028EA:  ADDWFC xFE,W
+028EC:  MOVWF  03
+028EE:  MOVFF  01,FE9
+028F2:  MOVWF  FEA
+028F4:  MOVFF  FEF,01
+028F8:  INCF   FE9,F
+028FA:  MOVF   FEF,W
+028FC:  DECF   FE9,F
+028FE:  MOVWF  02
+*
+029AC:  BCF    FD8.0
+029AE:  RLCF   xF9,W
+029B0:  MOVWF  00
+029B2:  BCF    FD8.0
+029B4:  RLCF   00,F
+029B6:  MOVF   00,W
+029B8:  MOVLB  1
+029BA:  ADDWF  x3B,W
+029BC:  MOVLB  4
+029BE:  MOVWF  xFD
+029C0:  MOVLW  00
+029C2:  MOVLB  1
+029C4:  ADDWFC x3C,W
+029C6:  MOVLB  4
+029C8:  MOVWF  xFE
+029CA:  BCF    FD8.0
+029CC:  RLCF   xFA,W
+029CE:  ADDWF  xFD,W
+029D0:  MOVWF  01
+029D2:  MOVLW  00
+029D4:  ADDWFC xFE,W
+029D6:  MOVWF  03
+029D8:  MOVFF  01,FE9
+029DC:  MOVWF  FEA
+029DE:  MOVFF  FEF,01
+029E2:  INCF   FE9,F
+029E4:  MOVF   FEF,W
+029E6:  DECF   FE9,F
+029E8:  MOVWF  02
+....................    } 
+....................  
+....................    
+....................   VOID org(void) 
+....................   { 
+*
+01A42:  MOVLB  4
+01A44:  BSF    xE4.0
+....................      INT clockorg; 
+....................      INT16 tempd[N_LUZES][2]; 
+....................      INT numluzes; 
+....................      INT1 again = 1; 
+....................      INT fa; 
+....................      INT16 fl; 
+....................      INT afa; 
+....................      FOR(fa = 0;fa < used_dimmers;++fa) 
+01A46:  CLRF   xE5
+01A48:  MOVLB  1
+01A4A:  MOVF   x3A,W
+01A4C:  MOVLB  4
+01A4E:  SUBWF  xE5,W
+01A50:  BC    1ACC
+....................      { 
+....................         tempd[fa][0] = ltlevel[fa];//tempd[x][0] fica com o valor de dimming 0...127 
+01A52:  MOVF   xE5,W
+01A54:  MULLW  04
+01A56:  MOVF   FF3,W
+01A58:  CLRF   xEA
+01A5A:  MOVWF  xE9
+01A5C:  MOVLW  A3
+01A5E:  ADDWF  xE9,W
+01A60:  MOVWF  01
+01A62:  MOVLW  04
+01A64:  ADDWFC xEA,W
+01A66:  MOVWF  03
+01A68:  MOVWF  xEA
+01A6A:  CLRF   03
+01A6C:  MOVF   xE5,W
+01A6E:  ADDLW  3F
+01A70:  MOVWF  FE9
+01A72:  MOVLW  01
+01A74:  ADDWFC 03,W
+01A76:  MOVWF  FEA
+01A78:  MOVF   FEF,W
+01A7A:  CLRF   03
+01A7C:  MOVFF  4EA,FEA
+01A80:  MOVFF  01,FE9
+01A84:  MOVFF  03,FEC
+01A88:  MOVF   FED,F
+01A8A:  MOVWF  FEF
+....................         tempd[fa][1] = lights[fa];//tempd[x][1] fica com o valor binario DO porto de saida 
+01A8C:  MOVF   xE5,W
+01A8E:  MULLW  04
+01A90:  MOVF   FF3,W
+01A92:  CLRF   xEA
+01A94:  MOVWF  xE9
+01A96:  MOVLW  02
+01A98:  ADDWF  xE9,W
+01A9A:  MOVWF  01
+01A9C:  MOVLW  00
+01A9E:  ADDWFC xEA,W
+01AA0:  MOVWF  03
+01AA2:  MOVF   01,W
+01AA4:  ADDLW  A3
+01AA6:  MOVWF  FE9
+01AA8:  MOVLW  04
+01AAA:  ADDWFC 03,W
+01AAC:  MOVWF  FEA
+01AAE:  BCF    FD8.0
+01AB0:  RLCF   xE5,W
+01AB2:  CLRF   03
+01AB4:  MOVLB  0
+01AB6:  CALL   0166
+01ABA:  TBLRD*+
+01ABC:  MOVFF  FF5,03
+01AC0:  MOVWF  FEF
+01AC2:  MOVFF  03,FEC
+....................      } 
+01AC6:  MOVLB  4
+01AC8:  INCF   xE5,F
+01ACA:  BRA    1A48
+....................  
+....................      WHILE(again) 
+....................      { 
+01ACC:  BTFSS  xE4.0
+01ACE:  BRA    1C96
+....................         again = 0; 
+01AD0:  BCF    xE4.0
+....................         FOR(fa = 0;fa < used_dimmers-1;++fa) 
+01AD2:  CLRF   xE5
+01AD4:  MOVLW  01
+01AD6:  MOVLB  1
+01AD8:  SUBWF  x3A,W
+01ADA:  MOVLB  4
+01ADC:  SUBWF  xE5,W
+01ADE:  BTFSC  FD8.0
+01AE0:  BRA    1C94
+....................         { 
+....................            //coloca valores por ordem tempd[0][0] o maior 
+....................            IF(tempd[fa][0] < tempd[fa + 1][0]) 
+01AE2:  MOVF   xE5,W
+01AE4:  MULLW  04
+01AE6:  MOVF   FF3,W
+01AE8:  CLRF   xEA
+01AEA:  MOVWF  xE9
+01AEC:  MOVLW  A3
+01AEE:  ADDWF  xE9,W
+01AF0:  MOVWF  FE9
+01AF2:  MOVLW  04
+01AF4:  ADDWFC xEA,W
+01AF6:  MOVWF  FEA
+01AF8:  MOVFF  FEC,4EA
+01AFC:  MOVF   FED,F
+01AFE:  MOVFF  FEF,4E9
+01B02:  MOVLW  01
+01B04:  ADDWF  xE5,W
+01B06:  MULLW  04
+01B08:  MOVF   FF3,W
+01B0A:  CLRF   xEC
+01B0C:  MOVWF  xEB
+01B0E:  MOVLW  A3
+01B10:  ADDWF  xEB,W
+01B12:  MOVWF  FE9
+01B14:  MOVLW  04
+01B16:  ADDWFC xEC,W
+01B18:  MOVWF  FEA
+01B1A:  MOVFF  FEC,03
+01B1E:  MOVF   FED,F
+01B20:  MOVFF  FEF,01
+01B24:  MOVF   xEA,W
+01B26:  SUBWF  03,W
+01B28:  BTFSS  FD8.0
+01B2A:  BRA    1C90
+01B2C:  BNZ   1B36
+01B2E:  MOVF   01,W
+01B30:  SUBWF  xE9,W
+01B32:  BTFSC  FD8.0
+01B34:  BRA    1C90
+....................            { 
+....................               again = 1; 
+01B36:  BSF    xE4.0
+....................               fl = tempd[fa][0]; 
+01B38:  MOVF   xE5,W
+01B3A:  MULLW  04
+01B3C:  MOVF   FF3,W
+01B3E:  CLRF   xEA
+01B40:  MOVWF  xE9
+01B42:  MOVLW  A3
+01B44:  ADDWF  xE9,W
+01B46:  MOVWF  FE9
+01B48:  MOVLW  04
+01B4A:  ADDWFC xEA,W
+01B4C:  MOVWF  FEA
+01B4E:  MOVFF  FEC,03
+01B52:  MOVF   FED,F
+01B54:  MOVFF  FEF,4E6
+01B58:  MOVFF  03,4E7
+....................               tempd[fa][0] = tempd[fa + 1][0]; 
+01B5C:  MOVF   xE5,W
+01B5E:  MULLW  04
+01B60:  MOVF   FF3,W
+01B62:  CLRF   xEA
+01B64:  MOVWF  xE9
+01B66:  MOVLW  A3
+01B68:  ADDWF  xE9,W
+01B6A:  MOVWF  01
+01B6C:  MOVLW  04
+01B6E:  ADDWFC xEA,W
+01B70:  MOVWF  03
+01B72:  MOVWF  xEA
+01B74:  MOVLW  01
+01B76:  ADDWF  xE5,W
+01B78:  MULLW  04
+01B7A:  MOVF   FF3,W
+01B7C:  CLRF   xEC
+01B7E:  MOVWF  xEB
+01B80:  MOVLW  A3
+01B82:  ADDWF  xEB,W
+01B84:  MOVWF  FE9
+01B86:  MOVLW  04
+01B88:  ADDWFC xEC,W
+01B8A:  MOVWF  FEA
+01B8C:  MOVFF  FEC,03
+01B90:  MOVF   FED,F
+01B92:  MOVFF  FEF,4EB
+01B96:  MOVFF  4EA,FEA
+01B9A:  MOVFF  01,FE9
+01B9E:  MOVFF  03,FEC
+01BA2:  MOVF   FED,F
+01BA4:  MOVFF  4EB,FEF
+....................               tempd[fa + 1][0] = fl; 
+01BA8:  MOVLW  01
+01BAA:  ADDWF  xE5,W
+01BAC:  MULLW  04
+01BAE:  MOVF   FF3,W
+01BB0:  CLRF   xEA
+01BB2:  MOVWF  xE9
+01BB4:  MOVLW  A3
+01BB6:  ADDWF  xE9,W
+01BB8:  MOVWF  FE9
+01BBA:  MOVLW  04
+01BBC:  ADDWFC xEA,W
+01BBE:  MOVWF  FEA
+01BC0:  MOVFF  4E7,FEC
+01BC4:  MOVF   FED,F
+01BC6:  MOVFF  4E6,FEF
+....................               fl = tempd[fa][1]; 
+01BCA:  MOVF   xE5,W
+01BCC:  MULLW  04
+01BCE:  MOVF   FF3,W
+01BD0:  CLRF   xEA
+01BD2:  MOVWF  xE9
+01BD4:  MOVLW  02
+01BD6:  ADDWF  xE9,W
+01BD8:  MOVWF  01
+01BDA:  MOVLW  00
+01BDC:  ADDWFC xEA,W
+01BDE:  MOVWF  03
+01BE0:  MOVF   01,W
+01BE2:  ADDLW  A3
+01BE4:  MOVWF  FE9
+01BE6:  MOVLW  04
+01BE8:  ADDWFC 03,W
+01BEA:  MOVWF  FEA
+01BEC:  MOVFF  FEC,03
+01BF0:  MOVF   FED,F
+01BF2:  MOVFF  FEF,4E6
+01BF6:  MOVFF  03,4E7
+....................               tempd[fa][1] = tempd[fa + 1][1]; 
+01BFA:  MOVF   xE5,W
+01BFC:  MULLW  04
+01BFE:  MOVF   FF3,W
+01C00:  CLRF   xEA
+01C02:  MOVWF  xE9
+01C04:  MOVLW  02
+01C06:  ADDWF  xE9,W
+01C08:  MOVWF  01
+01C0A:  MOVLW  00
+01C0C:  ADDWFC xEA,W
+01C0E:  MOVWF  03
+01C10:  MOVF   01,W
+01C12:  ADDLW  A3
+01C14:  MOVWF  01
+01C16:  MOVLW  04
+01C18:  ADDWFC 03,F
+01C1A:  MOVFF  01,4E9
+01C1E:  MOVFF  03,4EA
+01C22:  MOVLW  01
+01C24:  ADDWF  xE5,W
+01C26:  MULLW  04
+01C28:  MOVF   FF3,W
+01C2A:  CLRF   xEC
+01C2C:  MOVWF  xEB
+01C2E:  MOVLW  02
+01C30:  ADDWF  xEB,W
+01C32:  MOVWF  01
+01C34:  MOVLW  00
+01C36:  ADDWFC xEC,W
+01C38:  MOVWF  03
+01C3A:  MOVF   01,W
+01C3C:  ADDLW  A3
+01C3E:  MOVWF  FE9
+01C40:  MOVLW  04
+01C42:  ADDWFC 03,W
+01C44:  MOVWF  FEA
+01C46:  MOVFF  FEC,03
+01C4A:  MOVF   FED,F
+01C4C:  MOVFF  FEF,4EB
+01C50:  MOVFF  4EA,FEA
+01C54:  MOVFF  4E9,FE9
+01C58:  MOVFF  03,FEC
+01C5C:  MOVF   FED,F
+01C5E:  MOVFF  4EB,FEF
+....................               tempd[fa + 1][1] = fl; 
+01C62:  MOVLW  01
+01C64:  ADDWF  xE5,W
+01C66:  MULLW  04
+01C68:  MOVF   FF3,W
+01C6A:  CLRF   xEA
+01C6C:  MOVWF  xE9
+01C6E:  MOVLW  02
+01C70:  ADDWF  xE9,W
+01C72:  MOVWF  01
+01C74:  MOVLW  00
+01C76:  ADDWFC xEA,W
+01C78:  MOVWF  03
+01C7A:  MOVF   01,W
+01C7C:  ADDLW  A3
+01C7E:  MOVWF  FE9
+01C80:  MOVLW  04
+01C82:  ADDWFC 03,W
+01C84:  MOVWF  FEA
+01C86:  MOVFF  4E7,FEC
+01C8A:  MOVF   FED,F
+01C8C:  MOVFF  4E6,FEF
+....................            } 
+....................         } 
+01C90:  INCF   xE5,F
+01C92:  BRA    1AD4
+....................      } 
+01C94:  BRA    1ACC
+....................       for(temp=0;temp<17;++temp) 
+01C96:  MOVLB  1
+01C98:  CLRF   x39
+01C9A:  MOVF   x39,W
+01C9C:  SUBLW  10
+01C9E:  BNC   1D5C
+....................    { 
+....................       printf("%lu <-> %lu\n\r",tempd[temp][0],tempd[temp][1]); 
+01CA0:  MOVF   x39,W
+01CA2:  MULLW  04
+01CA4:  MOVF   FF3,W
+01CA6:  MOVLB  4
+01CA8:  CLRF   xEA
+01CAA:  MOVWF  xE9
+01CAC:  MOVLW  A3
+01CAE:  ADDWF  xE9,W
+01CB0:  MOVWF  FE9
+01CB2:  MOVLW  04
+01CB4:  ADDWFC xEA,W
+01CB6:  MOVWF  FEA
+01CB8:  MOVFF  FEC,4EA
+01CBC:  MOVF   FED,F
+01CBE:  MOVFF  FEF,4E9
+01CC2:  MOVLB  1
+01CC4:  MOVF   x39,W
+01CC6:  MULLW  04
+01CC8:  MOVF   FF3,W
+01CCA:  MOVLB  4
+01CCC:  CLRF   xEC
+01CCE:  MOVWF  xEB
+01CD0:  MOVLW  02
+01CD2:  ADDWF  xEB,W
+01CD4:  MOVWF  01
+01CD6:  MOVLW  00
+01CD8:  ADDWFC xEC,W
+01CDA:  MOVWF  03
+01CDC:  MOVF   01,W
+01CDE:  ADDLW  A3
+01CE0:  MOVWF  FE9
+01CE2:  MOVLW  04
+01CE4:  ADDWFC 03,W
+01CE6:  MOVWF  FEA
+01CE8:  MOVFF  FEC,4EC
+01CEC:  MOVF   FED,F
+01CEE:  MOVFF  FEF,4EB
+01CF2:  MOVLW  10
+01CF4:  MOVWF  FE9
+01CF6:  MOVFF  4EA,4EE
+01CFA:  MOVFF  4E9,4ED
+01CFE:  MOVLB  0
+01D00:  RCALL  17F6
+01D02:  MOVLW  B1
+01D04:  MOVWF  FF6
+01D06:  MOVLW  02
+01D08:  MOVWF  FF7
+01D0A:  MOVLW  00
+01D0C:  MOVWF  FF8
+01D0E:  MOVLW  05
+01D10:  MOVLB  4
+01D12:  MOVWF  xED
+01D14:  MOVLB  0
+01D16:  RCALL  18C0
+01D18:  MOVLW  10
+01D1A:  MOVWF  FE9
+01D1C:  MOVFF  4EC,4EE
+01D20:  MOVFF  4EB,4ED
+01D24:  RCALL  17F6
+01D26:  CLRF   1B
+01D28:  BTFSC  FF2.7
+01D2A:  BSF    1B.7
+01D2C:  BCF    FF2.7
+01D2E:  MOVLW  0A
+01D30:  MOVLB  4
+01D32:  MOVWF  xFE
+01D34:  MOVLB  0
+01D36:  CALL   036C
+01D3A:  BTFSC  1B.7
+01D3C:  BSF    FF2.7
+01D3E:  CLRF   1B
+01D40:  BTFSC  FF2.7
+01D42:  BSF    1B.7
+01D44:  BCF    FF2.7
+01D46:  MOVLW  0D
+01D48:  MOVLB  4
+01D4A:  MOVWF  xFE
+01D4C:  MOVLB  0
+01D4E:  CALL   036C
+01D52:  BTFSC  1B.7
+01D54:  BSF    FF2.7
+....................    } 
+01D56:  MOVLB  1
+01D58:  INCF   x39,F
+01D5A:  BRA    1C9A
+....................      IF(tempd[0][0] == 0)numluzes = 0;//luzes todas off 
+01D5C:  MOVLB  4
+01D5E:  MOVF   xA3,F
+01D60:  BNZ   1D6A
+01D62:  MOVF   xA4,F
+01D64:  BNZ   1D6A
+01D66:  CLRF   xE3
+....................      ELSE 
+01D68:  BRA    210A
+....................      { 
+....................         numluzes = 1; 
+01D6A:  MOVLW  01
+01D6C:  MOVWF  xE3
+....................         afa = 0; 
+01D6E:  CLRF   xE8
+....................         IF(actmat) 
+01D70:  MOVLB  0
+01D72:  BTFSS  xB1.3
+01D74:  BRA    1D88
+....................         { 
+....................            delays1[0][0] = tempd[0][0]; 
+01D76:  MOVFF  4A4,150
+01D7A:  MOVFF  4A3,14F
+....................            delays1[0][1] = tempd[0][1]; 
+01D7E:  MOVFF  4A6,152
+01D82:  MOVFF  4A5,151
+....................         } 
+....................  
+....................         ELSE 
+01D86:  BRA    1D98
+....................         { 
+....................            delays2[0][0] = tempd[0][0]; 
+01D88:  MOVFF  4A4,194
+01D8C:  MOVFF  4A3,193
+....................            delays2[0][1] = tempd[0][1]; 
+01D90:  MOVFF  4A6,196
+01D94:  MOVFF  4A5,195
+....................         } 
+....................  
+....................         FOR(fa = 1;fa < used_dimmers;++fa) 
+01D98:  MOVLW  01
+01D9A:  MOVLB  4
+01D9C:  MOVWF  xE5
+01D9E:  MOVLB  1
+01DA0:  MOVF   x3A,W
+01DA2:  MOVLB  4
+01DA4:  SUBWF  xE5,W
+01DA6:  BTFSC  FD8.0
+01DA8:  BRA    210A
+....................         { 
+....................            IF((tempd[fa][0] == tempd[fa - 1][0])&( ! tempd[fa][0] == 0)) 
+01DAA:  MOVF   xE5,W
+01DAC:  MULLW  04
+01DAE:  MOVF   FF3,W
+01DB0:  CLRF   xEA
+01DB2:  MOVWF  xE9
+01DB4:  MOVLW  A3
+01DB6:  ADDWF  xE9,W
+01DB8:  MOVWF  FE9
+01DBA:  MOVLW  04
+01DBC:  ADDWFC xEA,W
+01DBE:  MOVWF  FEA
+01DC0:  MOVFF  FEC,4EA
+01DC4:  MOVF   FED,F
+01DC6:  MOVFF  FEF,4E9
+01DCA:  MOVLW  01
+01DCC:  SUBWF  xE5,W
+01DCE:  MULLW  04
+01DD0:  MOVF   FF3,W
+01DD2:  CLRF   xEC
+01DD4:  MOVWF  xEB
+01DD6:  MOVLW  A3
+01DD8:  ADDWF  xEB,W
+01DDA:  MOVWF  FE9
+01DDC:  MOVLW  04
+01DDE:  ADDWFC xEC,W
+01DE0:  MOVWF  FEA
+01DE2:  MOVFF  FEC,03
+01DE6:  MOVF   FED,F
+01DE8:  MOVF   FEF,W
+01DEA:  SUBWF  xE9,W
+01DEC:  BNZ   1DF4
+01DEE:  MOVF   03,W
+01DF0:  SUBWF  xEA,W
+01DF2:  BZ    1DF8
+01DF4:  MOVLW  00
+01DF6:  BRA    1DFA
+01DF8:  MOVLW  01
+01DFA:  MOVWF  xE9
+01DFC:  MOVF   xE5,W
+01DFE:  MULLW  04
+01E00:  MOVF   FF3,W
+01E02:  CLRF   xEB
+01E04:  MOVWF  xEA
+01E06:  MOVLW  A3
+01E08:  ADDWF  xEA,W
+01E0A:  MOVWF  FE9
+01E0C:  MOVLW  04
+01E0E:  ADDWFC xEB,W
+01E10:  MOVWF  FEA
+01E12:  MOVF   FEF,F
+01E14:  BNZ   1E1A
+01E16:  MOVF   FEC,F
+01E18:  BZ    1E1E
+01E1A:  MOVLW  00
+01E1C:  BRA    1E20
+01E1E:  MOVLW  01
+01E20:  XORLW  00
+01E22:  BZ    1E28
+01E24:  MOVLW  00
+01E26:  BRA    1E2A
+01E28:  MOVLW  01
+01E2A:  ANDWF  xE9,W
+01E2C:  BTFSC  FD8.2
+01E2E:  BRA    1F6A
+....................            { 
+....................               IF(actmat)delays1[afa][1] = delays1[afa][1]&tempd[fa][1]; 
+01E30:  MOVLB  0
+01E32:  BTFSS  xB1.3
+01E34:  BRA    1ED0
+01E36:  MOVLB  4
+01E38:  MOVF   xE8,W
+01E3A:  MULLW  04
+01E3C:  MOVF   FF3,W
+01E3E:  CLRF   xEA
+01E40:  MOVWF  xE9
+01E42:  MOVLW  02
+01E44:  ADDWF  xE9,W
+01E46:  MOVWF  01
+01E48:  MOVLW  00
+01E4A:  ADDWFC xEA,W
+01E4C:  MOVWF  03
+01E4E:  MOVF   01,W
+01E50:  ADDLW  4F
+01E52:  MOVWF  01
+01E54:  MOVLW  01
+01E56:  ADDWFC 03,F
+01E58:  MOVFF  01,4E9
+01E5C:  MOVFF  03,4EA
+01E60:  MOVF   xE8,W
+01E62:  MULLW  04
+01E64:  MOVF   FF3,W
+01E66:  CLRF   xEC
+01E68:  MOVWF  xEB
+01E6A:  MOVLW  02
+01E6C:  ADDWF  xEB,W
+01E6E:  MOVWF  01
+01E70:  MOVLW  00
+01E72:  ADDWFC xEC,W
+01E74:  MOVWF  03
+01E76:  MOVF   01,W
+01E78:  ADDLW  4F
+01E7A:  MOVWF  FE9
+01E7C:  MOVLW  01
+01E7E:  ADDWFC 03,W
+01E80:  MOVWF  FEA
+01E82:  MOVFF  FEC,4EC
+01E86:  MOVF   FED,F
+01E88:  MOVFF  FEF,4EB
+01E8C:  MOVF   xE5,W
+01E8E:  MULLW  04
+01E90:  MOVF   FF3,W
+01E92:  CLRF   xEE
+01E94:  MOVWF  xED
+01E96:  MOVLW  02
+01E98:  ADDWF  xED,W
+01E9A:  MOVWF  01
+01E9C:  MOVLW  00
+01E9E:  ADDWFC xEE,W
+01EA0:  MOVWF  03
+01EA2:  MOVF   01,W
+01EA4:  ADDLW  A3
+01EA6:  MOVWF  FE9
+01EA8:  MOVLW  04
+01EAA:  ADDWFC 03,W
+01EAC:  MOVWF  FEA
+01EAE:  MOVFF  FEC,03
+01EB2:  MOVF   FED,F
+01EB4:  MOVF   FEF,W
+01EB6:  ANDWF  xEB,W
+01EB8:  MOVWF  00
+01EBA:  MOVF   03,W
+01EBC:  ANDWF  xEC,W
+01EBE:  MOVFF  4EA,FEA
+01EC2:  MOVFF  4E9,FE9
+01EC6:  MOVWF  FEC
+01EC8:  MOVF   FED,F
+01ECA:  MOVFF  00,FEF
+....................               ELSE delays2[afa][1] = delays2[afa][1]&tempd[fa][1]; 
+01ECE:  BRA    1F68
+01ED0:  MOVLB  4
+01ED2:  MOVF   xE8,W
+01ED4:  MULLW  04
+01ED6:  MOVF   FF3,W
+01ED8:  CLRF   xEA
+01EDA:  MOVWF  xE9
+01EDC:  MOVLW  02
+01EDE:  ADDWF  xE9,W
+01EE0:  MOVWF  01
+01EE2:  MOVLW  00
+01EE4:  ADDWFC xEA,W
+01EE6:  MOVWF  03
+01EE8:  MOVF   01,W
+01EEA:  ADDLW  93
+01EEC:  MOVWF  01
+01EEE:  MOVLW  01
+01EF0:  ADDWFC 03,F
+01EF2:  MOVFF  01,4E9
+01EF6:  MOVFF  03,4EA
+01EFA:  MOVF   xE8,W
+01EFC:  MULLW  04
+01EFE:  MOVF   FF3,W
+01F00:  CLRF   xEC
+01F02:  MOVWF  xEB
+01F04:  MOVLW  02
+01F06:  ADDWF  xEB,W
+01F08:  MOVWF  01
+01F0A:  MOVLW  00
+01F0C:  ADDWFC xEC,W
+01F0E:  MOVWF  03
+01F10:  MOVF   01,W
+01F12:  ADDLW  93
+01F14:  MOVWF  FE9
+01F16:  MOVLW  01
+01F18:  ADDWFC 03,W
+01F1A:  MOVWF  FEA
+01F1C:  MOVFF  FEC,4EC
+01F20:  MOVF   FED,F
+01F22:  MOVFF  FEF,4EB
+01F26:  MOVF   xE5,W
+01F28:  MULLW  04
+01F2A:  MOVF   FF3,W
+01F2C:  CLRF   xEE
+01F2E:  MOVWF  xED
+01F30:  MOVLW  02
+01F32:  ADDWF  xED,W
+01F34:  MOVWF  01
+01F36:  MOVLW  00
+01F38:  ADDWFC xEE,W
+01F3A:  MOVWF  03
+01F3C:  MOVF   01,W
+01F3E:  ADDLW  A3
+01F40:  MOVWF  FE9
+01F42:  MOVLW  04
+01F44:  ADDWFC 03,W
+01F46:  MOVWF  FEA
+01F48:  MOVFF  FEC,03
+01F4C:  MOVF   FED,F
+01F4E:  MOVF   FEF,W
+01F50:  ANDWF  xEB,W
+01F52:  MOVWF  00
+01F54:  MOVF   03,W
+01F56:  ANDWF  xEC,W
+01F58:  MOVFF  4EA,FEA
+01F5C:  MOVFF  4E9,FE9
+01F60:  MOVWF  FEC
+01F62:  MOVF   FED,F
+01F64:  MOVFF  00,FEF
+....................            } 
+....................  
+....................            else IF( ! tempd[fa][0] == 0) 
+01F68:  BRA    2106
+01F6A:  MOVF   xE5,W
+01F6C:  MULLW  04
+01F6E:  MOVF   FF3,W
+01F70:  CLRF   xEA
+01F72:  MOVWF  xE9
+01F74:  MOVLW  A3
+01F76:  ADDWF  xE9,W
+01F78:  MOVWF  FE9
+01F7A:  MOVLW  04
+01F7C:  ADDWFC xEA,W
+01F7E:  MOVWF  FEA
+01F80:  MOVF   FEF,F
+01F82:  BNZ   1F88
+01F84:  MOVF   FEC,F
+01F86:  BZ    1F8C
+01F88:  MOVLW  00
+01F8A:  BRA    1F8E
+01F8C:  MOVLW  01
+01F8E:  XORLW  00
+01F90:  BTFSS  FD8.2
+01F92:  BRA    2106
+....................            { 
+....................               ++afa; 
+01F94:  INCF   xE8,F
+....................               IF(actmat) 
+01F96:  MOVLB  0
+01F98:  BTFSS  xB1.3
+01F9A:  BRA    2052
+....................               { 
+....................                  delays1[afa][0] = tempd[fa][0]; 
+01F9C:  MOVLB  4
+01F9E:  MOVF   xE8,W
+01FA0:  MULLW  04
+01FA2:  MOVF   FF3,W
+01FA4:  CLRF   xEA
+01FA6:  MOVWF  xE9
+01FA8:  MOVLW  4F
+01FAA:  ADDWF  xE9,W
+01FAC:  MOVWF  01
+01FAE:  MOVLW  01
+01FB0:  ADDWFC xEA,W
+01FB2:  MOVWF  03
+01FB4:  MOVWF  xEA
+01FB6:  MOVF   xE5,W
+01FB8:  MULLW  04
+01FBA:  MOVF   FF3,W
+01FBC:  CLRF   xEC
+01FBE:  MOVWF  xEB
+01FC0:  MOVLW  A3
+01FC2:  ADDWF  xEB,W
+01FC4:  MOVWF  FE9
+01FC6:  MOVLW  04
+01FC8:  ADDWFC xEC,W
+01FCA:  MOVWF  FEA
+01FCC:  MOVFF  FEC,03
+01FD0:  MOVF   FED,F
+01FD2:  MOVFF  FEF,4EB
+01FD6:  MOVFF  4EA,FEA
+01FDA:  MOVFF  01,FE9
+01FDE:  MOVFF  03,FEC
+01FE2:  MOVF   FED,F
+01FE4:  MOVFF  4EB,FEF
+....................                  delays1[afa][1] = tempd[fa][1]; 
+01FE8:  MOVF   xE8,W
+01FEA:  MULLW  04
+01FEC:  MOVF   FF3,W
+01FEE:  CLRF   xEA
+01FF0:  MOVWF  xE9
+01FF2:  MOVLW  02
+01FF4:  ADDWF  xE9,W
+01FF6:  MOVWF  01
+01FF8:  MOVLW  00
+01FFA:  ADDWFC xEA,W
+01FFC:  MOVWF  03
+01FFE:  MOVF   01,W
+02000:  ADDLW  4F
+02002:  MOVWF  01
+02004:  MOVLW  01
+02006:  ADDWFC 03,F
+02008:  MOVFF  01,4E9
+0200C:  MOVFF  03,4EA
+02010:  MOVF   xE5,W
+02012:  MULLW  04
+02014:  MOVF   FF3,W
+02016:  CLRF   xEC
+02018:  MOVWF  xEB
+0201A:  MOVLW  02
+0201C:  ADDWF  xEB,W
+0201E:  MOVWF  01
+02020:  MOVLW  00
+02022:  ADDWFC xEC,W
+02024:  MOVWF  03
+02026:  MOVF   01,W
+02028:  ADDLW  A3
+0202A:  MOVWF  FE9
+0202C:  MOVLW  04
+0202E:  ADDWFC 03,W
+02030:  MOVWF  FEA
+02032:  MOVFF  FEC,03
+02036:  MOVF   FED,F
+02038:  MOVFF  FEF,4EB
+0203C:  MOVFF  4EA,FEA
+02040:  MOVFF  4E9,FE9
+02044:  MOVFF  03,FEC
+02048:  MOVF   FED,F
+0204A:  MOVFF  4EB,FEF
+....................               } 
+....................  
+....................               ELSE 
+0204E:  BRA    2104
+02050:  MOVLB  0
+....................               { 
+....................                  delays2[afa][0] = tempd[fa][0]; 
+02052:  MOVLB  4
+02054:  MOVF   xE8,W
+02056:  MULLW  04
+02058:  MOVF   FF3,W
+0205A:  CLRF   xEA
+0205C:  MOVWF  xE9
+0205E:  MOVLW  93
+02060:  ADDWF  xE9,W
+02062:  MOVWF  01
+02064:  MOVLW  01
+02066:  ADDWFC xEA,W
+02068:  MOVWF  03
+0206A:  MOVWF  xEA
+0206C:  MOVF   xE5,W
+0206E:  MULLW  04
+02070:  MOVF   FF3,W
+02072:  CLRF   xEC
+02074:  MOVWF  xEB
+02076:  MOVLW  A3
+02078:  ADDWF  xEB,W
+0207A:  MOVWF  FE9
+0207C:  MOVLW  04
+0207E:  ADDWFC xEC,W
+02080:  MOVWF  FEA
+02082:  MOVFF  FEC,03
+02086:  MOVF   FED,F
+02088:  MOVFF  FEF,4EB
+0208C:  MOVFF  4EA,FEA
+02090:  MOVFF  01,FE9
+02094:  MOVFF  03,FEC
+02098:  MOVF   FED,F
+0209A:  MOVFF  4EB,FEF
+....................                  delays2[afa][1] = tempd[fa][1]; 
+0209E:  MOVF   xE8,W
+020A0:  MULLW  04
+020A2:  MOVF   FF3,W
+020A4:  CLRF   xEA
+020A6:  MOVWF  xE9
+020A8:  MOVLW  02
+020AA:  ADDWF  xE9,W
+020AC:  MOVWF  01
+020AE:  MOVLW  00
+020B0:  ADDWFC xEA,W
+020B2:  MOVWF  03
+020B4:  MOVF   01,W
+020B6:  ADDLW  93
+020B8:  MOVWF  01
+020BA:  MOVLW  01
+020BC:  ADDWFC 03,F
+020BE:  MOVFF  01,4E9
+020C2:  MOVFF  03,4EA
+020C6:  MOVF   xE5,W
+020C8:  MULLW  04
+020CA:  MOVF   FF3,W
+020CC:  CLRF   xEC
+020CE:  MOVWF  xEB
+020D0:  MOVLW  02
+020D2:  ADDWF  xEB,W
+020D4:  MOVWF  01
+020D6:  MOVLW  00
+020D8:  ADDWFC xEC,W
+020DA:  MOVWF  03
+020DC:  MOVF   01,W
+020DE:  ADDLW  A3
+020E0:  MOVWF  FE9
+020E2:  MOVLW  04
+020E4:  ADDWFC 03,W
+020E6:  MOVWF  FEA
+020E8:  MOVFF  FEC,03
+020EC:  MOVF   FED,F
+020EE:  MOVFF  FEF,4EB
+020F2:  MOVFF  4EA,FEA
+020F6:  MOVFF  4E9,FE9
+020FA:  MOVFF  03,FEC
+020FE:  MOVF   FED,F
+02100:  MOVFF  4EB,FEF
+....................               } 
+....................  
+....................               ++numluzes; 
+02104:  INCF   xE3,F
+....................            } 
+....................         } 
+02106:  INCF   xE5,F
+02108:  BRA    1D9E
+....................      } 
+....................  
+....................      IF(actmat)delays1[N_LUZES][0] = numluzes; 
+0210A:  MOVLB  0
+0210C:  BTFSS  xB1.3
+0210E:  BRA    211A
+02110:  MOVLB  1
+02112:  CLRF   x90
+02114:  MOVFF  4E3,18F
+....................      ELSE  delays2[N_LUZES][0] = numluzes; 
+02118:  BRA    2122
+0211A:  MOVLB  1
+0211C:  CLRF   xD4
+0211E:  MOVFF  4E3,1D3
+....................      printf("numluzes=%d %lu %lu\n\r",numluzes,delays1[0][0],delays1[0][1]); 
+02122:  MOVLW  BC
+02124:  MOVWF  FF6
+02126:  MOVLW  02
+02128:  MOVWF  FF7
+0212A:  MOVLW  00
+0212C:  MOVWF  FF8
+0212E:  MOVLW  09
+02130:  MOVLB  4
+02132:  MOVWF  xED
+02134:  MOVLB  0
+02136:  CALL   18C0
+0213A:  MOVFF  4E3,4E9
+0213E:  MOVLW  1F
+02140:  MOVLB  4
+02142:  MOVWF  xEA
+02144:  MOVLB  0
+02146:  CALL   192A
+0214A:  CLRF   1B
+0214C:  BTFSC  FF2.7
+0214E:  BSF    1B.7
+02150:  BCF    FF2.7
+02152:  MOVLW  20
+02154:  MOVLB  4
+02156:  MOVWF  xFE
+02158:  MOVLB  0
+0215A:  CALL   036C
+0215E:  BTFSC  1B.7
+02160:  BSF    FF2.7
+02162:  MOVLW  10
+02164:  MOVWF  FE9
+02166:  MOVFF  150,4EE
+0216A:  MOVFF  14F,4ED
+0216E:  CALL   17F6
+02172:  CLRF   1B
+02174:  BTFSC  FF2.7
+02176:  BSF    1B.7
+02178:  BCF    FF2.7
+0217A:  MOVLW  20
+0217C:  MOVLB  4
+0217E:  MOVWF  xFE
+02180:  MOVLB  0
+02182:  CALL   036C
+02186:  BTFSC  1B.7
+02188:  BSF    FF2.7
+0218A:  MOVLW  10
+0218C:  MOVWF  FE9
+0218E:  MOVFF  152,4EE
+02192:  MOVFF  151,4ED
+02196:  CALL   17F6
+0219A:  CLRF   1B
+0219C:  BTFSC  FF2.7
+0219E:  BSF    1B.7
+021A0:  BCF    FF2.7
+021A2:  MOVLW  0A
+021A4:  MOVLB  4
+021A6:  MOVWF  xFE
+021A8:  MOVLB  0
+021AA:  CALL   036C
+021AE:  BTFSC  1B.7
+021B0:  BSF    FF2.7
+021B2:  CLRF   1B
+021B4:  BTFSC  FF2.7
+021B6:  BSF    1B.7
+021B8:  BCF    FF2.7
+021BA:  MOVLW  0D
+021BC:  MOVLB  4
+021BE:  MOVWF  xFE
+021C0:  MOVLB  0
+021C2:  CALL   036C
+021C6:  BTFSC  1B.7
+021C8:  BSF    FF2.7
+....................       
+....................      organizado=1; 
+021CA:  BSF    xB1.2
+....................   } 
+021CC:  RETLW  00
+....................  
+....................  
+....................  
+.................... #include "struct_and_enums.c" 
+.................... enum switch_type {on_off,dimmer,button}; 
+.................... enum switch_outstate {on, off, dimming, dimmed}; 
+.................... enum switch_direction {up, down}; 
+.................... enum switch_state {button_pressed, button_depressed}; 
+.................... enum output_type {_on_off, _dimmer,shutter}; 
+.................... enum output_state {_on, _off, _dimmed}; 
+.................... enum timer_type {time_on, time_off, periodic_on}; 
+.................... enum input_type {switch_,timer,none}; 
+....................  
+.................... void dimmer_init(int dim_adr,int on_adr,int off_adr,struct inputs* input); 
+.................... typedef struct data_point_out 
+.................... { 
+....................    int adress; 
+....................    int value; 
+....................    int1 needs_update; 
+.................... }; 
+.................... typedef struct data_point_in 
+.................... { 
+....................    int adress[8]; 
+....................    int value; 
+....................    int1 needs_update; 
+.................... }; 
+.................... ///////////////////////INPUTS////////////////////////////////////// 
+.................... typedef struct switches 
+.................... { 
+....................    switch_type type; 
+....................    struct data_point_out dim_level; 
+....................    struct data_point_out on; 
+....................    struct data_point_out off; 
+....................    int current_level; 
+....................    int32  timer; 
+....................    switch_state current_state; 
+....................    switch_state previous_state; 
+....................    switch_direction direction; 
+....................    switch_outstate outstate; 
+....................    int realbutton; 
+.................... }; 
+.................... typedef struct timer 
+.................... { 
+....................    timer_type type; 
+....................    int32 timeToAct; 
+....................    struct data_point_out on; 
+....................    struct data_point_out off; 
+....................    int32  timer; 
+.................... }; 
+.................... union input 
+.................... { 
+....................    struct switches; 
+....................    struct timer; 
+.................... }; 
+....................  
+.................... typedef struct inputs 
+.................... { 
+....................    enum input_type type; 
+....................    union input device; 
+.................... }; 
+.................... ///////////////////////OUTPUTS////////////////////////////////////// 
+.................... struct light 
+.................... { 
+....................    struct data_point_in on; 
+....................    struct data_point_in off; 
+....................    struct data_point_in dim_value; 
+....................    int  out_value; 
+....................    int  timer; 
+....................    int1  needs_update; 
+....................    output_state previous_state; 
+.................... }; 
+....................  
+.................... union output 
+.................... { 
+....................    struct light; 
+.................... }; 
+....................  
+.................... typedef struct outputs 
+.................... { 
+....................    enum output_type type; 
+....................    union output device; 
+.................... }; 
+....................  
+.................... typedef struct devices 
+.................... { 
+....................       int numberOfInputs; 
+....................       int numberOfOutputs; 
+....................       struct inputs myinputs[10]; 
+....................       struct outputs myoutputs[10]; 
+.................... }devicestype; 
+....................  
+.................... devicestype mydevices; 
+.................... void dimmer_init(int dim_adr,int on_adr,int off_adr,struct inputs* input,int real_button) 
+.................... { 
+....................       input->type=switch_; 
+021CE:  MOVLB  4
+021D0:  MOVFF  4A5,FE9
+021D4:  MOVFF  4A6,FEA
+021D8:  CLRF   FEF
+....................       input->device.dim_level.adress=dim_adr; 
+021DA:  MOVLW  02
+021DC:  ADDWF  xA5,W
+021DE:  MOVWF  FE9
+021E0:  MOVLW  00
+021E2:  ADDWFC xA6,W
+021E4:  MOVWF  FEA
+021E6:  MOVFF  4A2,FEF
+....................       input->device.on.adress=on_adr; 
+021EA:  MOVLW  05
+021EC:  ADDWF  xA5,W
+021EE:  MOVWF  FE9
+021F0:  MOVLW  00
+021F2:  ADDWFC xA6,W
+021F4:  MOVWF  FEA
+021F6:  MOVFF  4A3,FEF
+....................       input->device.off.adress=off_adr; 
+021FA:  MOVLW  08
+021FC:  ADDWF  xA5,W
+021FE:  MOVWF  FE9
+02200:  MOVLW  00
+02202:  ADDWFC xA6,W
+02204:  MOVWF  FEA
+02206:  MOVFF  4A4,FEF
+....................       input->device.previous_state=button_depressed; 
+0220A:  MOVLW  10
+0220C:  ADDWF  xA5,W
+0220E:  MOVWF  FE9
+02210:  MOVLW  00
+02212:  ADDWFC xA6,W
+02214:  MOVWF  FEA
+02216:  BSF    FEF.1
+....................       input->device.outstate=off; 
+02218:  MOVLW  11
+0221A:  ADDWF  xA5,W
+0221C:  MOVWF  FE9
+0221E:  MOVLW  00
+02220:  ADDWFC xA6,W
+02222:  MOVWF  FEA
+02224:  MOVLW  01
+02226:  MOVWF  FEF
+....................       input->device.current_level=0; 
+02228:  MOVLW  0B
+0222A:  ADDWF  xA5,W
+0222C:  MOVWF  FE9
+0222E:  MOVLW  00
+02230:  ADDWFC xA6,W
+02232:  MOVWF  FEA
+02234:  CLRF   FEF
+....................       input->device.direction=up; 
+02236:  MOVLW  10
+02238:  ADDWF  xA5,W
+0223A:  MOVWF  FE9
+0223C:  MOVLW  00
+0223E:  ADDWFC xA6,W
+02240:  MOVWF  FEA
+02242:  BCF    FEF.2
+....................       input->device.dim_level.needs_update=0; 
+02244:  MOVLW  04
+02246:  ADDWF  xA5,W
+02248:  MOVWF  FE9
+0224A:  MOVLW  00
+0224C:  ADDWFC xA6,W
+0224E:  MOVWF  FEA
+02250:  BCF    FEF.0
+....................        input->device.on.needs_update=0; 
+02252:  MOVLW  07
+02254:  ADDWF  xA5,W
+02256:  MOVWF  FE9
+02258:  MOVLW  00
+0225A:  ADDWFC xA6,W
+0225C:  MOVWF  FEA
+0225E:  BCF    FEF.0
+....................       input->device.off.needs_update=0; 
+02260:  MOVLW  0A
+02262:  ADDWF  xA5,W
+02264:  MOVWF  FE9
+02266:  MOVLW  00
+02268:  ADDWFC xA6,W
+0226A:  MOVWF  FEA
+0226C:  BCF    FEF.0
+....................        
+....................       input->device.dim_level.value=0; 
+0226E:  MOVLW  03
+02270:  ADDWF  xA5,W
+02272:  MOVWF  FE9
+02274:  MOVLW  00
+02276:  ADDWFC xA6,W
+02278:  MOVWF  FEA
+0227A:  CLRF   FEF
+....................       input->device.on.value=0; 
+0227C:  MOVLW  06
+0227E:  ADDWF  xA5,W
+02280:  MOVWF  FE9
+02282:  MOVLW  00
+02284:  ADDWFC xA6,W
+02286:  MOVWF  FEA
+02288:  CLRF   FEF
+....................       input->device.off.value=0; 
+0228A:  MOVLW  09
+0228C:  ADDWF  xA5,W
+0228E:  MOVWF  FE9
+02290:  MOVLW  00
+02292:  ADDWFC xA6,W
+02294:  MOVWF  FEA
+02296:  CLRF   FEF
+....................        
+....................       input->device.type=dimmer; 
+02298:  MOVLW  01
+0229A:  ADDWF  xA5,W
+0229C:  MOVWF  FE9
+0229E:  MOVLW  00
+022A0:  ADDWFC xA6,W
+022A2:  MOVWF  FEA
+022A4:  MOVLW  01
+022A6:  MOVWF  FEF
+....................       input->device.realbutton=inputs[real_button]; 
+022A8:  MOVLW  12
+022AA:  ADDWF  xA5,W
+022AC:  MOVWF  01
+022AE:  MOVLW  00
+022B0:  ADDWFC xA6,W
+022B2:  MOVWF  03
+022B4:  MOVWF  xA9
+022B6:  CLRF   03
+022B8:  MOVF   xA7,W
+022BA:  ADDLW  1C
+022BC:  MOVWF  FE9
+022BE:  MOVLW  00
+022C0:  ADDWFC 03,W
+022C2:  MOVWF  FEA
+022C4:  MOVFF  FEF,4AA
+022C8:  MOVFF  4A9,FEA
+022CC:  MOVFF  01,FE9
+022D0:  MOVFF  4AA,FEF
+.................... } 
+022D4:  MOVLB  0
+022D6:  GOTO   22FA (RETURN)
+....................  
+....................  
+....................  
+....................  
+.................... void test() 
+.................... {     mydevices.numberOfInputs=1; 
+022DA:  MOVLW  01
+022DC:  MOVLB  1
+022DE:  MOVWF  xD7
+....................       dimmer_init(1,2,3,&mydevices.myinputs[0],0); 
+022E0:  MOVLB  4
+022E2:  MOVWF  xA2
+022E4:  MOVLW  02
+022E6:  MOVWF  xA3
+022E8:  MOVLW  03
+022EA:  MOVWF  xA4
+022EC:  MOVLW  01
+022EE:  MOVWF  xA6
+022F0:  MOVLW  D9
+022F2:  MOVWF  xA5
+022F4:  CLRF   xA7
+022F6:  MOVLB  0
+022F8:  BRA    21CE
+.................... } 
+022FA:  GOTO   269E (RETURN)
+....................  
+....................  
+....................  
+.................... #include "datapoints.c" 
+.................... int1 array_contains(int * array,int & value) 
+.................... { 
+....................    int x; 
+....................    for(x=0;x<8;++x) 
+....................    { 
+....................       if(&(array)==value) return true; 
+....................       ++array; 
+....................    } 
+....................    return false; 
+.................... } 
+....................  
+.................... void process_outpoint_answer(int adress,int value) 
+.................... { 
+....................     
+.................... } 
+....................  
+.................... void process_inpoints(int &datapoint, int &value) 
+.................... { 
+....................    int x; 
+....................    for(x=0;x<mydevices.numberOfOutputs;++x) 
+....................    { 
+....................       switch (mydevices.myoutputs[x].type) { 
+....................  
+....................     case _dimmer: 
+....................            if (array_contains(mydevices.myoutputs[x].device.dim_value.adress,datapoint)) 
+....................            { 
+....................                mydevices.myoutputs[x].device.dim_value.value=value; 
+....................                mydevices.myoutputs[x].device.dim_value.needs_update=true; 
+....................            } 
+....................            else if (array_contains(mydevices.myoutputs[x].device.on.adress,datapoint)) 
+....................            { 
+....................                mydevices.myoutputs[x].device.on.value=value; 
+....................                mydevices.myoutputs[x].device.on.needs_update=true; 
+....................            } 
+....................            else if (array_contains(mydevices.myoutputs[x].device.off.adress,datapoint)) 
+....................            { 
+....................                mydevices.myoutputs[x].device.off.value=value; 
+....................                mydevices.myoutputs[x].device.off.needs_update=true; 
+....................            } 
+....................            break; 
+....................  
+....................     case _on_off: 
+....................  
+....................            break; 
+....................     case shutter: 
+....................  
+....................            break; 
+....................     default: 
+....................  
+....................             break; } 
+....................  
+....................    } 
+.................... } 
+....................  
+.................... void process_outpoints() 
+.................... { 
+....................     int x; 
+....................    for(x=0;x<mydevices.numberOfInputs;++x) 
+....................    { 
+....................       switch (mydevices.myinputs[x].type) { 
+....................     case switch_: 
+....................                if(mydevices.myinputs[x].device.dim_level.needs_update) 
+....................                { 
+....................                   process_outpoint_answer(mydevices.myinputs[x].device.dim_level.adress,mydevices.myinputs[x].device.dim_level.value); 
+....................                   mydevices.myinputs[x].device.dim_level.needs_update=false; 
+....................                   mydevices.myinputs[x].device.dim_level.value=0; 
+....................                } 
+....................            if(mydevices.myinputs[x].device.on.needs_update) 
+....................                { 
+....................                   process_outpoint_answer(mydevices.myinputs[x].device.on.adress,mydevices.myinputs[x].device.on.value); 
+....................                   mydevices.myinputs[x].device.on.needs_update=false; 
+....................                   mydevices.myinputs[x].device.on.value=0; 
+....................                } 
+....................                if(mydevices.myinputs[x].device.off.needs_update) 
+....................                { 
+....................                   process_outpoint_answer(mydevices.myinputs[x].device.off.adress,mydevices.myinputs[x].device.off.value); 
+....................                   mydevices.myinputs[x].device.off.needs_update=false; 
+....................                   mydevices.myinputs[x].device.off.value=0; 
+....................                } 
+....................                break; 
+....................     case timer: 
+....................  
+....................            break; 
+....................     default: 
+....................  
+....................             break; } 
+....................  
+....................    } 
+.................... } 
+....................  
+.................... ////////////////////////////////////////// 
+.................... //apagar 
+.................... int32 clock; 
+....................  
+.................... //dimmer constants 
+.................... static int TimeBase=0; 
+.................... static int32 reg=39; 
+.................... //dimmer end 
+....................  
+.................... struct switches msw; 
+.................... #include "switch_functions.c" 
+.................... void onOffHelper(struct switches *sw) 
+.................... { 
+....................    if(sw->dim_level.value!=0)  
+....................    { 
+....................        sw->on.value=1; 
+....................        sw->off.value=0; 
+....................    } 
+....................    else 
+....................    { 
+....................       sw->on.value=0; 
+....................       sw->off.value=1; 
+....................    } 
+.................... } 
+.................... void process_onOff(struct switches *sw) 
+.................... { 
+....................    int last_dim=sw->dim_level.value; 
+....................    int last_on=sw->on.value; 
+....................    int last_off=sw->off.value; 
+....................    if(sw->current_state==button_pressed && sw-> previous_state == button_depressed) 
+....................    {    
+....................       if(sw->dim_level.value==0) 
+....................       {   
+....................          sw->dim_level.value=127; 
+....................       } 
+....................       else  
+....................       { 
+....................          sw->dim_level.value=0; 
+....................       } 
+....................       sw->previous_state=button_pressed; 
+....................    } 
+....................    else if(sw->current_state==button_depressed) 
+....................       sw-> previous_state = button_depressed; 
+....................    onOffHelper(sw); 
+....................    if (last_dim!=sw->dim_level.value) sw->dim_level.needs_update=true; 
+....................    if (last_on!=sw->on.value) sw->on.needs_update=true; 
+....................    if (last_off!=sw->off.value) sw->off.needs_update=true; 
+.................... } 
+.................... void process_buttons(struct switches *sw) 
+.................... { 
+....................    int last_dim=sw->dim_level.value; 
+....................    int last_on=sw->on.value; 
+....................    int last_off=sw->off.value;   
+....................    if(sw->current_state==button_pressed)  
+....................    { 
+....................       sw->dim_level.value=127; 
+....................    } 
+....................    else   
+....................    { 
+....................       sw->dim_level.value=0; 
+....................    } 
+....................    onOffHelper(sw); 
+....................    if (last_dim!=sw->dim_level.value) sw->dim_level.needs_update=true; 
+....................    if (last_on!=sw->on.value) sw->on.needs_update=true; 
+....................    if (last_off!=sw->off.value) sw->off.needs_update=true; 
+.................... } 
+.................... void process_dimmers(struct switches *sw) 
+.................... { 
+*
+003C0:  MOVLW  0A
+003C2:  MOVLB  4
+003C4:  ADDWF  xFA,W
+003C6:  MOVWF  FE9
+003C8:  MOVLW  00
+003CA:  ADDWFC xFB,W
+003CC:  MOVWF  FEA
+003CE:  MOVFF  FEF,4FC
+003D2:  MOVLW  02
+003D4:  ADDWF  xFA,W
+003D6:  MOVWF  FE9
+003D8:  MOVLW  00
+003DA:  ADDWFC xFB,W
+003DC:  MOVWF  FEA
+003DE:  MOVFF  FEF,4FD
+....................    int last_level=sw->current_level; 
+....................    int last_dim=sw->dim_level.value; 
+....................    if(sw->current_state==button_pressed)//se o botao esta premido 
+003E2:  MOVLW  0F
+003E4:  ADDWF  xFA,W
+003E6:  MOVWF  FE9
+003E8:  MOVLW  00
+003EA:  ADDWFC xFB,W
+003EC:  MOVWF  FEA
+003EE:  MOVLW  00
+003F0:  BTFSC  FEF.0
+003F2:  MOVLW  01
+003F4:  ANDLW  01
+003F6:  BTFSS  FD8.2
+003F8:  BRA    05FA
+....................    { 
+....................      // printf("DIF %LU",clock - sw->timer); 
+....................       sw-> previous_state = button_pressed; 
+003FA:  MOVLW  0F
+003FC:  ADDWF  xFA,W
+003FE:  MOVWF  FE9
+00400:  MOVLW  00
+00402:  ADDWFC xFB,W
+00404:  MOVWF  FEA
+00406:  BCF    FEF.1
+....................       if ((clock - sw->timer > reg || sw->outstate == dimming)) 
+00408:  MOVLW  0B
+0040A:  ADDWF  xFA,W
+0040C:  MOVWF  FE9
+0040E:  MOVLW  00
+00410:  ADDWFC xFB,W
+00412:  MOVWF  FEA
+00414:  MOVFF  FEF,00
+00418:  MOVFF  FEC,01
+0041C:  MOVFF  FEC,02
+00420:  MOVFF  FEC,03
+00424:  MOVF   00,W
+00426:  MOVLB  3
+00428:  SUBWF  xF5,W
+0042A:  MOVLB  4
+0042C:  MOVWF  xFE
+0042E:  MOVF   01,W
+00430:  MOVLB  3
+00432:  SUBWFB xF6,W
+00434:  MOVLB  4
+00436:  MOVWF  xFF
+00438:  MOVF   02,W
+0043A:  MOVLB  3
+0043C:  SUBWFB xF7,W
+0043E:  MOVLB  5
+00440:  MOVWF  x00
+00442:  MOVF   03,W
+00444:  MOVLB  3
+00446:  SUBWFB xF8,W
+00448:  MOVLB  5
+0044A:  MOVWF  x01
+0044C:  MOVLB  3
+0044E:  MOVF   xFD,W
+00450:  MOVLB  5
+00452:  SUBWF  x01,W
+00454:  BNC   048A
+00456:  BNZ   04A2
+00458:  MOVLB  3
+0045A:  MOVF   xFC,W
+0045C:  MOVLB  5
+0045E:  SUBWF  x00,W
+00460:  BNC   048A
+00462:  BNZ   04A2
+00464:  MOVLB  3
+00466:  MOVF   xFB,W
+00468:  MOVLB  4
+0046A:  SUBWF  xFF,W
+0046C:  BTFSC  FD8.0
+0046E:  BRA    0474
+00470:  MOVLB  5
+00472:  BRA    048A
+00474:  BTFSC  FD8.2
+00476:  BRA    047C
+00478:  MOVLB  5
+0047A:  BRA    04A2
+0047C:  MOVF   xFE,W
+0047E:  MOVLB  3
+00480:  SUBWF  xFA,W
+00482:  BTFSC  FD8.0
+00484:  BRA    048A
+00486:  MOVLB  5
+00488:  BRA    04A2
+0048A:  MOVLW  10
+0048C:  MOVLB  4
+0048E:  ADDWF  xFA,W
+00490:  MOVWF  FE9
+00492:  MOVLW  00
+00494:  ADDWFC xFB,W
+00496:  MOVWF  FEA
+00498:  MOVF   FEF,W
+0049A:  SUBLW  02
+0049C:  BTFSS  FD8.2
+0049E:  BRA    05F8
+004A0:  MOVLB  5
+....................       {  
+....................          if(sw->outstate==off) 
+004A2:  MOVLW  10
+004A4:  MOVLB  4
+004A6:  ADDWF  xFA,W
+004A8:  MOVWF  FE9
+004AA:  MOVLW  00
+004AC:  ADDWFC xFB,W
+004AE:  MOVWF  FEA
+004B0:  DECFSZ FEF,W
+004B2:  BRA    04E2
+....................          { 
+....................             sw->on.value=1; 
+004B4:  MOVLW  05
+004B6:  ADDWF  xFA,W
+004B8:  MOVWF  FE9
+004BA:  MOVLW  00
+004BC:  ADDWFC xFB,W
+004BE:  MOVWF  FEA
+004C0:  MOVLW  01
+004C2:  MOVWF  FEF
+....................             sw->on.needs_update; 
+....................             printf("AKI"); 
+004C4:  MOVLW  41
+004C6:  MOVWF  xFE
+004C8:  MOVLB  0
+004CA:  RCALL  036C
+004CC:  MOVLW  4B
+004CE:  MOVLB  4
+004D0:  MOVWF  xFE
+004D2:  MOVLB  0
+004D4:  RCALL  036C
+004D6:  MOVLW  49
+004D8:  MOVLB  4
+004DA:  MOVWF  xFE
+004DC:  MOVLB  0
+004DE:  RCALL  036C
+004E0:  MOVLB  4
+....................          } 
+....................          sw->outstate = dimming; 
+004E2:  MOVLW  10
+004E4:  ADDWF  xFA,W
+004E6:  MOVWF  FE9
+004E8:  MOVLW  00
+004EA:  ADDWFC xFB,W
+004EC:  MOVWF  FEA
+004EE:  MOVLW  02
+004F0:  MOVWF  FEF
+....................          if (clock - sw->timer > TimeBase) //regula 
+004F2:  MOVLW  0B
+004F4:  ADDWF  xFA,W
+004F6:  MOVWF  FE9
+004F8:  MOVLW  00
+004FA:  ADDWFC xFB,W
+004FC:  MOVWF  FEA
+004FE:  MOVFF  FEF,00
+00502:  MOVFF  FEC,01
+00506:  MOVFF  FEC,02
+0050A:  MOVFF  FEC,03
+0050E:  MOVF   00,W
+00510:  MOVLB  3
+00512:  SUBWF  xF5,W
+00514:  MOVLB  4
+00516:  MOVWF  xFE
+00518:  MOVF   01,W
+0051A:  MOVLB  3
+0051C:  SUBWFB xF6,W
+0051E:  MOVLB  4
+00520:  MOVWF  xFF
+00522:  MOVF   02,W
+00524:  MOVLB  3
+00526:  SUBWFB xF7,W
+00528:  MOVLB  5
+0052A:  MOVWF  x00
+0052C:  MOVF   03,W
+0052E:  MOVLB  3
+00530:  SUBWFB xF8,W
+00532:  MOVLB  5
+00534:  MOVWF  x01
+00536:  MOVF   x01,F
+00538:  BNZ   0554
+0053A:  MOVF   x00,F
+0053C:  BNZ   0554
+0053E:  MOVLB  4
+00540:  MOVF   xFF,F
+00542:  BTFSC  FD8.2
+00544:  BRA    054A
+00546:  MOVLB  5
+00548:  BRA    0554
+0054A:  MOVF   xFE,W
+0054C:  MOVLB  3
+0054E:  SUBWF  xF9,W
+00550:  BC    05D8
+00552:  MOVLB  5
+....................          { 
+....................             if (sw->direction == up) //para cima 
+00554:  MOVLW  0F
+00556:  MOVLB  4
+00558:  ADDWF  xFA,W
+0055A:  MOVWF  FE9
+0055C:  MOVLW  00
+0055E:  ADDWFC xFB,W
+00560:  MOVWF  FEA
+00562:  MOVLW  00
+00564:  BTFSC  FEF.2
+00566:  MOVLW  01
+00568:  ANDLW  01
+0056A:  BNZ   059C
+....................             { 
+....................                ++sw->current_level; 
+0056C:  MOVLW  0A
+0056E:  ADDWF  xFA,W
+00570:  MOVWF  FE9
+00572:  MOVLW  00
+00574:  ADDWFC xFB,W
+00576:  MOVWF  FEA
+00578:  INCF   FEF,F
+....................                if (sw->current_level == 127) sw->direction = down; 
+0057A:  MOVLW  0A
+0057C:  ADDWF  xFA,W
+0057E:  MOVWF  FE9
+00580:  MOVLW  00
+00582:  ADDWFC xFB,W
+00584:  MOVWF  FEA
+00586:  MOVF   FEF,W
+00588:  SUBLW  7F
+0058A:  BNZ   059A
+0058C:  MOVLW  0F
+0058E:  ADDWF  xFA,W
+00590:  MOVWF  FE9
+00592:  MOVLW  00
+00594:  ADDWFC xFB,W
+00596:  MOVWF  FEA
+00598:  BSF    FEF.2
+....................             } 
+....................             else//para baixo 
+0059A:  BRA    05D8
+....................             { 
+....................                --sw->current_level; 
+0059C:  MOVLW  0A
+0059E:  ADDWF  xFA,W
+005A0:  MOVWF  FE9
+005A2:  MOVLW  00
+005A4:  ADDWFC xFB,W
+005A6:  MOVWF  FEA
+005A8:  DECF   FEF,F
+....................                if (sw->current_level == 0)  
+005AA:  MOVLW  0A
+005AC:  ADDWF  xFA,W
+005AE:  MOVWF  FE9
+005B0:  MOVLW  00
+005B2:  ADDWFC xFB,W
+005B4:  MOVWF  FEA
+005B6:  MOVF   FEF,F
+005B8:  BNZ   05D8
+....................                {   
+....................                   sw->direction = up; 
+005BA:  MOVLW  0F
+005BC:  ADDWF  xFA,W
+005BE:  MOVWF  FE9
+005C0:  MOVLW  00
+005C2:  ADDWFC xFB,W
+005C4:  MOVWF  FEA
+005C6:  BCF    FEF.2
+....................                   sw->off.value=1; 
+005C8:  MOVLW  08
+005CA:  ADDWF  xFA,W
+005CC:  MOVWF  FE9
+005CE:  MOVLW  00
+005D0:  ADDWFC xFB,W
+005D2:  MOVWF  FEA
+005D4:  MOVLW  01
+005D6:  MOVWF  FEF
+....................                } 
+....................             } 
+....................          } 
+....................          sw->timer = clock; 
+005D8:  MOVLW  0B
+005DA:  MOVLB  4
+005DC:  ADDWF  xFA,W
+005DE:  MOVWF  FE9
+005E0:  MOVLW  00
+005E2:  ADDWFC xFB,W
+005E4:  MOVWF  FEA
+005E6:  MOVFF  3F5,FEF
+005EA:  MOVFF  3F6,FEC
+005EE:  MOVFF  3F7,FEC
+005F2:  MOVFF  3F8,FEC
+....................       } 
+....................       else 
+005F6:  BRA    05F8
+....................       { 
+....................          //sw - > timer = clock; 
+....................       } 
+....................    } 
+....................    else//se o botao nao esta premido 
+005F8:  BRA    073E
+....................    { 
+....................       if (sw->previous_state == button_pressed) //se o botao acabou de ser deslargado 
+005FA:  MOVLW  0F
+005FC:  ADDWF  xFA,W
+005FE:  MOVWF  FE9
+00600:  MOVLW  00
+00602:  ADDWFC xFB,W
+00604:  MOVWF  FEA
+00606:  MOVLW  00
+00608:  BTFSC  FEF.1
+0060A:  MOVLW  01
+0060C:  ANDLW  01
+0060E:  BTFSS  FD8.2
+00610:  BRA    0722
+....................       { 
+....................          sw->previous_state = button_depressed; 
+00612:  MOVLW  0F
+00614:  ADDWF  xFA,W
+00616:  MOVWF  FE9
+00618:  MOVLW  00
+0061A:  ADDWFC xFB,W
+0061C:  MOVWF  FEA
+0061E:  BSF    FEF.1
+....................          if (sw->outstate == dimming) //se esteve a regular 
+00620:  MOVLW  10
+00622:  ADDWF  xFA,W
+00624:  MOVWF  FE9
+00626:  MOVLW  00
+00628:  ADDWFC xFB,W
+0062A:  MOVWF  FEA
+0062C:  MOVF   FEF,W
+0062E:  SUBLW  02
+00630:  BNZ   0678
+....................          { 
+....................             sw-> outstate = dimmed; 
+00632:  MOVLW  10
+00634:  ADDWF  xFA,W
+00636:  MOVWF  FE9
+00638:  MOVLW  00
+0063A:  ADDWFC xFB,W
+0063C:  MOVWF  FEA
+0063E:  MOVLW  03
+00640:  MOVWF  FEF
+....................             if (sw->direction == up) sw->direction = down; //inverte direccao 
+00642:  MOVLW  0F
+00644:  ADDWF  xFA,W
+00646:  MOVWF  FE9
+00648:  MOVLW  00
+0064A:  ADDWFC xFB,W
+0064C:  MOVWF  FEA
+0064E:  MOVLW  00
+00650:  BTFSC  FEF.2
+00652:  MOVLW  01
+00654:  ANDLW  01
+00656:  BNZ   0668
+00658:  MOVLW  0F
+0065A:  ADDWF  xFA,W
+0065C:  MOVWF  FE9
+0065E:  MOVLW  00
+00660:  ADDWFC xFB,W
+00662:  MOVWF  FEA
+00664:  BSF    FEF.2
+....................             else sw->direction = up; 
+00666:  BRA    0676
+00668:  MOVLW  0F
+0066A:  ADDWF  xFA,W
+0066C:  MOVWF  FE9
+0066E:  MOVLW  00
+00670:  ADDWFC xFB,W
+00672:  MOVWF  FEA
+00674:  BCF    FEF.2
+....................          } 
+....................          else//se nao esteve a regular 
+00676:  BRA    0722
+....................          { 
+....................             if (sw->outstate == off) //se estava desligada 
+00678:  MOVLW  10
+0067A:  ADDWF  xFA,W
+0067C:  MOVWF  FE9
+0067E:  MOVLW  00
+00680:  ADDWFC xFB,W
+00682:  MOVWF  FEA
+00684:  DECFSZ FEF,W
+00686:  BRA    06E6
+....................             { 
+....................               // printf("on"); 
+....................                if(sw->current_level > 0) //liga 
+00688:  MOVLW  0A
+0068A:  ADDWF  xFA,W
+0068C:  MOVWF  FE9
+0068E:  MOVLW  00
+00690:  ADDWFC xFB,W
+00692:  MOVWF  FEA
+00694:  MOVF   FEF,F
+00696:  BZ    06AA
+....................                   sw->outstate=dimmed; 
+00698:  MOVLW  10
+0069A:  ADDWF  xFA,W
+0069C:  MOVWF  FE9
+0069E:  MOVLW  00
+006A0:  ADDWFC xFB,W
+006A2:  MOVWF  FEA
+006A4:  MOVLW  03
+006A6:  MOVWF  FEF
+....................                else 
+006A8:  BRA    06B8
+....................                   sw->outstate=on; 
+006AA:  MOVLW  10
+006AC:  ADDWF  xFA,W
+006AE:  MOVWF  FE9
+006B0:  MOVLW  00
+006B2:  ADDWFC xFB,W
+006B4:  MOVWF  FEA
+006B6:  CLRF   FEF
+....................                sw->on.value=1; 
+006B8:  MOVLW  05
+006BA:  ADDWF  xFA,W
+006BC:  MOVWF  FE9
+006BE:  MOVLW  00
+006C0:  ADDWFC xFB,W
+006C2:  MOVWF  FEA
+006C4:  MOVLW  01
+006C6:  MOVWF  FEF
+....................                sw->direction = down; 
+006C8:  MOVLW  0F
+006CA:  ADDWF  xFA,W
+006CC:  MOVWF  FE9
+006CE:  MOVLW  00
+006D0:  ADDWFC xFB,W
+006D2:  MOVWF  FEA
+006D4:  BSF    FEF.2
+....................                sw->on.needs_update=true; 
+006D6:  MOVLW  06
+006D8:  ADDWF  xFA,W
+006DA:  MOVWF  FE9
+006DC:  MOVLW  00
+006DE:  ADDWFC xFB,W
+006E0:  MOVWF  FEA
+006E2:  BSF    FEF.0
+....................             } 
+....................             else 
+006E4:  BRA    0722
+....................             { 
+....................               // printf("off"); 
+....................                //sw->current_level = 0; //senao desliga 
+....................                sw->outstate=off; 
+006E6:  MOVLW  10
+006E8:  ADDWF  xFA,W
+006EA:  MOVWF  FE9
+006EC:  MOVLW  00
+006EE:  ADDWFC xFB,W
+006F0:  MOVWF  FEA
+006F2:  MOVLW  01
+006F4:  MOVWF  FEF
+....................                sw->off.value=1; 
+006F6:  MOVLW  08
+006F8:  ADDWF  xFA,W
+006FA:  MOVWF  FE9
+006FC:  MOVLW  00
+006FE:  ADDWFC xFB,W
+00700:  MOVWF  FEA
+00702:  MOVLW  01
+00704:  MOVWF  FEF
+....................                sw->direction = up; 
+00706:  MOVLW  0F
+00708:  ADDWF  xFA,W
+0070A:  MOVWF  FE9
+0070C:  MOVLW  00
+0070E:  ADDWFC xFB,W
+00710:  MOVWF  FEA
+00712:  BCF    FEF.2
+....................                sw->off.needs_update=true; 
+00714:  MOVLW  09
+00716:  ADDWF  xFA,W
+00718:  MOVWF  FE9
+0071A:  MOVLW  00
+0071C:  ADDWFC xFB,W
+0071E:  MOVWF  FEA
+00720:  BSF    FEF.0
+....................             } 
+....................          } 
+....................       } 
+....................       sw->timer = clock; 
+00722:  MOVLW  0B
+00724:  ADDWF  xFA,W
+00726:  MOVWF  FE9
+00728:  MOVLW  00
+0072A:  ADDWFC xFB,W
+0072C:  MOVWF  FEA
+0072E:  MOVFF  3F5,FEF
+00732:  MOVFF  3F6,FEC
+00736:  MOVFF  3F7,FEC
+0073A:  MOVFF  3F8,FEC
+....................    } 
+....................  //  onOffHelper(sw); 
+....................    if (last_level!=sw->current_level)  
+0073E:  MOVLW  0A
+00740:  ADDWF  xFA,W
+00742:  MOVWF  FE9
+00744:  MOVLW  00
+00746:  ADDWFC xFB,W
+00748:  MOVWF  FEA
+0074A:  MOVF   FEF,W
+0074C:  SUBWF  xFC,W
+0074E:  BZ    078A
+....................    { 
+....................       sw->dim_level.value=sw->current_level; 
+00750:  MOVLW  02
+00752:  ADDWF  xFA,W
+00754:  MOVWF  01
+00756:  MOVLW  00
+00758:  ADDWFC xFB,W
+0075A:  MOVWF  03
+0075C:  MOVLW  0A
+0075E:  ADDWF  xFA,W
+00760:  MOVWF  FE9
+00762:  MOVLW  00
+00764:  ADDWFC xFB,W
+00766:  MOVWF  FEA
+00768:  MOVFF  FEF,500
+0076C:  MOVLB  5
+0076E:  MOVFF  03,FEA
+00772:  MOVFF  01,FE9
+00776:  MOVFF  500,FEF
+....................       sw->dim_level.needs_update=true; 
+0077A:  MOVLW  03
+0077C:  MOVLB  4
+0077E:  ADDWF  xFA,W
+00780:  MOVWF  FE9
+00782:  MOVLW  00
+00784:  ADDWFC xFB,W
+00786:  MOVWF  FEA
+00788:  BSF    FEF.0
+....................    } 
+.................... } 
+0078A:  MOVLB  0
+0078C:  GOTO   090E (RETURN)
+....................  
+.................... void read_inputs() 
+.................... { 
+....................   int x; 
+....................    for(x=0;x<mydevices.numberOfInputs;++x) 
+00790:  MOVLB  4
+00792:  CLRF   xF7
+00794:  MOVLB  1
+00796:  MOVF   xD7,W
+00798:  MOVLB  4
+0079A:  SUBWF  xF7,W
+0079C:  BTFSC  FD8.0
+0079E:  BRA    0914
+....................    { 
+....................       switch (mydevices.myinputs[x].type) { 
+007A0:  CLRF   xF9
+007A2:  MOVFF  4F7,4F8
+007A6:  CLRF   xFB
+007A8:  MOVLW  13
+007AA:  MOVWF  xFA
+007AC:  MOVLB  0
+007AE:  RCALL  02D2
+007B0:  MOVFF  02,03
+007B4:  MOVF   01,W
+007B6:  ADDLW  D9
+007B8:  MOVWF  FE9
+007BA:  MOVLW  01
+007BC:  ADDWFC 02,W
+007BE:  MOVWF  FEA
+007C0:  MOVF   FEF,W
+007C2:  BZ    07CC
+007C4:  XORLW  01
+007C6:  BTFSC  FD8.2
+007C8:  BRA    090A
+007CA:  BRA    090C
+....................     case switch_: 
+....................            // printf("aki"); 
+....................             if (input (mydevices.myinputs[x].device.realbutton)) mydevices.myinputs[x].device.current_state = button_depressed; 
+007CC:  MOVLB  4
+007CE:  CLRF   xF9
+007D0:  MOVFF  4F7,4F8
+007D4:  CLRF   xFB
+007D6:  MOVLW  13
+007D8:  MOVWF  xFA
+007DA:  MOVLB  0
+007DC:  RCALL  02D2
+007DE:  MOVF   01,W
+007E0:  ADDLW  02
+007E2:  MOVLB  4
+007E4:  MOVWF  xF8
+007E6:  MOVLW  00
+007E8:  ADDWFC 02,W
+007EA:  MOVWF  xF9
+007EC:  MOVLW  01
+007EE:  ADDWF  xF8,F
+007F0:  MOVLW  00
+007F2:  ADDWFC xF9,F
+007F4:  MOVLW  11
+007F6:  ADDWF  xF8,W
+007F8:  MOVWF  01
+007FA:  MOVLW  00
+007FC:  ADDWFC xF9,W
+007FE:  MOVWF  03
+00800:  MOVF   01,W
+00802:  ADDLW  D7
+00804:  MOVWF  FE9
+00806:  MOVLW  01
+00808:  ADDWFC 03,W
+0080A:  MOVWF  FEA
+0080C:  MOVFF  FEF,4F8
+00810:  MOVFF  4F8,4F9
+00814:  MOVLW  01
+00816:  MOVWF  xFA
+00818:  MOVLW  0F
+0081A:  MOVWF  xFC
+0081C:  MOVLW  92
+0081E:  MOVWF  xFB
+00820:  MOVLB  0
+00822:  BRA    02F4
+00824:  MOVFF  4F8,4F9
+00828:  MOVLW  0F
+0082A:  MOVLB  4
+0082C:  MOVWF  xFB
+0082E:  MOVLW  80
+00830:  MOVWF  xFA
+00832:  MOVLB  0
+00834:  BRA    0338
+00836:  BTFSS  01.0
+00838:  BRA    087E
+0083A:  MOVLB  4
+0083C:  CLRF   xF9
+0083E:  MOVFF  4F7,4F8
+00842:  CLRF   xFB
+00844:  MOVLW  13
+00846:  MOVWF  xFA
+00848:  MOVLB  0
+0084A:  RCALL  02D2
+0084C:  MOVF   01,W
+0084E:  ADDLW  02
+00850:  MOVLB  4
+00852:  MOVWF  xF8
+00854:  MOVLW  00
+00856:  ADDWFC 02,W
+00858:  MOVWF  xF9
+0085A:  MOVLW  01
+0085C:  ADDWF  xF8,F
+0085E:  MOVLW  00
+00860:  ADDWFC xF9,F
+00862:  MOVLW  0F
+00864:  ADDWF  xF8,W
+00866:  MOVWF  01
+00868:  MOVLW  00
+0086A:  ADDWFC xF9,W
+0086C:  MOVWF  03
+0086E:  MOVF   01,W
+00870:  ADDLW  D7
+00872:  MOVWF  FE9
+00874:  MOVLW  01
+00876:  ADDWFC 03,W
+00878:  MOVWF  FEA
+0087A:  BSF    FEF.0
+....................             else mydevices.myinputs[x].device.current_state = button_pressed; 
+0087C:  BRA    08C0
+0087E:  MOVLB  4
+00880:  CLRF   xF9
+00882:  MOVFF  4F7,4F8
+00886:  CLRF   xFB
+00888:  MOVLW  13
+0088A:  MOVWF  xFA
+0088C:  MOVLB  0
+0088E:  RCALL  02D2
+00890:  MOVF   01,W
+00892:  ADDLW  02
+00894:  MOVLB  4
+00896:  MOVWF  xF8
+00898:  MOVLW  00
+0089A:  ADDWFC 02,W
+0089C:  MOVWF  xF9
+0089E:  MOVLW  01
+008A0:  ADDWF  xF8,F
+008A2:  MOVLW  00
+008A4:  ADDWFC xF9,F
+008A6:  MOVLW  0F
+008A8:  ADDWF  xF8,W
+008AA:  MOVWF  01
+008AC:  MOVLW  00
+008AE:  ADDWFC xF9,W
+008B0:  MOVWF  03
+008B2:  MOVF   01,W
+008B4:  ADDLW  D7
+008B6:  MOVWF  FE9
+008B8:  MOVLW  01
+008BA:  ADDWFC 03,W
+008BC:  MOVWF  FEA
+008BE:  BCF    FEF.0
+....................             process_dimmers(&mydevices.myinputs[x].device); 
+008C0:  CLRF   xF9
+008C2:  MOVFF  4F7,4F8
+008C6:  CLRF   xFB
+008C8:  MOVLW  13
+008CA:  MOVWF  xFA
+008CC:  MOVLB  0
+008CE:  RCALL  02D2
+008D0:  MOVF   01,W
+008D2:  ADDLW  02
+008D4:  MOVLB  4
+008D6:  MOVWF  xF8
+008D8:  MOVLW  00
+008DA:  ADDWFC 02,W
+008DC:  MOVWF  xF9
+008DE:  MOVLW  01
+008E0:  ADDWF  xF8,W
+008E2:  MOVWF  01
+008E4:  MOVLW  00
+008E6:  ADDWFC xF9,W
+008E8:  MOVWF  03
+008EA:  MOVF   01,W
+008EC:  ADDLW  D7
+008EE:  MOVWF  01
+008F0:  MOVLW  01
+008F2:  ADDWFC 03,F
+008F4:  MOVFF  01,4F8
+008F8:  MOVFF  03,4F9
+008FC:  MOVFF  03,4FB
+00900:  MOVFF  01,4FA
+00904:  MOVLB  0
+00906:  BRA    03C0
+....................             break; 
+00908:  BRA    090E
+....................     case timer: 
+....................  
+....................            break; 
+0090A:  BRA    090E
+....................     default: 
+....................  
+....................             break;  
+0090C:  BRA    090E
+....................             } 
+....................  
+....................    } 
+0090E:  MOVLB  4
+00910:  INCF   xF7,F
+00912:  BRA    0794
+.................... } 
+00914:  MOVLB  0
+00916:  GOTO   0934 (RETURN)
+....................  
+....................  
+.................... ////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... int1 flag=0;//mains not detected flag 
+.................... #int_TIMER0 
+.................... void  TIMER0_isr(void)  
+.................... { 
+....................    ++clock; 
+0091A:  MOVLW  01
+0091C:  MOVLB  3
+0091E:  ADDWF  xF5,F
+00920:  BTFSC  FD8.0
+00922:  INCF   xF6,F
+00924:  BTFSC  FD8.2
+00926:  INCF   xF7,F
+00928:  BTFSC  FD8.2
+0092A:  INCF   xF8,F
+....................    if (bit_test (clock, 1)) read_inputs(); 
+0092C:  BTFSS  xF5.1
+0092E:  BRA    0936
+00930:  MOVLB  0
+00932:  BRA    0790
+00934:  MOVLB  3
+.................... } 
+....................  
+00936:  BCF    FF2.2
+00938:  MOVLB  0
+0093A:  GOTO   0110
+.................... #int_TIMER1 
+.................... void  TIMER1_isr(void)  
+.................... { 
+....................    flag = 1; 
+0093E:  BSF    xB1.4
+.................... } 
+....................  
+00940:  BCF    F9E.0
+00942:  GOTO   0110
+.................... #int_EXT 
+.................... void  EXT_isr(void)  
+.................... { 
+....................  
+....................   // set_timer1 (0) ; 
+....................          portc=0xFF; 
+00946:  MOVLW  FF
+00948:  MOVWF  F82
+....................          portd=0xFF; 
+0094A:  MOVWF  F83
+....................          if (organizado)  
+0094C:  BTFSS  xB1.2
+0094E:  BRA    0972
+....................          { 
+....................             organizado=0; 
+00950:  BCF    xB1.2
+....................             if (actmat)  
+00952:  BTFSS  xB1.3
+00954:  BRA    0966
+....................             { 
+....................                actmat=0; 
+00956:  BCF    xB1.3
+....................                pointer=delays1; 
+00958:  MOVLW  01
+0095A:  MOVLB  1
+0095C:  MOVWF  x3C
+0095E:  MOVLW  4F
+00960:  MOVWF  x3B
+....................             } 
+....................             else 
+00962:  BRA    0972
+00964:  MOVLB  0
+....................             { 
+....................                actmat=1; 
+00966:  BSF    xB1.3
+....................                pointer=delays2; 
+00968:  MOVLW  01
+0096A:  MOVLB  1
+0096C:  MOVWF  x3C
+0096E:  MOVLW  93
+00970:  MOVWF  x3B
+....................             } 
+....................          } 
+....................          vez=0; 
+00972:  MOVLB  1
+00974:  CLRF   x3D
+....................          CCP_1=matrizluz[fpointer(0,0)]; 
+00976:  MOVLB  4
+00978:  CLRF   xF9
+0097A:  CLRF   xFA
+*
+009E6:  MOVFF  02,4F8
+009EA:  MOVFF  01,4F7
+009EE:  BCF    FD8.0
+009F0:  RLCF   01,W
+009F2:  MOVWF  02
+009F4:  RLCF   xF8,W
+009F6:  MOVWF  03
+009F8:  MOVF   02,W
+009FA:  MOVLB  0
+009FC:  CALL   019A
+00A00:  TBLRD*+
+00A02:  MOVFF  FF5,03
+00A06:  MOVWF  FBE
+00A08:  MOVFF  03,FBF
+....................          mnumluzes=fpointer(N_LUZES,0); 
+00A0C:  MOVLW  10
+00A0E:  MOVLB  4
+00A10:  MOVWF  xF9
+00A12:  CLRF   xFA
+*
+00A7E:  MOVFF  01,13E
+....................          set_timer1(0); 
+00A82:  CLRF   FCF
+00A84:  CLRF   FCE
+.................... } 
+....................  
+00A86:  BCF    FF2.1
+00A88:  MOVLB  0
+00A8A:  GOTO   0110
+.................... #int_RDA 
+.................... void  RDA_isr(void)  
+.................... { 
+.................... } 
+....................  
+00A8E:  BCF    F9E.5
+00A90:  GOTO   0110
+.................... #int_TBE 
+.................... void  TBE_isr(void)  
+.................... { 
+.................... } 
+....................  
+00A94:  BCF    F9E.4
+00A96:  GOTO   0110
+.................... #int_BUSCOL 
+.................... void  BUSCOL_isr(void)  
+.................... { 
+.................... } 
+....................  
+00A9A:  BCF    FA1.3
+00A9C:  GOTO   0110
+.................... #int_OSCF 
+.................... void  OSCF_isr(void)  
+.................... { 
+.................... } 
+....................  
+00AA0:  BCF    FA1.7
+00AA2:  GOTO   0110
+.................... #int_canrx0 
+.................... void canrx0_int ( )  
+.................... { 
+....................    canReceive (); 
+*
+0107C:  RCALL  0C9E
+....................    // TODO: add CAN recieve code here 
+.................... } 
+....................  
+0107E:  BCF    FA4.0
+01080:  GOTO   0110
+.................... #int_canrx1 
+.................... void canrx1_int ( )  
+.................... { 
+....................    canReceive (); 
+01084:  RCALL  0C9E
+....................    // TODO: add CAN recieve code here 
+.................... } 
+....................  
+01086:  BCF    FA4.1
+01088:  GOTO   0110
+.................... #int_cantx0 
+.................... void cantx0_int ( )  
+.................... { 
+....................    canTransmit (); 
+*
+014B4:  RCALL  1292
+....................    // TODO: add CAN transmit code here 
+.................... } 
+....................  
+014B6:  BCF    FA4.2
+014B8:  GOTO   0110
+.................... #int_cantx1 
+.................... void cantx1_int ( )  
+.................... { 
+....................    canTransmit (); 
+014BC:  RCALL  1292
+....................    // TODO: add CAN transmit code here 
+.................... } 
+....................  
+014BE:  BCF    FA4.3
+014C0:  GOTO   0110
+.................... #int_cantx2 
+.................... void cantx2_int ( )  
+.................... { 
+....................    canTransmit (); 
+014C4:  RCALL  1292
+....................    // TODO: add CAN transmit code here 
+.................... } 
+....................  
+014C6:  BCF    FA4.4
+014C8:  GOTO   0110
+.................... #int_canirx 
+.................... void canirx_int ( )  
+.................... { 
+....................    // TODO: add CAN IRX handling code here 
+.................... } 
+....................  
+014CC:  BCF    FA4.7
+014CE:  GOTO   0110
+.................... #int_canerr 
+.................... void canerr_int ( )  
+.................... { 
+....................    // TODO: add CAN error handling code here 
+.................... } 
+....................  
+014D2:  BCF    FA4.5
+014D4:  GOTO   0110
+.................... #int_CCP1 
+.................... void CCP1_isr(void)  
+.................... { 
+....................    if(mnumluzes!=0) 
+014D8:  MOVLB  1
+014DA:  MOVF   x3E,F
+014DC:  BTFSC  FD8.2
+014DE:  BRA    1608
+....................    { 
+....................    output_low (LED) ; 
+014E0:  BCF    F96.2
+014E2:  BCF    F8D.2
+....................       int16 auxccp=fpointer(vez,1); 
+014E4:  MOVFF  13D,4F9
+014E8:  MOVLW  01
+014EA:  MOVLB  4
+014EC:  MOVWF  xFA
+*
+01558:  MOVFF  02,4F8
+0155C:  MOVFF  01,4F7
+....................       portc=(portc & MAKE8(auxccp,1)); 
+01560:  MOVF   xF8,W
+01562:  ANDWF  F82,F
+....................       portd=(portd & MAKE8(auxccp,0)); 
+01564:  MOVF   xF7,W
+01566:  ANDWF  F83,F
+....................       ++vez; 
+01568:  MOVLB  1
+0156A:  INCF   x3D,F
+....................       --mnumluzes; 
+0156C:  DECF   x3E,F
+....................       CCP_1=matrizluz[fpointer(vez,0)]; 
+0156E:  MOVFF  13D,4F9
+01572:  MOVLB  4
+01574:  CLRF   xFA
+*
+015E0:  MOVFF  02,4FA
+015E4:  MOVFF  01,4F9
+015E8:  BCF    FD8.0
+015EA:  RLCF   01,W
+015EC:  MOVWF  02
+015EE:  RLCF   xFA,W
+015F0:  MOVWF  03
+015F2:  MOVF   02,W
+015F4:  MOVLB  0
+015F6:  CALL   019A
+015FA:  TBLRD*+
+015FC:  MOVFF  FF5,03
+01600:  MOVWF  FBE
+01602:  MOVFF  03,FBF
+01606:  MOVLB  1
+....................    } 
+.................... } 
+01608:  BCF    F9E.2
+0160A:  MOVLB  0
+0160C:  GOTO   0110
+.................... void main() 
+.................... { 
+*
+023D8:  CLRF   FF8
+023DA:  BCF    FD0.7
+023DC:  BSF    07.7
+023DE:  CLRF   FEA
+023E0:  CLRF   FE9
+023E2:  BCF    F93.5
+023E4:  BSF    F8A.5
+023E6:  CLRF   24
+023E8:  BCF    xB1.0
+023EA:  CLRF   xB2
+023EC:  BSF    xB1.1
+023EE:  MOVLW  10
+023F0:  MOVLB  1
+023F2:  MOVWF  x3A
+023F4:  MOVLB  3
+023F6:  CLRF   xF9
+023F8:  CLRF   xFD
+023FA:  CLRF   xFC
+023FC:  CLRF   xFB
+023FE:  MOVLW  27
+02400:  MOVWF  xFA
+02402:  MOVLB  0
+02404:  BCF    xB1.4
+02406:  MOVF   FC1,W
+02408:  ANDLW  C0
+0240A:  IORLW  0F
+0240C:  MOVWF  FC1
+0240E:  MOVLW  07
+02410:  MOVWF  FB4
+02412:  CLRF   1C
+02414:  MOVLW  01
+02416:  MOVWF  1D
+02418:  MOVLW  02
+0241A:  MOVWF  1E
+0241C:  MOVLW  03
+0241E:  MOVWF  1F
+02420:  MOVLW  04
+02422:  MOVWF  20
+02424:  MOVLW  05
+02426:  MOVWF  21
+02428:  MOVLW  20
+0242A:  MOVWF  22
+0242C:  MOVLW  21
+0242E:  MOVWF  23
+02430:  MOVLW  0B
+02432:  MOVLB  1
+02434:  MOVWF  x35
+02436:  CLRF   x36
+02438:  CLRF   x37
+0243A:  CLRF   x38
+0243C:  MOVLW  0A
+0243E:  MOVWF  x3F
+02440:  MOVWF  x40
+02442:  MOVWF  x41
+02444:  MOVWF  x42
+02446:  MOVWF  x43
+02448:  MOVWF  x44
+0244A:  MOVWF  x45
+0244C:  MOVWF  x46
+0244E:  MOVWF  x47
+02450:  MOVWF  x48
+02452:  MOVWF  x49
+02454:  MOVWF  x4A
+02456:  MOVWF  x4B
+02458:  MOVWF  x4C
+0245A:  MOVWF  x4D
+0245C:  MOVWF  x4E
+0245E:  CLRF   x4F
+02460:  CLRF   x50
+02462:  CLRF   x51
+02464:  CLRF   x52
+02466:  CLRF   x53
+02468:  CLRF   x54
+0246A:  MOVLW  01
+0246C:  MOVWF  x55
+0246E:  CLRF   x56
+02470:  CLRF   x57
+02472:  CLRF   x58
+02474:  MOVLW  02
+02476:  MOVWF  x59
+02478:  CLRF   x5A
+0247A:  CLRF   x5B
+0247C:  CLRF   x5C
+0247E:  MOVLW  03
+02480:  MOVWF  x5D
+02482:  CLRF   x5E
+02484:  CLRF   x5F
+02486:  CLRF   x60
+02488:  MOVLW  04
+0248A:  MOVWF  x61
+0248C:  CLRF   x62
+0248E:  CLRF   x63
+02490:  CLRF   x64
+02492:  MOVLW  05
+02494:  MOVWF  x65
+02496:  CLRF   x66
+02498:  CLRF   x67
+0249A:  CLRF   x68
+0249C:  MOVLW  06
+0249E:  MOVWF  x69
+024A0:  CLRF   x6A
+024A2:  CLRF   x6B
+024A4:  CLRF   x6C
+024A6:  MOVLW  07
+024A8:  MOVWF  x6D
+024AA:  CLRF   x6E
+024AC:  CLRF   x6F
+024AE:  CLRF   x70
+024B0:  MOVLW  08
+024B2:  MOVWF  x71
+024B4:  CLRF   x72
+024B6:  CLRF   x73
+024B8:  CLRF   x74
+024BA:  MOVLW  09
+024BC:  MOVWF  x75
+024BE:  CLRF   x76
+024C0:  CLRF   x77
+024C2:  CLRF   x78
+024C4:  MOVLW  0A
+024C6:  MOVWF  x79
+024C8:  CLRF   x7A
+024CA:  CLRF   x7B
+024CC:  CLRF   x7C
+024CE:  MOVLW  0B
+024D0:  MOVWF  x7D
+024D2:  CLRF   x7E
+024D4:  CLRF   x7F
+024D6:  CLRF   x80
+024D8:  MOVLW  0C
+024DA:  MOVWF  x81
+024DC:  CLRF   x82
+024DE:  CLRF   x83
+024E0:  CLRF   x84
+024E2:  MOVLW  0D
+024E4:  MOVWF  x85
+024E6:  CLRF   x86
+024E8:  CLRF   x87
+024EA:  CLRF   x88
+024EC:  MOVLW  0E
+024EE:  MOVWF  x89
+024F0:  CLRF   x8A
+024F2:  CLRF   x8B
+024F4:  CLRF   x8C
+024F6:  MOVLW  0F
+024F8:  MOVWF  x8D
+024FA:  CLRF   x8E
+024FC:  CLRF   x8F
+024FE:  CLRF   x90
+02500:  CLRF   x91
+02502:  CLRF   x92
+02504:  CLRF   x93
+02506:  CLRF   x94
+02508:  CLRF   x95
+0250A:  CLRF   x96
+0250C:  CLRF   x97
+0250E:  CLRF   x98
+02510:  MOVLW  01
+02512:  MOVWF  x99
+02514:  CLRF   x9A
+02516:  CLRF   x9B
+02518:  CLRF   x9C
+0251A:  MOVLW  02
+0251C:  MOVWF  x9D
+0251E:  CLRF   x9E
+02520:  CLRF   x9F
+02522:  CLRF   xA0
+02524:  MOVLW  03
+02526:  MOVWF  xA1
+02528:  CLRF   xA2
+0252A:  CLRF   xA3
+0252C:  CLRF   xA4
+0252E:  MOVLW  04
+02530:  MOVWF  xA5
+02532:  CLRF   xA6
+02534:  CLRF   xA7
+02536:  CLRF   xA8
+02538:  MOVLW  05
+0253A:  MOVWF  xA9
+0253C:  CLRF   xAA
+0253E:  CLRF   xAB
+02540:  CLRF   xAC
+02542:  MOVLW  06
+02544:  MOVWF  xAD
+02546:  CLRF   xAE
+02548:  CLRF   xAF
+0254A:  CLRF   xB0
+0254C:  MOVLW  07
+0254E:  MOVWF  xB1
+02550:  CLRF   xB2
+02552:  CLRF   xB3
+02554:  CLRF   xB4
+02556:  MOVLW  08
+02558:  MOVWF  xB5
+0255A:  CLRF   xB6
+0255C:  CLRF   xB7
+0255E:  CLRF   xB8
+02560:  MOVLW  09
+02562:  MOVWF  xB9
+02564:  CLRF   xBA
+02566:  CLRF   xBB
+02568:  CLRF   xBC
+0256A:  MOVLW  0A
+0256C:  MOVWF  xBD
+0256E:  CLRF   xBE
+02570:  CLRF   xBF
+02572:  CLRF   xC0
+02574:  MOVLW  0B
+02576:  MOVWF  xC1
+02578:  CLRF   xC2
+0257A:  CLRF   xC3
+0257C:  CLRF   xC4
+0257E:  MOVLW  0C
+02580:  MOVWF  xC5
+02582:  CLRF   xC6
+02584:  CLRF   xC7
+02586:  CLRF   xC8
+02588:  MOVLW  0D
+0258A:  MOVWF  xC9
+0258C:  CLRF   xCA
+0258E:  CLRF   xCB
+02590:  CLRF   xCC
+02592:  MOVLW  0E
+02594:  MOVWF  xCD
+02596:  CLRF   xCE
+02598:  CLRF   xCF
+0259A:  CLRF   xD0
+0259C:  MOVLW  0F
+0259E:  MOVWF  xD1
+025A0:  CLRF   xD2
+025A2:  CLRF   xD3
+025A4:  CLRF   xD4
+025A6:  CLRF   xD5
+025A8:  CLRF   xD6
+....................    clock = 0; 
+025AA:  MOVLB  3
+025AC:  CLRF   xF8
+025AE:  CLRF   xF7
+025B0:  CLRF   xF6
+025B2:  CLRF   xF5
+....................    can_init () ; 
+025B4:  MOVLB  0
+025B6:  GOTO   16A2
+....................    can_set_mode (CAN_OP_CONFIG) ; 
+025BA:  MOVLW  04
+025BC:  MOVLB  4
+025BE:  MOVWF  xA2
+025C0:  MOVLB  0
+025C2:  CALL   164C
+....................     
+....................    BRGCON1.brp = 4; 
+025C6:  MOVLW  C0
+025C8:  ANDWF  F70,W
+025CA:  IORLW  04
+025CC:  MOVWF  F70
+....................    BRGCON1.sjw = 0; 
+025CE:  MOVLW  3F
+025D0:  ANDWF  F70,W
+025D2:  MOVWF  F70
+....................    BRGCON2.prseg = 2; 
+025D4:  MOVLW  F8
+025D6:  ANDWF  F71,W
+025D8:  IORLW  02
+025DA:  MOVWF  F71
+....................    BRGCON2.seg1ph = 5; 
+025DC:  MOVLW  C7
+025DE:  ANDWF  F71,W
+025E0:  IORLW  28
+025E2:  MOVWF  F71
+....................    BRGCON2.sam = FALSE; 
+025E4:  BCF    F71.6
+....................    BRGCON2.seg2phts = FALSE; 
+025E6:  BCF    F71.7
+....................    BRGCON3.seg2ph = 5; 
+025E8:  MOVLW  F8
+025EA:  ANDWF  F72,W
+025EC:  IORLW  05
+025EE:  MOVWF  F72
+....................    BRGCON3.wakfil = TRUE; 
+025F0:  BSF    F72.6
+....................    can_set_mode (CAN_OP_NORMAL) ; 
+025F2:  MOVLB  4
+025F4:  CLRF   xA2
+025F6:  MOVLB  0
+025F8:  CALL   164C
+....................     
+....................    enable_interrupts (int_canrx0); 
+025FC:  BSF    FA3.0
+....................    enable_interrupts (int_canrx1); 
+025FE:  BSF    FA3.1
+....................    enable_interrupts (int_cantx0); 
+02600:  BSF    FA3.2
+....................    enable_interrupts (int_cantx1); 
+02602:  BSF    FA3.3
+....................    enable_interrupts (int_cantx2); 
+02604:  BSF    FA3.4
+....................    enable_interrupts (int_canirx); 
+02606:  BSF    FA3.7
+....................    enable_interrupts (int_canerr); 
+02608:  BSF    FA3.5
+....................    setup_adc_ports (NO_ANALOGS | VSS_VDD) ; 
+0260A:  MOVF   FC1,W
+0260C:  ANDLW  C0
+0260E:  IORLW  0F
+02610:  MOVWF  FC1
+....................    setup_adc (ADC_CLOCK_DIV_2 | ADC_TAD_MUL_0) ; 
+02612:  MOVF   FC0,W
+02614:  ANDLW  C0
+02616:  MOVWF  FC0
+02618:  BCF    FC0.7
+0261A:  BSF    FC2.0
+....................    setup_psp (PSP_DISABLED) ; 
+0261C:  BCF    F96.4
+....................    setup_spi (SPI_SS_DISABLED) ; 
+0261E:  BCF    FC6.5
+02620:  MOVLW  01
+02622:  MOVWF  FC6
+02624:  MOVLW  00
+02626:  MOVWF  FC7
+....................    //setup_wdt (WDT_ON) ; 
+....................    setup_timer_0 (RTCC_INTERNAL | RTCC_DIV_4); //div16 1.6us thick 104ms overflow 
+02628:  MOVLW  81
+0262A:  MOVWF  FD5
+....................     
+....................    //setup_timer_1 (T1_INTERNAL | T1_DIV_BY_2); //div2 0.2us thick overflow 13.1ms 
+....................    setup_timer_1(T1_INTERNAL|T1_DIV_BY_2); 
+0262C:  MOVLW  95
+0262E:  MOVWF  FCD
+....................    setup_timer_2(T2_DISABLED,0,1); 
+02630:  MOVLW  00
+02632:  MOVWF  FCA
+02634:  MOVLW  00
+02636:  MOVWF  FCB
+....................    setup_ccp1(CCP_COMPARE_INT); 
+02638:  MOVLW  0A
+0263A:  MOVWF  FBD
+....................    enable_interrupts(INT_CCP1); 
+0263C:  BSF    F9D.2
+....................    ext_int_edge(l_to_h); 
+0263E:  BSF    FF1.6
+....................     
+....................    setup_timer_2 (T2_DISABLED, 0, 1) ; 
+02640:  MOVLW  00
+02642:  MOVWF  FCA
+02644:  MOVLW  00
+02646:  MOVWF  FCB
+....................    setup_timer_3 (T3_DISABLED | T3_DIV_BY_1) ; 
+02648:  CLRF   FB1
+....................     
+....................   // setup_ccp1 (CCP_OFF) ; 
+....................    setup_comparator (NC_NC_NC_NC) ; 
+0264A:  MOVLW  07
+0264C:  MOVWF  FB4
+0264E:  MOVF   F95,W
+02650:  MOVWF  F95
+02652:  MOVF   F96,W
+02654:  MOVWF  F96
+02656:  CLRWDT
+02658:  MOVLW  20
+0265A:  MOVWF  00
+0265C:  DECFSZ 00,F
+0265E:  BRA    265C
+02660:  BRA    2662
+02662:  MOVF   FB4,W
+02664:  BCF    FA1.6
+....................    setup_vref (FALSE) ; 
+02666:  CLRF   FB5
+....................     
+....................    enable_interrupts (int_TIMER0) ; 
+02668:  BSF    FF2.5
+....................    enable_interrupts (int_EXT) ; 
+0266A:  BSF    FF2.4
+....................    //enable_interrupts (int_TBE) ; 
+....................    //enable_interrupts (int_BUSCOL) ; 
+....................    //enable_interrupts (int_CANIRX) ; 
+....................    //enable_interrupts (int_CANERR) ; 
+....................    //enable_interrupts (int_CANTX2) ; 
+....................    //enable_interrupts (int_CANTX1) ; 
+....................    //enable_interrupts (int_CANTX0) ; 
+....................    //enable_interrupts (int_CANRX1) ; 
+....................    //enable_interrupts (int_CANRX0) ; 
+....................    //enable_interrupts (int_OSCF) ; 
+....................    
+....................    //TODO: User Code 
+....................    struct switches array[NUMBER_OF_SWITCHES]; 
+....................    msw.previous_state=button_depressed; 
+0266C:  MOVLB  4
+0266E:  BSF    x0D.1
+....................    msw.outstate=off; 
+02670:  MOVLW  01
+02672:  MOVWF  x0E
+....................  
+....................    trisc=0x00; //tudo saidas 
+02674:  CLRF   F94
+....................    trisd=0x00; //tudo saidas 
+02676:  CLRF   F95
+....................    actmat=0; 
+02678:  MOVLB  0
+0267A:  BCF    xB1.3
+....................    pointer=delays1; 
+0267C:  MOVLB  1
+0267E:  MOVWF  x3C
+02680:  MOVLW  4F
+02682:  MOVWF  x3B
+....................    org(); 
+02684:  MOVLB  0
+02686:  CALL   1A42
+....................    pointer=delays2; 
+0268A:  MOVLW  01
+0268C:  MOVLB  1
+0268E:  MOVWF  x3C
+02690:  MOVLW  93
+02692:  MOVWF  x3B
+....................    actmat=1; 
+02694:  MOVLB  0
+02696:  BSF    xB1.3
+....................    org(); 
+02698:  CALL   1A42
+....................     
+....................    test(); 
+0269C:  BRA    22DA
+....................     
+....................    enable_interrupts (GLOBAL) ; 
+0269E:  MOVLW  C0
+026A0:  IORWF  FF2,F
+....................    while(true) 
+....................    { 
+....................    delay_ms (200) ; 
+026A2:  MOVLW  C8
+026A4:  MOVLB  4
+026A6:  MOVWF  xA3
+026A8:  MOVLB  0
+026AA:  RCALL  22FE
+....................    if(mydevices.myinputs[0].device.dim_level.needs_update) 
+026AC:  MOVLB  1
+026AE:  BTFSS  xDD.0
+026B0:  BRA    270E
+....................    { 
+....................       printf("dim_level %d\n\r",mydevices.myinputs[0].device.dim_level.value); 
+026B2:  MOVLW  10
+026B4:  MOVWF  FF6
+026B6:  MOVLW  16
+026B8:  MOVWF  FF7
+026BA:  MOVLW  00
+026BC:  MOVWF  FF8
+026BE:  MOVLW  0A
+026C0:  MOVLB  4
+026C2:  MOVWF  xED
+026C4:  MOVLB  0
+026C6:  CALL   18C0
+026CA:  MOVFF  1DC,4E9
+026CE:  MOVLW  1F
+026D0:  MOVLB  4
+026D2:  MOVWF  xEA
+026D4:  MOVLB  0
+026D6:  CALL   192A
+026DA:  CLRF   1B
+026DC:  BTFSC  FF2.7
+026DE:  BSF    1B.7
+026E0:  BCF    FF2.7
+026E2:  MOVLW  0A
+026E4:  MOVLB  4
+026E6:  MOVWF  xFE
+026E8:  MOVLB  0
+026EA:  CALL   036C
+026EE:  BTFSC  1B.7
+026F0:  BSF    FF2.7
+026F2:  CLRF   1B
+026F4:  BTFSC  FF2.7
+026F6:  BSF    1B.7
+026F8:  BCF    FF2.7
+026FA:  MOVLW  0D
+026FC:  MOVLB  4
+026FE:  MOVWF  xFE
+02700:  MOVLB  0
+02702:  CALL   036C
+02706:  BTFSC  1B.7
+02708:  BSF    FF2.7
+....................       mydevices.myinputs[0].device.dim_level.needs_update=false; 
+0270A:  MOVLB  1
+0270C:  BCF    xDD.0
+....................    } 
+....................    if(mydevices.myinputs[0].device.on.needs_update) 
+0270E:  BTFSS  xE0.0
+02710:  BRA    279E
+02712:  CLRF   1B
+02714:  BTFSC  FF2.7
+02716:  BSF    1B.7
+02718:  BCF    FF2.7
+....................    { 
+....................       printf("on %d\n\r",mydevices.myinputs[0].device.on.value); 
+0271A:  MOVLW  6F
+0271C:  MOVLB  4
+0271E:  MOVWF  xFE
+02720:  MOVLB  0
+02722:  CALL   036C
+02726:  BTFSC  1B.7
+02728:  BSF    FF2.7
+0272A:  CLRF   1B
+0272C:  BTFSC  FF2.7
+0272E:  BSF    1B.7
+02730:  BCF    FF2.7
+02732:  MOVLW  6E
+02734:  MOVLB  4
+02736:  MOVWF  xFE
+02738:  MOVLB  0
+0273A:  CALL   036C
+0273E:  BTFSC  1B.7
+02740:  BSF    FF2.7
+02742:  CLRF   1B
+02744:  BTFSC  FF2.7
+02746:  BSF    1B.7
+02748:  BCF    FF2.7
+0274A:  MOVLW  20
+0274C:  MOVLB  4
+0274E:  MOVWF  xFE
+02750:  MOVLB  0
+02752:  CALL   036C
+02756:  BTFSC  1B.7
+02758:  BSF    FF2.7
+0275A:  MOVFF  1DF,4E9
+0275E:  MOVLW  1F
+02760:  MOVLB  4
+02762:  MOVWF  xEA
+02764:  MOVLB  0
+02766:  CALL   192A
+0276A:  CLRF   1B
+0276C:  BTFSC  FF2.7
+0276E:  BSF    1B.7
+02770:  BCF    FF2.7
+02772:  MOVLW  0A
+02774:  MOVLB  4
+02776:  MOVWF  xFE
+02778:  MOVLB  0
+0277A:  CALL   036C
+0277E:  BTFSC  1B.7
+02780:  BSF    FF2.7
+02782:  CLRF   1B
+02784:  BTFSC  FF2.7
+02786:  BSF    1B.7
+02788:  BCF    FF2.7
+0278A:  MOVLW  0D
+0278C:  MOVLB  4
+0278E:  MOVWF  xFE
+02790:  MOVLB  0
+02792:  CALL   036C
+02796:  BTFSC  1B.7
+02798:  BSF    FF2.7
+....................       mydevices.myinputs[0].device.on.needs_update=false; 
+0279A:  MOVLB  1
+0279C:  BCF    xE0.0
+....................    } 
+....................    if(mydevices.myinputs[0].device.off.needs_update) 
+0279E:  BTFSS  xE3.0
+027A0:  BRA    27FE
+....................    { 
+....................       printf("off %d\n\r",mydevices.myinputs[0].device.off.value); 
+027A2:  MOVLW  20
+027A4:  MOVWF  FF6
+027A6:  MOVLW  16
+027A8:  MOVWF  FF7
+027AA:  MOVLW  00
+027AC:  MOVWF  FF8
+027AE:  MOVLW  04
+027B0:  MOVLB  4
+027B2:  MOVWF  xED
+027B4:  MOVLB  0
+027B6:  CALL   18C0
+027BA:  MOVFF  1E2,4E9
+027BE:  MOVLW  1F
+027C0:  MOVLB  4
+027C2:  MOVWF  xEA
+027C4:  MOVLB  0
+027C6:  CALL   192A
+027CA:  CLRF   1B
+027CC:  BTFSC  FF2.7
+027CE:  BSF    1B.7
+027D0:  BCF    FF2.7
+027D2:  MOVLW  0A
+027D4:  MOVLB  4
+027D6:  MOVWF  xFE
+027D8:  MOVLB  0
+027DA:  CALL   036C
+027DE:  BTFSC  1B.7
+027E0:  BSF    FF2.7
+027E2:  CLRF   1B
+027E4:  BTFSC  FF2.7
+027E6:  BSF    1B.7
+027E8:  BCF    FF2.7
+027EA:  MOVLW  0D
+027EC:  MOVLB  4
+027EE:  MOVWF  xFE
+027F0:  MOVLB  0
+027F2:  CALL   036C
+027F6:  BTFSC  1B.7
+027F8:  BSF    FF2.7
+....................       mydevices.myinputs[0].device.off.needs_update=false; 
+027FA:  MOVLB  1
+027FC:  BCF    xE3.0
+....................    } 
+.................... } 
+027FE:  MOVLB  0
+02800:  BRA    26A2
+....................    while(organizado==0){} 
+02802:  BTFSC  xB1.2
+02804:  BRA    2808
+02806:  BRA    2802
+....................    for(temp=0;temp<17;++temp) 
+02808:  MOVLB  1
+0280A:  CLRF   x39
+0280C:  MOVF   x39,W
+0280E:  SUBLW  10
+02810:  BTFSS  FD8.0
+02812:  BRA    2978
+....................    { 
+....................       printf("%lu <-> %lu\n\r",fpointer(temp,0),fpointer(temp,1)); 
+02814:  MOVFF  139,4F9
+02818:  MOVLB  4
+0281A:  CLRF   xFA
+*
+02886:  MOVFF  02,4A3
+0288A:  MOVFF  01,4A2
+0288E:  MOVFF  139,4F9
+02892:  MOVLW  01
+02894:  MOVWF  xFA
+*
+02900:  MOVFF  02,4A5
+02904:  MOVFF  01,4A4
+02908:  MOVLW  10
+0290A:  MOVWF  FE9
+0290C:  MOVFF  4A3,4EE
+02910:  MOVFF  4A2,4ED
+02914:  MOVLB  0
+02916:  CALL   17F6
+0291A:  MOVLW  2D
+0291C:  MOVWF  FF6
+0291E:  MOVLW  16
+02920:  MOVWF  FF7
+02922:  MOVLW  00
+02924:  MOVWF  FF8
+02926:  MOVLW  05
+02928:  MOVLB  4
+0292A:  MOVWF  xED
+0292C:  MOVLB  0
+0292E:  CALL   18C0
+02932:  MOVLW  10
+02934:  MOVWF  FE9
+02936:  MOVFF  4A5,4EE
+0293A:  MOVFF  4A4,4ED
+0293E:  CALL   17F6
+02942:  CLRF   1B
+02944:  BTFSC  FF2.7
+02946:  BSF    1B.7
+02948:  BCF    FF2.7
+0294A:  MOVLW  0A
+0294C:  MOVLB  4
+0294E:  MOVWF  xFE
+02950:  MOVLB  0
+02952:  CALL   036C
+02956:  BTFSC  1B.7
+02958:  BSF    FF2.7
+0295A:  CLRF   1B
+0295C:  BTFSC  FF2.7
+0295E:  BSF    1B.7
+02960:  BCF    FF2.7
+02962:  MOVLW  0D
+02964:  MOVLB  4
+02966:  MOVWF  xFE
+02968:  MOVLB  0
+0296A:  CALL   036C
+0296E:  BTFSC  1B.7
+02970:  BSF    FF2.7
+....................    } 
+02972:  MOVLB  1
+02974:  INCF   x39,F
+02976:  BRA    280C
+....................     int16 auxccp=fpointer(0,1); 
+02978:  MOVLB  4
+0297A:  CLRF   xF9
+0297C:  MOVLW  01
+0297E:  MOVWF  xFA
+*
+029EA:  MOVFF  02,4A1
+029EE:  MOVFF  01,4A0
+....................       printf("%lu <-> %u <-> %u\n\r",auxccp,MAKE8(auxccp,1),MAKE8(auxccp,0)); 
+029F2:  MOVFF  4A1,4A2
+029F6:  MOVFF  4A0,4A3
+029FA:  MOVLW  10
+029FC:  MOVWF  FE9
+029FE:  MOVFF  4A1,4EE
+02A02:  MOVFF  4A0,4ED
+02A06:  MOVLB  0
+02A08:  CALL   17F6
+02A0C:  MOVLW  3B
+02A0E:  MOVWF  FF6
+02A10:  MOVLW  16
+02A12:  MOVWF  FF7
+02A14:  MOVLW  00
+02A16:  MOVWF  FF8
+02A18:  MOVLW  05
+02A1A:  MOVLB  4
+02A1C:  MOVWF  xED
+02A1E:  MOVLB  0
+02A20:  CALL   18C0
+02A24:  MOVFF  4A2,4A4
+02A28:  MOVLW  1B
+02A2A:  MOVLB  4
+02A2C:  MOVWF  xA5
+02A2E:  MOVLB  0
+02A30:  RCALL  232E
+02A32:  MOVLW  42
+02A34:  MOVWF  FF6
+02A36:  MOVLW  16
+02A38:  MOVWF  FF7
+02A3A:  MOVLW  00
+02A3C:  MOVWF  FF8
+02A3E:  MOVLW  05
+02A40:  MOVLB  4
+02A42:  MOVWF  xED
+02A44:  MOVLB  0
+02A46:  CALL   18C0
+02A4A:  MOVFF  4A3,4A4
+02A4E:  MOVLW  1B
+02A50:  MOVLB  4
+02A52:  MOVWF  xA5
+02A54:  MOVLB  0
+02A56:  RCALL  232E
+02A58:  CLRF   1B
+02A5A:  BTFSC  FF2.7
+02A5C:  BSF    1B.7
+02A5E:  BCF    FF2.7
+02A60:  MOVLW  0A
+02A62:  MOVLB  4
+02A64:  MOVWF  xFE
+02A66:  MOVLB  0
+02A68:  CALL   036C
+02A6C:  BTFSC  1B.7
+02A6E:  BSF    FF2.7
+02A70:  CLRF   1B
+02A72:  BTFSC  FF2.7
+02A74:  BSF    1B.7
+02A76:  BCF    FF2.7
+02A78:  MOVLW  0D
+02A7A:  MOVLB  4
+02A7C:  MOVWF  xFE
+02A7E:  MOVLB  0
+02A80:  CALL   036C
+02A84:  BTFSC  1B.7
+02A86:  BSF    FF2.7
+....................    for (;; ) 
+....................    {    
+....................        
+....................       output_high (LED) ; 
+02A88:  BCF    F96.2
+02A8A:  BSF    F8D.2
+....................        delay_ms (1000) ; 
+02A8C:  MOVLW  04
+02A8E:  MOVLB  4
+02A90:  MOVWF  xA2
+02A92:  MOVLW  FA
+02A94:  MOVWF  xA3
+02A96:  MOVLB  0
+02A98:  RCALL  22FE
+02A9A:  MOVLB  4
+02A9C:  DECFSZ xA2,F
+02A9E:  BRA    2A92
+....................        
+....................      // output_low (LED) ; 
+....................        
+....................        
+....................       delay_ms (200) ; 
+02AA0:  MOVLW  C8
+02AA2:  MOVWF  xA3
+02AA4:  MOVLB  0
+02AA6:  RCALL  22FE
+....................       //   printf("%LX\n\r",temp); 
+....................      // printf (" %d %lX\n\r", msw.dim_level.value,porta) ; 
+....................    } 
+02AA8:  BRA    2A88
+.................... } 
+....................  
+....................  
+02AAA:  BRA    2AAA
+
+Configuration Fuses:
+   Word  1: C600   H4 IESO FCMEN
+   Word  2: 0E19   NOBROWNOUT WDT128 NOWDT BORV20 NOPUT
+   Word  3: 8600   PBADEN LPT1OSC MCLR
+   Word  4: 0030   NOSTVREN DEBUG NOLVP NOXINST BBSIZ4K
+   Word  5: C03F   NOPROTECT NOCPD NOCPB
+   Word  6: E03F   NOWRT NOWRTD NOWRTC NOWRTB
+   Word  7: 403F   NOEBTR NOEBTRB

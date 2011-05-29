@@ -1,0 +1,28 @@
+[PROJECT]
+Target=prob_pinA4.hex
+Development_Mode=
+Processor_Text=PIC16F876A
+ToolSuite=CCS
+Processor=0x876A
+[prob_pinA4]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=prob_pinA4
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Opened Files]
+1=C:\Projecto_Domotica\Pic\lixo\prob_pinA4.c
+2=C:\Projecto_Domotica\estores\fresh.c
+3=
+[Target Data]
+OptionString=-p +FM
+FileList=C:\Projecto_Domotica\Pic\lixo\prob_pinA4.c
+[Units]
+Count=1
+1=prob_pinA4.c (main)
+Link=0

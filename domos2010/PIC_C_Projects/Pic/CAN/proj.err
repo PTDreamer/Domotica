@@ -1,0 +1,3 @@
+>>> Warning 202 "C:\Projecto_Domotica\Pic\CAN\mcp.c" Line 69(8,11): Variable never used:   aux
+      Memory usage:   ROM=56%      RAM=31% - 47%
+      0 Errors,  1 Warnings.

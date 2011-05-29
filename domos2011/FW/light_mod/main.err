@@ -1,0 +1,11 @@
+>>> Warning 208 "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c" Line 132(15,23): Function not void and does not return a value  can_push
+>>> Warning 207 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\switch_functions.c" Line 69(1,1): Code has no effect
+>>> Warning 216 "main.c" Line 262(0,1): Interrupts disabled during call to prevent re-entrancy:  (can_set_id)
+>>> Warning 216 "main.c" Line 262(0,1): Interrupts disabled during call to prevent re-entrancy:  (@PUTCHAR_1_)
+>>> Warning 202 "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c" Line 11(6,16): Variable never used:   can_rsfull
+>>> Warning 202 "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c" Line 16(6,17): Variable never used:   can_tsempty
+>>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\dimming_functions.c" Line 43(10,18): Variable never used:   clockorg
+>>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\switch_functions.c" Line 59(8,16): Variable never used:   last_dim
+>>> Warning 202 "main.c" Line 203(20,25): Variable never used:   array
+      Memory usage:   ROM=11%      RAM=31% - 40%
+      0 Errors,  9 Warnings.

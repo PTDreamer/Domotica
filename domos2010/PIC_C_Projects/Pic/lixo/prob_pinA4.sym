@@ -1,0 +1,52 @@
+004-005 @WRITE_PROGRAM_MEMORY.P1
+004-005 @READ_PROGRAM_MEMORY.P2
+015     CCP_1_LOW
+015-016 CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B-01C CCP_2
+01C     CCP_2_HIGH
+020     @TRIS_C
+021     main.@SCRATCH
+022     @delay_ms1.P1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+07B     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D     @READ_PROGRAM_MEMORY.P1
+10D     @WRITE_PROGRAM_MEMORY.P2
+10F     @READ_PROGRAM_MEMORY.P1
+10F     @WRITE_PROGRAM_MEMORY.P2
+
+0004  @delay_ms1
+0018  main
+0018  @cinit
+
+Project Files:
+    prob_pinA4.c
+    prob_pinA4.h
+    ..\..\..\Program Files\PICC\devices\16F876A.h
+
+Units:
+    C:\Projecto_Domotica\Pic\lixo\prob_pinA4.c (main)
+
+Compiler Settings:
+    Processor:      PIC16F876A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      0
+    Short,Int,Long: 1,8,16
+
+Output Files:
+    Errors:      C:\Projecto_Domotica\Pic\lixo\prob_pinA4.err
+    Ext Symbols: C:\Projecto_Domotica\Pic\lixo\prob_pinA4.esym
+    INHX8:       C:\Projecto_Domotica\Pic\lixo\prob_pinA4.hex
+    Symbols:     C:\Projecto_Domotica\Pic\lixo\prob_pinA4.sym
+    List:        C:\Projecto_Domotica\Pic\lixo\prob_pinA4.lst
+    Debug/COFF:  C:\Projecto_Domotica\Pic\lixo\prob_pinA4.cof
+    Call Tree:   prob_pinA4.tre
+    Statistics:  prob_pinA4.sta

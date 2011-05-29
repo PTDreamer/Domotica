@@ -1,0 +1,32 @@
+Partlist exported from C:/Users/Xapo/Documents/Electronica/domos2010/MODULO LUZES/HARDWARE/LUZES_18Fv3.sch at 11-03-2011 23:54:34
+
+Qty Value      Device            Parts                                                                                  
+1              22-23-2061        X3                                                                                     
+1              78XXS             IC21                                                                                   
+3              CTB9550-2508      CAMDEN_2P1, CAMDEN_2P2, CAMDEN_2P3                                                     
+1              CTB9550-4508      CAMDEN_4P-1                                                                            
+3              CTB9550-8508      CAMDEN_8P-1, CAMDEN_8P-2, CAMDEN_8P-3                                                  
+1              JP1E              CAN_LINE_TERM                                                                          
+3              LEDCHIP-LED0805   LED1, LED2, LED3                                                                       
+16  0.05u      (farnell 174-4803)C-EU102-043X133   C2, C3, C4, C5, C9, C10, C12, C13, C14, C15, C17, C18, C19, C20, C21, C22              
+1   1N4148     (146-9384)1N4148            D1                                                                                     
+1   2K21       R-EU_M0805        R2                                                                                     
+1   6N138      (farnell 1085022)6N138SMD          1                                                                                      
+1   10MHz      (farnell 1611856)CRYSTALHC49U-V    Q1                                                                                     
+1   22-23-2041 22-23-2041        X1                                                                                     
+2   18pF       C-EUC0805         C8, C11                                                                                
+1   47u-100V   CPOL-EUE5-13      C25                                                                                    
+2   100K       R-EU_R2512        R56, R57                                                                               
+6   100n       (farnell 108-679)C-EUC0805         C1, C6, C7, C16, C23, C24                                                              
+1   120        (farnell 612984) R-EU_M0805        R16                                                                                    
+16  330        (farnell 08059333037)R-EU_M0805        R4, R7, R10, R13, R17, R20, R23, R26, R30, R33, R36, R39, R42, R45, R48, R51           
+16  360        (farnell 08059334416)R-EU_R0805        R5, R8, R11, R14, R18, R21, R24, R27, R31, R34, R37, R40, R43, R46, R49, R52           
+16  470        (farnell 08059334572)R-EU_R0805        R6, R9, R12, R15, R19, R22, R25, R28, R32, R35, R38, R41, R44, R47, R50, R53           
+3   560        (farnell 08059334688)R-EU_R0805        R29, R54, R55                                                                          
+15  BTA216     TIC225S           T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16                      
+1   BTA216->>  TIC225S           T3                                                                                     
+1   DBS107G    (farnell 1621661)DBS107G           B1                                                                                     
+1   MAX6818    MAX6818SMALL      IC15                                                                                   
+1   (Microchip Sample)MCP2551    PCA82C250T        IC5                                                                                    
+16  MOC3022    DIL6              IC1, IC2, IC3, IC4, IC6, IC7, IC9, IC10, IC11, IC12, IC13, IC14, IC16, IC17, IC18, IC19
+1   PIC18F4685 PIC18F4685_85TQFP IC8                                                                                    

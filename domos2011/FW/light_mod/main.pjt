@@ -1,0 +1,32 @@
+[PROJECT]
+Target=C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\main.hex
+Development_Mode=
+Processor_Text=PIC18F4685
+ToolSuite=CCS
+Processor=0x4685
+[C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\main]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\main.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\main
+[Opened Files]
+1=main.c
+2=..\..\..\..\..\..\..\Program Files\PICC\devices\18F4685.h
+3=main.h
+4=..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h
+5=..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c
+6=switch_functions.c
+7=dimming_functions.c
+8=struct_and_enums.c
+9=datapoints.c
+10=

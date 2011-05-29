@@ -1,0 +1,75 @@
+[PROJECT]
+Target=fresh.hex
+Development_Mode=
+Processor=0x876A
+ToolSuite=CCS
+Processor_Text=PIC16F876A
+
+[Directories]
+Include=C:\Program Files\PICC\devices\;C:\Program Files\PICC\dr;C:\Program Files\PICC\Drivers;
+Library=
+LinkerScript=
+
+[Target Data]
+FileList=C:\Projecto_Domotica\Pic\comcanfast\fresh.c
+BuildTool=C-COMPILER
+OptionString=+FM
+AdditionalOptionString=
+BuildRequired=1
+
+[fresh.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[mru-list]
+1=C:\Projecto_Domotica\estores\fresh.c
+
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+
+[Opened Files]
+1=fresh.c
+2=org.c
+3=
+4=
+5=E:\Maxtor backup\PORTATEL\C\Projecto_Domotica\Pic\comcanfast\Lcan.c
+6=E:\Maxtor backup\PORTATEL\C\Projecto_Domotica\Pic\comcanfast\org.c
+7=E:\Maxtor backup\PORTATEL\C\Projecto_Domotica\Pic\comcanfast\swit_virtual.c
+8=
+9=C:\Projecto_Domotica\Pic\comcanfast\mcp.c
+10=C:\Projecto_Domotica\Pic\comcanfast\org.c
+11=C:\Projecto_Domotica\Pic\comcanfast\Lcan.c
+12=C:\Projecto_Domotica\Pic\comcanfast\swit_virtual.c
+13=
+[documentation]
+template=C:\Program Files\PICC\template_sdd.rtf
+output=C:\Projectos\Casa\comcanfast\documento
+Count=1
+1=C:\Projectos\Casa\semcanfast\fresh.c
+1T=fresh.c
+1E=
+1W=0
+[defines]
+enabled=0
+D1=
+V1=
+[fileformats]
+forcecoff=0
+debug=4
+error=2
+object=0
+list=0
+scratch=0
+sta=1
+tre=1
+allerrors=1
+allwarnings=1
+stayupne=3
+stayupoe=0
+[Units]
+Count=1
+1=fresh.c (main)

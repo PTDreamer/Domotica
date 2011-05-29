@@ -1,0 +1,102 @@
+
+ROM used: 10920 (11%)
+          10920 (11%) including unused fragments
+
+          5 Average locations per line
+          21 Average locations per statement
+
+RAM used: 1044 (31%) at main() level
+          1316 (40%) worst case
+
+Stack used: 7 worst case (out of 30 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  261   109  21  main.c
+   33     0   0  main.h
+  467     0   0  ..\..\..\..\..\..\..\Program Files\PICC\devices\18F4685.h
+   40     0   0  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h
+  155    62  12  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c
+  443   137  26  ..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.c
+  378     0   0  ..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.h
+  131    58  11  dimming_functions.c
+  120    18   3  struct_and_enums.c
+   90    46   9  datapoints.c
+  164   101  19  switch_functions.c
+----- -----
+ 2282   531 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     48   0   1             @delay_ms1
+0     84   0   1             @PUTCHAR_1_
+0    340   2   1   822  4.4  can_init
+0     48   0   0   255  2.3  can_set_baud
+0     38   0   2    76  3.1  can_set_mode
+0    308   1  13  1112  6.4  can_set_id
+0    504   2  14   706  8.4  can_get_id
+0    210   1  17  1026  7.9  can_putd
+ Inline       14  1586  6.9  can_getd
+0    990   5  18  1118  7.6  canReceive
+0    546   2  21  1053  9.8  canTransmit
+0     52   0   0             @const367
+0    276   1   0             @const369
+ Inline        6   212  4.0  fpointer
+0   1932   9  77  3696  8.5  org
+0     14   0   0             @const384
+0    202   1   9             @PRINTF_LU_65
+0     62   0   4             @PSTRINGCN_65
+0     22   0   0             @const389
+0     44   0   3             @DIV88
+0    280   1   6             @PRINTF_D_65
+0    268   1   9  1070  4.6  dimmer_init
+0     36   0   0   110  3.4  test
+0     34   0   5             @MUL1616
+0    976   4   8  2361  7.9  process_dimmers
+0    394   2   3   540  8.1  read_inputs
+0     68   0   6             @WRITEBITA
+0     52   0   5             @READBITA
+0     36   0   0    61  2.3  TIMER0_isr
+0      8   0   0    22  1.2  TIMER1_isr
+0    328   2   2   357  3.8  EXT_isr
+0      6   0   0     5  1.0  RDA_isr
+0      6   0   0     5  1.0  TBE_isr
+0      6   0   0     5  1.0  BUSCOL_isr
+0      6   0   0     5  1.0  OSCF_isr
+0      8   0   0    12  0.8  canrx0_int
+0      8   0   0    12  0.8  canrx1_int
+0      8   0   0    12  0.8  cantx0_int
+0      8   0   0    12  0.8  cantx1_int
+0      8   0   0    12  0.8  cantx2_int
+0      6   0   0     3  0.0  canirx_int
+0      6   0   0     3  0.0  canerr_int
+0    312   1   2   319  5.1  CCP1_isr
+0   1748   8   4  3525  6.9  MAIN
+0     16   0   0             @const557
+0     10   0   0             @const559
+0     14   0   0             @const560
+0     20   0   0             @const562
+0    170   1   2             @PRINTF_U_65
+
+Program metrics:
+    Functions               31
+    Statements              531
+    Comments                537
+    Volume (V)              31787
+    Difficilty (D)          125.3
+    Effort to implement (E) 3981454
+    Time to implement (T)   61 hours, 27 minutes
+    Est Delivered Bugs (B)  8
+    Cyclomatic Complexity   58
+    Maintainability (MI)    97
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-00006     0  4  
+00008-00164   350  0  
+00166-0FFFE  10566  54612  
+10000-17CBE     0  31936  
+
+
+

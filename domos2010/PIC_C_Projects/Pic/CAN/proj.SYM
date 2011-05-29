@@ -1,0 +1,224 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004     @WRITE_PROGRAM_MEMORY8.P2
+015     CCP_1_LOW
+015-016 CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B-01C CCP_2
+01C     CCP_2_HIGH
+020     @INTERRUPT_AREA
+021     @INTERRUPT_AREA
+022     @INTERRUPT_AREA
+023     @INTERRUPT_AREA
+024     @INTERRUPT_AREA
+025     @INTERRUPT_AREA
+026     @INTERRUPT_AREA
+027     @INTERRUPT_AREA
+028-029 strtok.save
+02A-02D _Randseed
+02E.0   DEBUG
+02F-03A pilha_rs232
+03B-053 Sstring
+054-059 go
+05A     Saux
+05B     @TRIS_C
+05C     MAIN.ch
+05D     MAIN.auxc1
+05E     MAIN.auxcb
+05F     MAIN.auxs
+060-06A MAIN.pilha_can
+06B     MAIN.@SCRATCH1
+06C     MAIN.@SCRATCH2
+06D     MAIN.@SCRATCH3
+06E     MAIN.@SCRATCH4
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+07B     @SCRATCH
+07F     @INTERRUPT_AREA
+09C.6   C1OUT
+09C.7   C2OUT
+0A0-0BD MAIN.string
+0CD-0CE f2510tx.pilha
+0CD-0D4 f2510dump.rd
+0CD     f2510cfg_end.end
+0CD     f2510cfg.aux
+0CD-0CE f2510rx.bu
+0CE     @delay_ms1.P1
+0CE     f2510cfg_end.intr
+0CF     f2510tx.buffer1
+0CF     f2510rx.auxrx
+0D0     f2510tx.buffer
+0D0     f2510bc.end
+0D0     f2510rx.@SCRATCH1
+0D1     f2510bc.bbit
+0D1     @PRINTF_U_9600_62_63.P1
+0D1     f2510tx.aux1_length
+0D1-0D2 atoi.s
+0D1     f2510rx.@SCRATCH2
+0D2     f2510bc.aux
+0D2     f2510tx.aux2
+0D2     @PRINTF_U_9600_62_63.P1
+0D2     f2510rx.@SCRATCH3
+0D3     f2510bs.end
+0D3     atoi.result
+0D3     f2510tx.@SCRATCH1
+0D3     f2510rx.@SCRATCH4
+0D4     f2510rd.end
+0D4     f2510bs.bbit
+0D4     atoi.sign
+0D4     f2510tx.@SCRATCH2
+0D5     f2510wr.end
+0D5     f2510bs.aux
+0D5     f2510rd.aux
+0D5     f2510dump.adrr
+0D5     atoi.base
+0D6     f2510wr.dado
+0D6     f2510dump.adr
+0D6     atoi.index
+0D7     atoi.c
+0D7     @PRINTF_D_9600_62_63.P1
+0D7     @PRINTF_X_9600_62_63.P2
+0D7     f2510dump.@SCRATCH1
+0D8     @PRINTF_X_9600_62_63.P1
+0D8     @PRINTF_D_9600_62_63.P2
+0D8     @MUL88.P3
+0D8     atoi.@SCRATCH1
+0D8     f2510dump.@SCRATCH2
+0D9     @MUL88.P1
+0D9     atoi.@SCRATCH2
+0D9     @PRINTF_D_9600_62_63.@SCRATCH1
+0DA     @PRINTF_D_9600_62_63.@SCRATCH2
+0DB     @PRINTF_D_9600_62_63.@SCRATCH3
+0DC     @PRINTF_D_9600_62_63.@SCRATCH4
+0DD     @DIV88.P1
+0DE     @DIV88.P1
+0DF     @DIV88.@SCRATCH1
+0E0-0E1 stricmp.s1
+0E0     RDA_isr.@SCRATCH1
+0E1     RDA_isr.@SCRATCH2
+0E2-0E3 stricmp.s2
+0E2     RDA_isr.@SCRATCH3
+0E3     RDA_isr.@SCRATCH4
+0E4     stricmp.@SCRATCH1
+0E4     RDA_isr.@SCRATCH5
+0E5     stricmp.@SCRATCH2
+0E5     RDA_isr.@SCRATCH6
+0E6-0E7 atoi_b16.s
+0E6     stricmp.@SCRATCH3
+0E7     stricmp.@SCRATCH4
+0E8     atoi_b16.result
+0E8     stricmp.@SCRATCH5
+0E9     atoi_b16.i
+0E9     stricmp.@SCRATCH6
+0EA     stricmp.@SCRATCH7
+0EA     atoi_b16.@SCRATCH1
+0EB     atoi_b16.@SCRATCH2
+0EC     atoi_b16.@SCRATCH3
+0FF     @INTERRUPT_AREA
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+17F     @INTERRUPT_AREA
+1FF     @INTERRUPT_AREA
+27F     @INTERRUPT_AREA
+2FF     @INTERRUPT_AREA
+37F     @INTERRUPT_AREA
+3FF     @INTERRUPT_AREA
+
+ROM Allocation:
+05EB  @delay_ms1
+04BD  stricmp
+0BDD  @MUL88
+0B6E  atoi
+05FF  f2510wr
+0701  f2510rd
+061F  f2510cfg
+08D3  f2510tx
+0641  f2510bs
+0726  f2510bc
+05DD  f2510rst
+0676  f2510cfg_end
+0800  f2510rx
+044D  atoi_b16
+04A5  RDA_isr
+0035  @const367
+1000  MAIN
+004A  @const377
+0054  @const378
+075A  @PRINTF_X_9600_62_63
+0072  @const385
+0092  @const387
+00B7  @const388
+00DC  @const389
+0104  @const390
+0129  @const391
+014E  @const392
+0173  @const393
+0198  @const394
+01BD  @const395
+01E2  @const396
+020A  @const399
+0223  @const400
+024B  @const401
+0277  @const402
+029E  @const403
+02C9  @const404
+02E2  @const405
+0306  @const406
+0781  @DIV88
+09B6  @PRINTF_D_9600_62_63
+0321  @const413
+033C  @const414
+0359  @const416
+0798  @PRINTF_U_9600_62_63
+036E  @const420
+0382  @const421
+0398  @const422
+03B2  @const423
+03C8  @const424
+03E2  @const425
+03F4  @const426
+040F  @const427
+0A2F  f2510dump
+0424  @const433
+1000  @cinit
+0136  StrtoulGO
+0136  StrtolGO
+
+Project Directory:
+    C:\Projecto_Domotica\Pic\CAN\
+
+Project Files:
+    proj.c
+    proj.h
+    ..\..\..\Program Files\PICC\devices\16F876a.h
+    mcp2510.inc
+    ..\..\..\Program Files\PICC\Drivers\stdlib.h
+    ..\..\..\Program Files\PICC\Drivers\stddef.h
+    ..\..\..\Program Files\PICC\Drivers\string.h
+    ..\..\..\Program Files\PICC\Drivers\ctype.h
+    mcp.c
+
+Units:
+    C:\Projecto_Domotica\Pic\CAN\proj.c (main)
+
+Compiler Settings:
+    Processor:      PIC16F876A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      proj.err
+    Ext Symbols: proj.esym
+    INHX8:       proj.hex
+    Symbols:     proj.sym
+    List:        proj.lst
+    Debug/COFF:  proj.cof
+    Project:     proj.PJT
+    Call Tree:   proj.tre
+    Statistics:  proj.sta

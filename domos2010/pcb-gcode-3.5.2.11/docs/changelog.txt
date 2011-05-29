@@ -1,0 +1,8 @@
+Users
+13-Oct-2007 Non-continous lines on the Milling Layer were generated as continous lines.
+Fixed comment line created for the NC_FILE_COMMENT_FROM_BOARD option.
+
+Internal
+string.h    Created string substitution routine.
+string.ulp  Added tests for substitution routine.
+nonvolatile.h Changed the key-value seperator to '='.

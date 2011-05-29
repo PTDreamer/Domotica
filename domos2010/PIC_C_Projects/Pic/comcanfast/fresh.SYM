@@ -1,0 +1,205 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004     @WRITE_PROGRAM_MEMORY8.P2
+005     porta
+006     portb
+007     portc
+015-016 CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B-01C CCP_2
+01C     CCP_2_HIGH
+020     @INTERRUPT_AREA
+021     @INTERRUPT_AREA
+022     @INTERRUPT_AREA
+023     @INTERRUPT_AREA
+024     @INTERRUPT_AREA
+025     @INTERRUPT_AREA
+026     @INTERRUPT_AREA
+027     @INTERRUPT_AREA
+028-029 strtok.save
+02A-02D _Randseed
+02E-035 ltlevel
+036-03D oldltlevel
+03E     adr
+03F-046 LOF
+047-04E GAD
+04F.0   organizado
+04F.1   actmat
+04F.2   cl
+050     mnumluzes
+051-058 flag
+059-06A delays1
+06B-072 swcont
+073     pointer
+074     vez
+075     auxccp
+076     auxccp2
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+07B     @SCRATCH
+07C     temp
+07D     clock
+07E     iadress
+07F     @INTERRUPT_AREA
+085     trisa
+086     trisb
+087     trisc
+09C.6   C1OUT
+09C.7   C2OUT
+0A0-0B1 delays2
+0B2-0B9 prevclock
+0BA-0C1 s_virtual
+0C2-0CC pilha_can
+0CD-0D7 pilha_canTX
+0D8     daux
+0D9     aux33
+0DA     switches.swit
+0DA     recebe_can.zaux
+0DA     f2510cfg_end.end
+0DA     cfgload.xau
+0DA     swit_virtual.n
+0DA     MAIN.@SCRATCH1
+0DB     org.clockorg
+0DB     swit_virtual.clockorg
+0DB.0   switches.vl
+0DB     cfgload.xxau
+0DB     f2510cfg_end.intr
+0DB-0DC f2510rx.bu
+0DB.1   switches.a
+0DB     recebe_can.@SCRATCH1
+0DC     @delay_ms1.P1
+0DC.0   swit_virtual.a
+0DC     cfgload.xxxau
+0DC-0EB org.tempd
+0DC     recebe_can.@SCRATCH2
+0DC     switches.@SCRATCH1
+0DD     cfgload.xxxxau
+0DD     f2510rx.auxrx
+0DD     swit_virtual.@SCRATCH1
+0DD     switches.@SCRATCH2
+0DE     f2510bc.end
+0DE     f2510rx.@SCRATCH1
+0DE     swit_virtual.@SCRATCH2
+0DE     cfgload.@SCRATCH1
+0DE     switches.@SCRATCH3
+0DF     f2510bc.bbit
+0DF     f2510rx.@SCRATCH2
+0DF     cfgload.@SCRATCH2
+0E0     f2510bc.aux
+0E0     f2510rx.@SCRATCH3
+0E1     f2510rx.@SCRATCH4
+0EC     org.numluzes
+0ED.0   org.again
+0EE     org.fa
+0EF     org.fl
+0FF     @INTERRUPT_AREA
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+110     org.afa
+111-112 f2510tx.pilha
+111     org.@SCRATCH1
+112     org.@SCRATCH2
+113     f2510tx.buffer1
+113     org.@SCRATCH3
+114     f2510tx.buffer
+114     org.@SCRATCH4
+115     f2510tx.aux1_length
+115     org.@SCRATCH5
+116     f2510tx.aux2
+116     org.@SCRATCH6
+117     f2510bs.end
+117     f2510rd.end
+117     f2510tx.@SCRATCH1
+117     org.@SCRATCH7
+118     f2510bs.bbit
+118     f2510rd.aux
+118     f2510tx.@SCRATCH2
+119     f2510bs.aux
+119     f2510wr.end
+11A     f2510wr.dado
+11B     fpointer.ax
+11B     EXT_isr.@SCRATCH1
+11B     CCP1_isr.@SCRATCH1
+11C     fpointer.ay
+11C     EXT_isr.@SCRATCH2
+11C     CCP1_isr.@SCRATCH2
+11D     fpointer.@SCRATCH1
+17F     @INTERRUPT_AREA
+1FF     @INTERRUPT_AREA
+27F     @INTERRUPT_AREA
+2FF     @INTERRUPT_AREA
+37F     @INTERRUPT_AREA
+3FF     @INTERRUPT_AREA
+
+ROM Allocation:
+0616  @delay_ms1
+0206  f2510wr
+01E5  f2510rd
+0636  f2510cfg
+0253  f2510tx
+0222  f2510bs
+08EF  f2510bc
+062A  f2510rst
+065A  f2510cfg_end
+0804  f2510rx
+003C  Matrizluz
+0143  lights
+06EF  send_to_requester
+0800  recebe_can
+0B5E  @goto11482
+031E  org
+06FA  swit_virtual
+0790  @goto11609
+05A5  cfgload
+01C4  fpointer
+014F  EXT_isr
+0199  CCP1_isr
+0B75  switches
+0C90  @goto11712
+0C9C  MAIN
+0C9C  @cinit
+0136  StrtoulGO
+0136  StrtolGO
+
+Project Directory:
+    C:\Projecto_Domotica\Pic\comcanfast\
+
+Project Files:
+    fresh.c
+    fresh.h
+    ..\..\..\Program Files\PICC\devices\16F876A.h
+    ..\..\..\Program Files\PICC\Drivers\stdlib.h
+    ..\..\..\Program Files\PICC\Drivers\stddef.h
+    ..\..\..\Program Files\PICC\Drivers\string.h
+    ..\..\..\Program Files\PICC\Drivers\ctype.h
+    mcp2510.inc
+    mcp.c
+    Lcan.c
+    org.c
+    swit_virtual.c
+
+Units:
+    C:\Projecto_Domotica\Pic\comcanfast\fresh.c (main)
+
+Compiler Settings:
+    Processor:      PIC16F876A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      fresh.err
+    Ext Symbols: fresh.esym
+    INHX8:       fresh.hex
+    Symbols:     fresh.sym
+    List:        fresh.lst
+    Debug/COFF:  fresh.cof
+    Project:     fresh.PJT
+    Call Tree:   fresh.tre
+    Statistics:  fresh.sta

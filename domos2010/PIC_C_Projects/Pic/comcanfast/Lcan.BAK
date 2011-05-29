@@ -1,0 +1,106 @@
+#define full 0
+#define end_dest 1
+#define sub_end_dest 2
+#define end_orig 3
+#define sub_end_orig 4
+#define tipo 5
+#define comp_dados 6
+#define dados 7
+
+//TIPOS
+#define Set_Value 1
+#define Get_Value 2
+#define Value_Ans 3
+#define Ping_Request 4
+#define Ping_Ans 5
+#define Set_Configuration 6
+#define Get_Configuration 7
+#define Configuration_Ans 8
+#define Reset 9
+#define Direct_Adress 10
+#define Indirect_adress_config 11
+#define Indirect_Set_Value 12
+#define man_val_change 13
+
+int iadress=0;
+
+int pilha_can[11];
+int pilha_canTX[11];
+int daux;
+
+
+
+
+void send_to_requester(){
+   pilha_canTX[1]=pilha_can[3];
+   pilha_canTX[2]=pilha_can[4];
+   pilha_canTX[3]=pilha_can[1];
+   pilha_canTX[4]=pilha_can[2];
+}
+
+void recebe_can(){
+   int zaux;
+   // printf("rx=%X\n\r",f2510rx(pilha_can));
+   if (f2510rx(pilha_can)==0){
+      printf("mensagem\n\r");
+      switch(pilha_can[tipo])
+      {
+         case 1:
+             ltlevel[pilha_can[sub_end_dest]]=pilha_can[dados];
+             org();
+             pilha_can[full]=0;
+             break;
+
+         case 2:
+             if (pilha_canTX[full]==0)
+             {
+               pilha_canTX[full]=1;
+               send_to_requester();
+               pilha_canTX[tipo]=3;
+               pilha_canTX[comp_dados]=1;
+               pilha_canTX[dados]=ltlevel[pilha_can[sub_end_dest]];
+               f2510tx(pilha_canTX);
+               pilha_can[full]=0;
+             }
+             break;
+
+          case Ping_Request:
+          printf("received ping\n\r");
+          printf("pilha_canTX[0]=%X \n\r",pilha_canTX[full]);
+             if (pilha_canTX[full]==0)
+             {
+               pilha_canTX[full]=1;
+               send_to_requester();
+               pilha_canTX[tipo]=Ping_Ans;
+               pilha_canTX[comp_dados]=0;
+               daux=f2510tx(pilha_canTX);
+               printf("send res:%X\n\r",daux);
+               pilha_can[full]=0;
+             }
+             break;
+
+          case Indirect_adress_config:
+               iadress=pilha_can[dados];
+               pilha_can[full]=0;
+             break;
+
+          case Direct_Adress:
+               iadress=0;
+               pilha_can[full]=0;
+             break;
+
+          case Indirect_Set_Value:
+               if(iadress==0) break;
+               for (zaux=0;zaux<8;++zaux){
+                  if (bit_test(iadress,zaux)) ltlevel[zaux]=pilha_can[dados];
+               }
+             if (actmat) org(delays1);
+             else org(delays2);
+               pilha_can[full]=0;
+             break;
+      }
+
+
+
+      }
+}
