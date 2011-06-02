@@ -15,7 +15,7 @@ static int TimeBase=0;
 static int32 reg=39;
 //dimmer end
 
-struct switches msw;
+//struct switches msw;
 #include "switch_functions.c"
 
 //////////////////////////////////////////////////////////////////////////
@@ -200,9 +200,8 @@ void main()
    //enable_interrupts (int_OSCF) ;
   
    //TODO: User Code
-   struct switches array[NUMBER_OF_SWITCHES];
-   msw.previous_state=button_depressed;
-   msw.outstate=off;
+   //struct switches array[NUMBER_OF_SWITCHES];
+  
 
    trisc=0x00; //tudo saidas
    trisd=0x00; //tudo saidas
@@ -216,25 +215,9 @@ void main()
    test();
    
    enable_interrupts (GLOBAL) ;
-   while(true)
-   {
-   delay_ms (200) ;
-   if(mydevices.myinputs[0].device.dim_level.needs_update)
-   {
-      printf("dim_level %d\n\r",mydevices.myinputs[0].device.dim_level.value);
-      mydevices.myinputs[0].device.dim_level.needs_update=false;
-   }
-   if(mydevices.myinputs[0].device.on.needs_update)
-   {
-      printf("on %d\n\r",mydevices.myinputs[0].device.on.value);
-      mydevices.myinputs[0].device.on.needs_update=false;
-   }
-   if(mydevices.myinputs[0].device.off.needs_update)
-   {
-      printf("off %d\n\r",mydevices.myinputs[0].device.off.value);
-      mydevices.myinputs[0].device.off.needs_update=false;
-   }
-}
+   
+   
+   
    while(organizado==0){}
    for(temp=0;temp<17;++temp)
    {

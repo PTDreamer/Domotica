@@ -63,17 +63,21 @@ void process_outpoints()
                {
                   process_outpoint_answer(mydevices.myinputs[x].device.dim_level.adress,mydevices.myinputs[x].device.dim_level.value);
                   mydevices.myinputs[x].device.dim_level.needs_update=false;
+                  mydevices.myinputs[x].device.dim_level.value=0;
                }
            if(mydevices.myinputs[x].device.on.needs_update)
                {
                   process_outpoint_answer(mydevices.myinputs[x].device.on.adress,mydevices.myinputs[x].device.on.value);
                   mydevices.myinputs[x].device.on.needs_update=false;
+                  mydevices.myinputs[x].device.on.value=0;
                }
                if(mydevices.myinputs[x].device.off.needs_update)
                {
                   process_outpoint_answer(mydevices.myinputs[x].device.off.adress,mydevices.myinputs[x].device.off.value);
                   mydevices.myinputs[x].device.off.needs_update=false;
+                  mydevices.myinputs[x].device.off.value=0;
                }
+               break;
     case timer:
 
            break;
