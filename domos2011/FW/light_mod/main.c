@@ -221,17 +221,17 @@ void main()
    delay_ms (200) ;
    if(mydevices.myinputs[0].device.dim_level.needs_update)
    {
-      printf("dim_level %d\n\r",mydevices.myinputs[0].device.dim_level.value);
+      printf("dim_level %u\n\r",mydevices.myinputs[0].device.dim_level.value);
       mydevices.myinputs[0].device.dim_level.needs_update=false;
    }
    if(mydevices.myinputs[0].device.on.needs_update)
    {
-      printf("on %d\n\r",mydevices.myinputs[0].device.on.value);
+      printf("on %u\n\r",mydevices.myinputs[0].device.on.value);
       mydevices.myinputs[0].device.on.needs_update=false;
    }
    if(mydevices.myinputs[0].device.off.needs_update)
    {
-      printf("off %d\n\r",mydevices.myinputs[0].device.off.value);
+      printf("off %u\n\r",mydevices.myinputs[0].device.off.value);
       mydevices.myinputs[0].device.off.needs_update=false;
    }
 }

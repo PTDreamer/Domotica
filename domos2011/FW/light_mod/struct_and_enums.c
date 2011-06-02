@@ -1,5 +1,5 @@
 enum switch_type {on_off,dimmer,button};
-enum switch_outstate {on, off, dimming, dimmed};
+enum switch_outstate {on, off, dimming, dimmed, maxed};
 enum switch_direction {up, down};
 enum switch_state {button_pressed, button_depressed};
 enum output_type {_on_off, _dimmer,shutter};
@@ -7,17 +7,17 @@ enum output_state {_on, _off, _dimmed};
 enum timer_type {time_on, time_off, periodic_on};
 enum input_type {switch_,timer,none};
 
-void dimmer_init(int dim_adr,int on_adr,int off_adr,struct inputs* input);
+void dimmer_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,struct inputs* input);
 typedef struct data_point_out
 {
-   int adress;
-   int value;
+   unsigned int adress;
+   unsigned int value;
    int1 needs_update;
 };
 typedef struct data_point_in
 {
-   int adress[8];
-   int value;
+   unsigned int adress[8];
+   unsigned int value;
    int1 needs_update;
 };
 ///////////////////////INPUTS//////////////////////////////////////
@@ -27,13 +27,13 @@ typedef struct switches
    struct data_point_out dim_level;
    struct data_point_out on;
    struct data_point_out off;
-   int current_level;
+   unsigned int current_level;
    int32  timer;
    switch_state current_state;
    switch_state previous_state;
    switch_direction direction;
    switch_outstate outstate;
-   int realbutton;
+   unsigned int realbutton;
 };
 typedef struct timer
 {
@@ -60,8 +60,8 @@ struct light
    struct data_point_in on;
    struct data_point_in off;
    struct data_point_in dim_value;
-   int  out_value;
-   int  timer;
+   unsigned int  out_value;
+   unsigned int  timer;
    int1  needs_update;
    output_state previous_state;
 };
@@ -79,8 +79,8 @@ typedef struct outputs
 
 typedef struct devices
 {
-      int numberOfInputs;
-      int numberOfOutputs;
+      unsigned int numberOfInputs;
+      unsigned int numberOfOutputs;
       struct inputs myinputs[10];
       struct outputs myoutputs[10];
 }devicestype;

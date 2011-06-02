@@ -1,6 +1,6 @@
 
-ROM used: 10920 (11%)
-          10920 (11%) including unused fragments
+ROM used: 11046 (11%)
+          11046 (11%) including unused fragments
 
           5 Average locations per line
           21 Average locations per statement
@@ -8,11 +8,11 @@ ROM used: 10920 (11%)
 RAM used: 1044 (31%) at main() level
           1316 (40%) worst case
 
-Stack used: 7 worst case (out of 30 total available)
+Stack used: 8 worst case (out of 30 total available)
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  261   109  21  main.c
+  261   109  20  main.c
    33     0   0  main.h
   467     0   0  ..\..\..\..\..\..\..\Program Files\PICC\devices\18F4685.h
    40     0   0  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h
@@ -22,9 +22,9 @@ Lines Stmts  %   Files
   131    58  11  dimming_functions.c
   120    18   3  struct_and_enums.c
    90    46   9  datapoints.c
-  164   101  19  switch_functions.c
+  171   107  20  switch_functions.c
 ----- -----
- 2282   531 Total
+ 2289   537 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
@@ -37,7 +37,7 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0    504   2  14   706  8.4  can_get_id
 0    210   1  17  1026  7.9  can_putd
  Inline       14  1586  6.9  can_getd
-0    990   5  18  1118  7.6  canReceive
+0    990   4  18  1118  7.6  canReceive
 0    546   2  21  1053  9.8  canTransmit
 0     52   0   0             @const367
 0    276   1   0             @const369
@@ -48,17 +48,19 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0     62   0   4             @PSTRINGCN_65
 0     22   0   0             @const389
 0     44   0   3             @DIV88
-0    280   1   6             @PRINTF_D_65
+0    282   1   6             @PRINTF_D_65
 0    268   1   9  1070  4.6  dimmer_init
 0     36   0   0   110  3.4  test
 0     34   0   5             @MUL1616
-0    976   4   8  2361  7.9  process_dimmers
+0   1058   5   8  2676  8.4  process_dimmers
+0      6   0   0             @const528
+0     42   0   3             @PSTRINGC_65
 0    394   2   3   540  8.1  read_inputs
 0     68   0   6             @WRITEBITA
 0     52   0   5             @READBITA
 0     36   0   0    61  2.3  TIMER0_isr
 0      8   0   0    22  1.2  TIMER1_isr
-0    328   2   2   357  3.8  EXT_isr
+0    328   1   2   357  3.8  EXT_isr
 0      6   0   0     5  1.0  RDA_isr
 0      6   0   0     5  1.0  TBE_isr
 0      6   0   0     5  1.0  BUSCOL_isr
@@ -71,31 +73,31 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0      6   0   0     3  0.0  canirx_int
 0      6   0   0     3  0.0  canerr_int
 0    312   1   2   319  5.1  CCP1_isr
-0   1748   8   4  3525  6.9  MAIN
-0     16   0   0             @const557
-0     10   0   0             @const559
-0     14   0   0             @const560
-0     20   0   0             @const562
+0   1742   8   4  3525  6.9  MAIN
+0     16   0   0             @const559
 0    170   1   2             @PRINTF_U_65
+0     10   0   0             @const564
+0     14   0   0             @const565
+0     20   0   0             @const567
 
 Program metrics:
     Functions               31
-    Statements              531
-    Comments                537
-    Volume (V)              31787
-    Difficilty (D)          125.3
-    Effort to implement (E) 3981454
-    Time to implement (T)   61 hours, 27 minutes
+    Statements              537
+    Comments                536
+    Volume (V)              32222
+    Difficilty (D)          125.6
+    Effort to implement (E) 4047004
+    Time to implement (T)   62 hours, 27 minutes
     Est Delivered Bugs (B)  8
-    Cyclomatic Complexity   58
-    Maintainability (MI)    97
+    Cyclomatic Complexity   59
+    Maintainability (MI)    96
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-00006     0  4  
 00008-00164   350  0  
-00166-0FFFE  10566  54612  
+00166-0FFFE  10692  54486  
 10000-17CBE     0  31936  
 
 

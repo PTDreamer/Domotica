@@ -1,5 +1,5 @@
 enum switch_type {on_off,dimmer,button};
-enum switch_outstate {on, off, dimming, dimmed};
+enum switch_outstate {on, off, dimming, dimmed, maxed};
 enum switch_direction {up, down};
 enum switch_state {button_pressed, button_depressed};
 enum output_type {_on_off, _dimmer,shutter};
@@ -10,14 +10,14 @@ enum input_type {switch_,timer,none};
 void dimmer_init(int dim_adr,int on_adr,int off_adr,struct inputs* input);
 typedef struct data_point_out
 {
-   int adress;
-   int value;
+   unsigned int adress;
+   unsigned int value;
    int1 needs_update;
 };
 typedef struct data_point_in
 {
-   int adress[8];
-   int value;
+   unsigned int adress[8];
+   unsigned int value;
    int1 needs_update;
 };
 ///////////////////////INPUTS//////////////////////////////////////
@@ -27,13 +27,13 @@ typedef struct switches
    struct data_point_out dim_level;
    struct data_point_out on;
    struct data_point_out off;
-   int current_level;
+   unsigned int current_level;
    int32  timer;
    switch_state current_state;
    switch_state previous_state;
    switch_direction direction;
    switch_outstate outstate;
-   int realbutton;
+   unsigned int realbutton;
 };
 typedef struct timer
 {
@@ -97,11 +97,13 @@ void dimmer_init(int dim_adr,int on_adr,int off_adr,struct inputs* input,int rea
       input->device.current_level=0;
       input->device.direction=up;
       input->device.dim_level.needs_update=0;
-      input->device.dim_level.value=0;
-      input->device.on.needs_update=0;
+       input->device.on.needs_update=0;
       input->device.off.needs_update=0;
-        input->device.on.value=0;
+      
+      input->device.dim_level.value=0;
+      input->device.on.value=0;
       input->device.off.value=0;
+      
       input->device.type=dimmer;
       input->device.realbutton=inputs[real_button];
 }

@@ -1,5 +1,5 @@
 ÀÄmain
-   ÃÄMAIN  0/1748  Ram=4
+   ÃÄMAIN  0/1742  Ram=4
    ³  ÃÄ??0??
    ³  ÃÄcan_init  0/340  Ram=1
    ³  ³  ÃÄcan_set_mode  0/38  Ram=2
@@ -27,7 +27,7 @@
    ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ³  ÃÄ@PSTRINGCN_65  0/62  Ram=4
    ³  ³  ³  ÀÄ@PUTCHAR_1_  0/84  Ram=1
-   ³  ³  ÃÄ@PRINTF_D_65  0/280  Ram=6
+   ³  ³  ÃÄ@PRINTF_D_65  0/282  Ram=6
    ³  ³  ³  ÃÄ@DIV88  0/44  Ram=3
    ³  ³  ³  ÃÄ@DIV88  0/44  Ram=3
    ³  ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
@@ -54,7 +54,7 @@
    ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ³  ÃÄ@PSTRINGCN_65  0/62  Ram=4
    ³  ³  ³  ÀÄ@PUTCHAR_1_  0/84  Ram=1
-   ³  ³  ÃÄ@PRINTF_D_65  0/280  Ram=6
+   ³  ³  ÃÄ@PRINTF_D_65  0/282  Ram=6
    ³  ³  ³  ÃÄ@DIV88  0/44  Ram=3
    ³  ³  ³  ÃÄ@DIV88  0/44  Ram=3
    ³  ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
@@ -74,11 +74,10 @@
    ³  ÃÄ@delay_ms1  0/48  Ram=1
    ³  ÃÄ@PSTRINGCN_65  0/62  Ram=4
    ³  ³  ÀÄ@PUTCHAR_1_  0/84  Ram=1
-   ³  ÃÄ@PRINTF_D_65  0/280  Ram=6
-   ³  ³  ÃÄ@DIV88  0/44  Ram=3
+   ³  ÃÄ@PRINTF_U_65  0/170  Ram=2
    ³  ³  ÃÄ@DIV88  0/44  Ram=3
    ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
-   ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
+   ³  ³  ÃÄ@DIV88  0/44  Ram=3
    ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ³  ÀÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
@@ -86,22 +85,20 @@
    ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
-   ³  ÃÄ@PRINTF_D_65  0/280  Ram=6
-   ³  ³  ÃÄ@DIV88  0/44  Ram=3
+   ³  ÃÄ@PRINTF_U_65  0/170  Ram=2
    ³  ³  ÃÄ@DIV88  0/44  Ram=3
    ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
-   ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
+   ³  ³  ÃÄ@DIV88  0/44  Ram=3
    ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ³  ÀÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ÃÄ@PSTRINGCN_65  0/62  Ram=4
    ³  ³  ÀÄ@PUTCHAR_1_  0/84  Ram=1
-   ³  ÃÄ@PRINTF_D_65  0/280  Ram=6
-   ³  ³  ÃÄ@DIV88  0/44  Ram=3
+   ³  ÃÄ@PRINTF_U_65  0/170  Ram=2
    ³  ³  ÃÄ@DIV88  0/44  Ram=3
    ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
-   ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
+   ³  ³  ÃÄ@DIV88  0/44  Ram=3
    ³  ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ³  ÀÄ@PUTCHAR_1_  0/84  Ram=1
    ³  ÃÄ@PUTCHAR_1_  0/84  Ram=1
@@ -148,10 +145,9 @@
    ³     ÃÄ@MUL1616  0/34  Ram=5
    ³     ÃÄ@MUL1616  0/34  Ram=5
    ³     ÃÄ@MUL1616  0/34  Ram=5
-   ³     ÀÄprocess_dimmers  0/976  Ram=8
-   ³        ÃÄ@PUTCHAR_1_  0/84  Ram=1
-   ³        ÃÄ@PUTCHAR_1_  0/84  Ram=1
-   ³        ÀÄ@PUTCHAR_1_  0/84  Ram=1
+   ³     ÀÄprocess_dimmers  0/1058  Ram=8
+   ³        ÀÄ@PSTRINGC_65  0/42  Ram=3
+   ³           ÀÄ@PUTCHAR_1_  0/84  Ram=1
    ÃÄTIMER1_isr  0/8  Ram=0
    ÃÄEXT_isr  0/328  Ram=2
    ³  ÃÄfpointer  (Inline)  Ram=6

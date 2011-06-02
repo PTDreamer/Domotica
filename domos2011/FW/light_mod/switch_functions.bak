@@ -61,14 +61,18 @@ void process_dimmers(struct switches *sw)
    {
      // printf("DIF %LU",clock - sw->timer);
       sw-> previous_state = button_pressed;
-      if ((clock - sw->timer > reg || sw->outstate == dimming))
+      if ((clock - sw->timer > reg || sw->outstate == dimming) && sw->outstate!=maxed)
       { 
          if(sw->outstate==off)
          {
+            printf("MAXED");
+            sw->outstate=maxed;
             sw->on.value=1;
-            sw->on.needs_update;
-            printf("AKI");
+            sw->current_level = 127;
+            sw->on.needs_update=1;
          }
+        else
+        {
          sw->outstate = dimming;
          if (clock - sw->timer > TimeBase) //regula
          {
@@ -89,6 +93,7 @@ void process_dimmers(struct switches *sw)
          }
          sw->timer = clock;
       }
+      }
       else
       {
          //sw - > timer = clock;
@@ -101,7 +106,7 @@ void process_dimmers(struct switches *sw)
          sw->previous_state = button_depressed;
          if (sw->outstate == dimming) //se esteve a regular
          {
-            sw-> outstate = dimmed;
+            sw-> outstate = on;
             if (sw->direction == up) sw->direction = down; //inverte direccao
             else sw->direction = up;
          }
@@ -110,15 +115,12 @@ void process_dimmers(struct switches *sw)
             if (sw->outstate == off) //se estava desligada
             {
               // printf("on");
-               if(sw->current_level > 0) //liga
-                  sw->outstate=dimmed;
-               else
-                  sw->outstate=on;
+               sw->outstate=on;
                sw->on.value=1;
                sw->direction = down;
                sw->on.needs_update=true;
             }
-            else
+            else if (sw->outstate == on)
             {
               // printf("off");
                //sw->current_level = 0; //senao desliga
@@ -126,6 +128,10 @@ void process_dimmers(struct switches *sw)
                sw->off.value=1;
                sw->direction = up;
                sw->off.needs_update=true;
+            }
+            else if(sw->outstate == maxed)
+            {
+               sw->outstate=on;
             }
          }
       }
