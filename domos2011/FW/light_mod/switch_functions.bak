@@ -20,7 +20,7 @@ void process_onOff(struct on_off_switch *sw)
    else if(sw->current_state==button_depressed)
       sw-> previous_state = button_depressed;
 }
-void process_buttons(struct dimmer_switch *sw)
+void process_buttons(struct button_switch *sw)
 {
    if(sw->current_state==button_pressed && sw->outstate==off) 
    {

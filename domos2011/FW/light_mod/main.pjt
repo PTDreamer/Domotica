@@ -29,4 +29,6 @@ Count=1
 7=dimming_functions.c
 8=struct_and_enums.c
 9=datapoints.c
-10=
+10=interrupt_functions.c
+11=hw_setup.c
+12=

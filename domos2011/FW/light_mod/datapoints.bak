@@ -58,7 +58,7 @@ void process_outpoints()
    for(x=0;x<mydevices.numberOfInputs;++x)
    {
       switch (mydevices.myinputs[x].type) {
-    case switch_:
+    case dimmer_switch:
                if(mydevices.myinputs[x].device.dim_level.needs_update)
                {
                   process_outpoint_answer(mydevices.myinputs[x].device.dim_level.adress,mydevices.myinputs[x].device.dim_level.value);

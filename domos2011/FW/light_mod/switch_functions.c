@@ -38,7 +38,6 @@ void process_buttons(struct button_switch *sw)
 void process_dimmers(struct dimmer_switch *sw)
 {
    int last_level=sw->current_level;
-   int last_dim=sw->dim_level.value;
    if(sw->current_state==button_pressed)//se o botao esta premido
    {
     //  printf("STATE %u",sw->current_state);

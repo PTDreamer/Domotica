@@ -1,19 +1,22 @@
 #define N_LUZES 16 //numero maximo de dimmers
-int used_dimmers=16;
+int used_dimmers=0;
 #use fast_io(c)
 #use fast_io(d)
+
 int1 organizado;//flag que diz se os dimmings estao organizados
-int1 actmat;//matriz em uso
+int1 actmat=0;//matriz em uso
 int16 pointer;//apontador para matriz em uso
 int vez;//indice da matriz de dimming corrente
 int mnumluzes;//quantos valores de dimming diferentes temos
+int16 dimmers_off_value;
 int ltlevel[N_LUZES]={10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10};
 int16 delays1[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
 int16 delays2[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
-const int16 lights[N_LUZES]={0b1111111011111111,0b1111110111111111,0b1111101111111111,0b1111011111111111,0b1110111111111111,0b1101111111111111,0b1011111111111111,0b0111111111111111,
+const int16 light_pins[N_LUZES]={0b1111111011111111,0b1111110111111111,0b1111101111111111,0b1111011111111111,0b1110111111111111,0b1101111111111111,0b1011111111111111,0b0111111111111111,
          /*<........................................................................portC..................................................................................>*/
 0b1111111111111110,0b1111111111111101,0b1111111111111011,0b1111111111110111,0b1111111111101111,0b1111111111011111,0b1111111110111111,0b1111111101111111};
 /*<.................................................................................portD.............................................................>*/
+int16 lights[N_LUZES];
 const long Matrizluz[128]={
 38400,38731 , 38492 , 38253 , 38014 , 37775 , 37536 , 37297 , 37058 , 36819 , 36580
 , 36341 , 36102 , 35863 , 35624 , 35385 , 35146 , 34907 , 34668 , 34429 , 34190 , 33951
@@ -40,7 +43,6 @@ const long Matrizluz[128]={
   
   VOID org(void)
   {
-     INT clockorg;
      INT16 tempd[N_LUZES][2];
      INT numluzes;
      INT1 again = 1;
@@ -127,4 +129,78 @@ const long Matrizluz[128]={
      organizado=1;
   }
 
+void dimmer_outputs_init()
+{
+   int x;
+   for(x=0;x<mydevices.numberOfOutputs;++x)
+   {
+      switch (mydevices.myoutputs[x].type) {
+         case dimmer:
+            lights[used_dimmers]=light_pins[((struct light)mydevices.myoutputs[x].device).output_pin];
+            ((struct light)mydevices.myoutputs[x].device).internal_order=used_dimmers;
+            ++used_dimmers;
+            
+         break;
+      }
+   }
+   dimmers_off_value=0xFFFF;
+   for(x=0;x<used_dimmers;++x)
+   {
+      dimmers_off_value=dimmers_off_value & lights[x];
+   }
+   dimmers_off_value=!dimmers_off_value;
+   trisc=0x00; //tudo saidas
+   trisd=0x00; //tudo saidas
+   actmat=0;
+   pointer=delays1;
+   org();
+   pointer=delays2;
+   actmat=1;
+   org();
+}
 
+void write_outputs()
+{
+   int x;
+   int1 update_dimmers=false;
+   for(x=0;x<mydevices.numberOfOutputs;++x)
+   {
+      switch (mydevices.myoutputs[x].type) {
+         case dimmer:
+            if(((struct light)mydevices.myoutputs[x].device).dim_value.needs_update)
+            {
+               if(((struct light)mydevices.myoutputs[x].device).out_state==_on)
+               {
+                  ltlevel[((struct light)mydevices.myoutputs[x].device).internal_order]=((struct light)mydevices.myoutputs[x].device).dim_value.value;
+                  update_dimmers=true;
+               }
+               ((struct light)mydevices.myoutputs[x].device).dim_value.needs_update=false;
+            }
+            
+            if(((struct light)mydevices.myoutputs[x].device).off.needs_update)
+            {
+               if(((struct light)mydevices.myoutputs[x].device).off.value)
+               {
+                  ((struct light)mydevices.myoutputs[x].device).out_state=_off;
+                  ltlevel[((struct light)mydevices.myoutputs[x].device).internal_order]=0;
+                  update_dimmers=true;
+               }
+               ((struct light)mydevices.myoutputs[x].device).off.needs_update=false;
+            }
+            
+            if(((struct light)mydevices.myoutputs[x].device).on.needs_update)
+            {
+               if(((struct light)mydevices.myoutputs[x].device).on.value)
+               {
+                  ((struct light)mydevices.myoutputs[x].device).out_state=_on;
+                  ltlevel[((struct light)mydevices.myoutputs[x].device).internal_order]=((struct light)mydevices.myoutputs[x].device).dim_value.value;
+                  update_dimmers=true;
+               }
+               ((struct light)mydevices.myoutputs[x].device).on.needs_update=false;
+            }
+         break;
+      }
+   }
+   if(update_dimmers)
+      org();
+}

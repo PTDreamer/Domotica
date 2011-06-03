@@ -21,7 +21,7 @@ void process_inpoints(int &datapoint, int &value)
    {
       switch (mydevices.myoutputs[x].type) {
 
-    case _dimmer:
+    case dimmer:
            if (array_contains(mydevices.myoutputs[x].device.dim_value.adress,datapoint))
            {
                mydevices.myoutputs[x].device.dim_value.value=value;
