@@ -1,11 +1,4 @@
-void copy_array(unsigned int *origin,unsigned int *destination, unsigned int n_elements)
-{
-   int x;
-   for (x=0;x<n_elements;++x)
-   {
-      *destination=*origin;
-   }
-}
+
 enum switch_outstate {on, off, dimming, dimmed, maxed};
 enum switch_direction {up, down};
 enum switch_state {button_pressed, button_depressed};
@@ -120,27 +113,37 @@ typedef struct devices
 
 devicestype mydevices;
 
+void copy_array(unsigned int *origin,struct data_point_in* destination , unsigned int n_elements)
+{
+   int x;
+   for (x=0;x<n_elements;++x)
+   {
+      ((struct data_point_in*)destination)->adress[x]=*origin;
+      printf("%u:%u<----->%u\n\r",x,((struct data_point_in*)destination)->adress[x],*origin);
+      ++origin;
+   }
+}
+
+
 ///////INPUTS INITIALIZATION//////////////////////////////////////////////////
 void dimmer_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,struct inputs* input,unsigned int real_button)
 {
-      struct dimmer_switch sw;
       input->type=dimmer_switch;
-      sw.dim_level.adress=dim_adr;
-      sw.on.adress=on_adr;
-      sw.off.adress=off_adr;
-      sw.previous_state=button_depressed;
-      sw.outstate=off;
-      sw.current_level=0;
-      sw.direction=up;
-      sw.dim_level.needs_update=0;
-      sw.on.needs_update=0;
-      sw.off.needs_update=0;
-      sw.dim_level.value=0;
-      sw.on.value=0;
-      sw.off.value=0;
-      sw.realbutton=inputs[real_button];
-      sw.timer=0;
-      input->device=sw;
+      ((struct dimmer_switch)input->device).dim_level.adress=dim_adr;
+      ((struct dimmer_switch)input->device).on.adress=on_adr;
+      ((struct dimmer_switch)input->device).off.adress=off_adr;
+      ((struct dimmer_switch)input->device).previous_state=button_depressed;
+      ((struct dimmer_switch)input->device).outstate=off;
+      ((struct dimmer_switch)input->device).current_level=0;
+      ((struct dimmer_switch)input->device).direction=up;
+      ((struct dimmer_switch)input->device).dim_level.needs_update=0;
+      ((struct dimmer_switch)input->device).on.needs_update=0;
+      ((struct dimmer_switch)input->device).off.needs_update=0;
+      ((struct dimmer_switch)input->device).dim_level.value=0;
+      ((struct dimmer_switch)input->device).on.value=0;
+      ((struct dimmer_switch)input->device).off.value=0;
+      ((struct dimmer_switch)input->device).realbutton=inputs[real_button];
+      ((struct dimmer_switch)input->device).timer=0;
 }
 void on_off_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,struct inputs* input,unsigned int real_button)
 {
@@ -177,32 +180,33 @@ void button_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,s
 ///////INPUTS INITIALIZATION//////////////////////////////////////////////////
 void dimmer_out_init(unsigned int *dim_adr,unsigned int *on_adr,unsigned int *off_adr,struct outputs* output,unsigned int output_pin)
 {
-   struct light lg;
-   output->type=dimmer;
-   lg.dim_value.needs_update=0;
-   lg.on.needs_update=0;
-   lg.off.needs_update=0;
-   lg.dim_value.value=0;
-   lg.on.value=0;
-   lg.off.value=0;
-   lg.output_pin=output_pin;
-   copy_array(dim_adr,&lg.dim_value.adress,8);
-   copy_array(on_adr,&lg.on.adress,8);
-   copy_array(off_adr,&lg.off.adress,8);
-   lg.out_state=_off;
-   output->device=lg;
+   ((struct outputs *)output)->type=dimmer;
+   ((struct light)output->device).dim_value.needs_update=0;
+   ((struct light)output->device).on.needs_update=0;
+   ((struct light)output->device).off.needs_update=0;
+   ((struct light)output->device).dim_value.value=0;
+   ((struct light)output->device).on.value=0;
+   ((struct light)output->device).off.value=0;
+   ((struct light)output->device).output_pin=output_pin;
+   ((struct light)output->device).dim_value.adress[0]=1;
+   ((struct light)output->device).dim_value.adress[1]=2;
+   printf("adress test:%u %u\n\r",((struct light)output->device).dim_value.adress[0],((struct light)output->device).dim_value.adress[1]);
+   copy_array(dim_adr,((struct light)output->device).dim_value,8);
+   copy_array(on_adr,((struct light)output->device).on,8);
+   copy_array(off_adr,((struct light)output->device).off,8);
+  ((struct light)output->device).out_state=_off;
 }
 //////////////////////////////////////////////////////////////////////////////
 
-void test()
+void button_test()
 {     mydevices.numberOfInputs=1;
     //  struct dimmer_switch sw;
     //  sw.dim_level.value=69;
     //  mydevices.myinputs[0].device=sw;
     //  printf("VALUE=%u\n\r",mydevices.myinputs[0].device.dim_level.value);
     //  on_off_init(1,2,3,&mydevices.myinputs[0],0);
-    button_init(1,2,3,&mydevices.myinputs[0],0);
-     // dimmer_init(1,2,3,&mydevices.myinputs[0],0);
+    //button_init(1,2,3,&mydevices.myinputs[0],0);
+      dimmer_init(1,2,3,&mydevices.myinputs[0],0);
       //printf("VALUE=%u\n\r",mydevices.myinputs[0].device.dim_level.value);
      // while(true){};
 }

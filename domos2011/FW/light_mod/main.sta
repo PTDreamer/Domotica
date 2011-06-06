@@ -1,72 +1,80 @@
 
-ROM used: 9600 (10%)
-          9600 (10%) including unused fragments
+ROM used: 16252 (17%)
+          16252 (17%) including unused fragments
 
-          4 Average locations per line
-          15 Average locations per statement
+          6 Average locations per line
+          25 Average locations per statement
 
 RAM used: 1055 (32%) at main() level
-          1119 (34%) worst case
+          1176 (35%) worst case
 
-Stack used: 7 worst case (out of 31 total available)
+Stack used: 9 worst case (out of 30 total available)
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   48    11   2  main.c
+   61    23   3  main.c
    33     0   0  main.h
   467     0   0  ..\..\..\..\..\..\..\Program Files\PICC\devices\18F4685.h
-   40     0   0  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h
-  155    62  10  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c
+   41     0   0  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h
+  155    62   9  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c
   443   137  21  ..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.c
   378     0   0  ..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.h
-  211    57   9  struct_and_enums.c
-  207   107  17  dimming_functions.c
-   90    46   7  datapoints.c
-  236   148  23  switch_functions.c
-  161    50   8  interrupt_functions.c
-   36    24   4  hw_setup.c
+  215    60   9  struct_and_enums.c
+  219   106  16  dimming_functions.c
+   95    47   7  datapoints.c
+  236   154  23  switch_functions.c
+  179    50   8  interrupt_functions.c
+   35    23   3  hw_setup.c
 ----- -----
- 2505   642 Total
+ 2557   662 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
-0     50   0   1             @delay_ms1
 0     84   0   1             @PUTCHAR_1_
-0    340   2   1   822  4.4  can_init
+0    340   1   1   822  4.4  can_init
 0     48   0   0   255  2.3  can_set_baud
 0     38   0   2    76  3.1  can_set_mode
-0    308   2  13  1112  6.4  can_set_id
-0    504   3  14   706  8.4  can_get_id
+0    308   1  13  1112  6.4  can_set_id
+0    504   2  14   706  8.4  can_get_id
 0    210   1  17  1026  7.9  can_putd
  Inline       14  1586  6.9  can_getd
-0    944   5  18  1118  7.6  canReceive
-0    538   3  21  1053  9.8  canTransmit
-0     92   0  21   631  4.9  button_init
-0     36   0   0   111  3.1  test
-0    276   1   0  3696  8.5  @const509
+0    944   3  18  1118  7.6  canReceive
+0    538   2  21  1053  9.8  canTransmit
+0    192   1   9   364  5.9  copy_array
+0     18   0   0             @const465
+0     44   0   3             @DIV88
+0    124   0   2             @PRINTF_U_65
+0     48   0   4             @PSTRINGCN_65
+0    452   1  11  1540  5.4  dimmer_init
+0    594   2  15  1768  5.3  dimmer_out_init
+0     20   0   0             @const500
+0     36   0   0   111  3.1  button_test
+0     52   0   0             @const514
+0    276   1   0             @const517
  Inline        6   212  4.0  fpointer
-0     14   0   0   170  5.4  @const523
-0    188   1   9   944  4.8  @PRINTF_LU_65
-0     48   0   4   631  4.9  @PSTRINGCN_65
-0     22   0   0   631  4.9  @const528
-0     44   0   3   829  4.9  @DIV88
-0     34   0   5    20  1.5  @MUL1616
+0   1586   5  76  3234  8.0  org
+0    430   1   7   862  7.5  dimmer_outputs_init
+0     34   0   5             @MUL1616
+0   1486   5   9  2472  8.2  write_outputs
+0    120   0   0   538  4.2  dimmer_test
+ Inline        5   253  7.5  array_contains
+ Inline        7  1579 10.0  process_inpoints
+0   1060   3   2    54  2.3  process_outpoint_answer
+0   1360   4   7  2249  8.8  process_outpoints
 0    232   1   4   606  5.3  process_onOff
 0    178   1   4   446  5.2  process_buttons
-0    934   5   7  2559  8.4  process_dimmers
-0   1082   6   5  1660  9.0  read_inputs
-0     66   0   6  3413  8.7  @WRITEBITA
-0     50   0   5  3413  8.7  @READBITA
-0    594   3   3  3413  8.7  print_inputs
-0     16   0   0     5  1.0  @const577
-0    124   1   2    61  2.3  @PRINTF_U_65
-0     10   0   0    22  1.2  @const582
-0     10   0   0    61  2.3  @const584
-0     10   0   0    61  2.3  @const586
+0    934   3   7  2559  8.4  process_dimmers
+0   1088   3   5  1691  9.1  read_inputs
+0     66   0   6             @WRITEBITA
+0     50   0   5             @READBITA
+0     16   0   0             @const578
+0     10   0   0             @const580
+0     10   0   0             @const582
+0     10   0   0             @const584
 0     36   0   0    61  2.3  TIMER0_isr
 0      8   0   0    22  1.2  TIMER1_isr
 0     40   0   0   151  3.5  TIMER2_isr
-0    328   2   2   357  3.8  EXT_isr
+0    328   1   2   357  3.8  EXT_isr
 0      6   0   0     5  1.0  RDA_isr
 0      6   0   0     5  1.0  TBE_isr
 0      6   0   0     5  1.0  BUSCOL_isr
@@ -78,31 +86,33 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0      8   0   0    12  0.8  cantx2_int
 0      6   0   0     3  0.0  canirx_int
 0      6   0   0     3  0.0  canerr_int
-0    308   2   2   294  5.1  CCP1_isr
+0    308   1   2   294  5.1  CCP1_isr
 0     30   0   0   243  1.4  interrupts_enable
-0   1250   7   4  1340  5.8  MAIN
-0     14   0   0             @const610
-0     20   0   0             @const612
+0    154   0   0   751  3.4  hw_setup
+0   1142   4   4  1092  6.0  MAIN
+0     14   0   0             @const609
+0    190   1   9             @PRINTF_LU_65
+0     20   0   0             @const613
 
 Program metrics:
-    Functions               49
-    Statements              642
-    Comments                568
-    Volume (V)              57292
-    Difficilty (D)          208.5
-    Effort to implement (E) 11943867
-    Time to implement (T)   184 hours, 19 minutes
+    Functions               45
+    Statements              662
+    Comments                599
+    Volume (V)              54002
+    Difficilty (D)          206.9
+    Effort to implement (E) 11175422
+    Time to implement (T)   172 hours, 28 minutes
     Est Delivered Bugs (B)  17
-    Cyclomatic Complexity   103
-    Maintainability (MI)    50
+    Cyclomatic Complexity   95
+    Maintainability (MI)    61
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-00006     0  4  
 00008-00170   362  0  
-00172-0FFFE  9234  55932  
-10000-17FFE     0  32768  
+00172-0FFFE  15886  49280  
+10000-17CBE     0  31936  
 
 
 

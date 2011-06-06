@@ -132,7 +132,7 @@ void read_inputs()
   int x;
    for(x=0;x<mydevices.numberOfInputs;++x)
    {
-      switch (mydevices.myinputs[x].type) {
+      switch (((struct inputs)mydevices.myinputs[x]).type) {
     case dimmer_switch:
            // printf("aki");
             if (input (((struct dimmer_switch)mydevices.myinputs[x].device).realbutton)) 
@@ -179,54 +179,54 @@ void read_inputs()
 
    }
 }
-void print_inputs()
+void print_inputs(int1 disable_updates)
 {
    int x;
-   while(true)
+   
    {
       delay_ms (200) ;
       for(x=0;x<mydevices.numberOfInputs;++x)
       {
-         switch (mydevices.myinputs[x].type) {
+         switch (((struct inputs)mydevices.myinputs[x]).type) {
             case dimmer_switch:
                if(((struct dimmer_switch)mydevices.myinputs[0].device).dim_level.needs_update)
                {
                   printf("dim_level %u\n\r"((struct dimmer_switch)mydevices.myinputs[0].device).dim_level.value);
-                  ((struct dimmer_switch)mydevices.myinputs[0].device).dim_level.needs_update=false;
+                  if(disable_updates)((struct dimmer_switch)mydevices.myinputs[0].device).dim_level.needs_update=false;
                }
                if(((struct dimmer_switch)mydevices.myinputs[0].device).on.needs_update)
                {
                   printf("on %u\n\r",((struct dimmer_switch)mydevices.myinputs[0].device).on.value);
-                  ((struct dimmer_switch)mydevices.myinputs[0].device).on.needs_update=false;
+                  if(disable_updates)((struct dimmer_switch)mydevices.myinputs[0].device).on.needs_update=false;
                }           
                if(((struct dimmer_switch)mydevices.myinputs[0].device).off.needs_update)
                {
                   printf("off %u\n\r",((struct dimmer_switch)mydevices.myinputs[0].device).off.value);
-                  ((struct dimmer_switch)mydevices.myinputs[0].device).off.needs_update=false;
+                  if(disable_updates)((struct dimmer_switch)mydevices.myinputs[0].device).off.needs_update=false;
                }
                break;
             case on_off_switch:
                if(((struct on_off_switch)mydevices.myinputs[0].device).on.needs_update)
                {
                   printf("on %u\n\r",((struct on_off_switch)mydevices.myinputs[0].device).on.value);
-                  ((struct on_off_switch)mydevices.myinputs[0].device).on.needs_update=false;
+                  if(disable_updates)((struct on_off_switch)mydevices.myinputs[0].device).on.needs_update=false;
                }           
                if(((struct on_off_switch)mydevices.myinputs[0].device).off.needs_update)
                {
                   printf("off %u\n\r",((struct on_off_switch)mydevices.myinputs[0].device).off.value);
-                  ((struct on_off_switch)mydevices.myinputs[0].device).off.needs_update=false;
+                  if(disable_updates)((struct on_off_switch)mydevices.myinputs[0].device).off.needs_update=false;
                }
             break;
             case button_switch:
                if(((struct button_switch)mydevices.myinputs[0].device).on.needs_update)
                {
                   printf("on %u\n\r",((struct button_switch)mydevices.myinputs[0].device).on.value);
-                  ((struct button_switch)mydevices.myinputs[0].device).on.needs_update=false;
+                  if(disable_updates)((struct button_switch)mydevices.myinputs[0].device).on.needs_update=false;
                }           
                if(((struct button_switch)mydevices.myinputs[0].device).off.needs_update)
                {
                   printf("off %u\n\r",((struct button_switch)mydevices.myinputs[0].device).off.value);
-                  ((struct button_switch)mydevices.myinputs[0].device).off.needs_update=false;
+                  if(disable_updates)((struct button_switch)mydevices.myinputs[0].device).off.needs_update=false;
                }
             break;
          }

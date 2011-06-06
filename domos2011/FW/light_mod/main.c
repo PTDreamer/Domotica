@@ -19,21 +19,34 @@ static int32 reg=39;
 //struct switches msw;
 #include "switch_functions.c"
 #include "interrupt_functions.c"
+#include "hw_setup.c"
 //////////////////////////////////////////////////////////////////////////
 
 void main()
 {
    clock = 0;
-   
-   #include "hw_setup.c"
+      
+   hw_setup();
    //TODO: User Code
    //struct switches array[NUMBER_OF_SWITCHES];
   
-   test();
-   
+   button_test();
+   dimmer_test();
+   dimmer_outputs_init();
+   ((struct light)mydevices.myoutputs[0].device).dim_value.value=50;
+   ((struct light)mydevices.myoutputs[0].device).dim_value.needs_update=true;
+   ((struct light)mydevices.myoutputs[0].device).on.value=1;
+   ((struct light)mydevices.myoutputs[0].device).on.needs_update=true;
+ 
+   write_outputs();
    interrupts_enable();
-   
-   print_inputs();
+   while(true){
+   process_outpoints();
+   write_outputs();
+  // print_inputs(false);
+   };
+    
+
    while(organizado==0){}
    for(temp=0;temp<17;++temp)
    {

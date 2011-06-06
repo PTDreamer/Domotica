@@ -19,76 +19,34 @@ static int32 reg=39;
 //struct switches msw;
 #include "switch_functions.c"
 #include "interrupt_functions.c"
+#include "hw_setup.c"
 //////////////////////////////////////////////////////////////////////////
 
 void main()
 {
    clock = 0;
-   can_init () ;
-   can_set_mode (CAN_OP_CONFIG) ;
-   
-   BRGCON1.brp = 4;
-   BRGCON1.sjw = 0;
-   BRGCON2.prseg = 2;
-   BRGCON2.seg1ph = 5;
-   BRGCON2.sam = FALSE;
-   BRGCON2.seg2phts = FALSE;
-   BRGCON3.seg2ph = 5;
-   BRGCON3.wakfil = TRUE;
-   can_set_mode (CAN_OP_NORMAL) ;
-   
-   enable_interrupts (int_canrx0);
-   enable_interrupts (int_canrx1);
-   enable_interrupts (int_cantx0);
-   enable_interrupts (int_cantx1);
-   enable_interrupts (int_cantx2);
-   enable_interrupts (int_canirx);
-   enable_interrupts (int_canerr);
-   setup_adc_ports (NO_ANALOGS | VSS_VDD) ;
-   setup_adc (ADC_CLOCK_DIV_2 | ADC_TAD_MUL_0) ;
-   setup_psp (PSP_DISABLED) ;
-   setup_spi (SPI_SS_DISABLED) ;
-   //setup_wdt (WDT_ON) ;
-   setup_timer_0 (RTCC_INTERNAL | RTCC_DIV_4); //div16 1.6us thick 104ms overflow
-   
-   //setup_timer_1 (T1_INTERNAL | T1_DIV_BY_2); //div2 0.2us thick overflow 13.1ms
-   setup_timer_1(T1_INTERNAL|T1_DIV_BY_2);
-   setup_timer_2(T2_DIV_BY_16,241,13);
-   setup_ccp1(CCP_COMPARE_INT);
-   enable_interrupts(INT_CCP1);
-   ext_int_edge(l_to_h);
-   
- 
- 
-   setup_timer_3 (T3_DISABLED | T3_DIV_BY_1) ;
-   
-  // setup_ccp1 (CCP_OFF) ;
-   setup_comparator (NC_NC_NC_NC) ;
-   setup_vref (FALSE) ;
-   
-   enable_interrupts (int_TIMER0) ;
-   enable_interrupts (int_TIMER2) ;
-   enable_interrupts (int_EXT) ;
-   //enable_interrupts (int_TBE) ;
-   //enable_interrupts (int_BUSCOL) ;
-   //enable_interrupts (int_CANIRX) ;
-   //enable_interrupts (int_CANERR) ;
-   //enable_interrupts (int_CANTX2) ;
-   //enable_interrupts (int_CANTX1) ;
-   //enable_interrupts (int_CANTX0) ;
-   //enable_interrupts (int_CANRX1) ;
-   //enable_interrupts (int_CANRX0) ;
-   //enable_interrupts (int_OSCF) ;
-  
+      
+   hw_setup();
    //TODO: User Code
    //struct switches array[NUMBER_OF_SWITCHES];
   
-   test();
-   
-   enable_interrupts (GLOBAL) ;
-   
-   
-   print_inputs();
+   button_test();
+   dimmer_test();
+   dimmer_outputs_init();
+   ((struct light)mydevices.myoutputs[0].device).dim_value.value=50;
+   ((struct light)mydevices.myoutputs[0].device).dim_value.needs_update=true;
+   ((struct light)mydevices.myoutputs[0].device).on.value=1;
+   ((struct light)mydevices.myoutputs[0].device).on.needs_update=true;
+ 
+   write_outputs();
+   interrupts_enable();
+   while(true){
+   process_outpoints();
+   write_outputs();
+   print_inputs(false);
+   };
+    
+
    while(organizado==0){}
    for(temp=0;temp<17;++temp)
    {

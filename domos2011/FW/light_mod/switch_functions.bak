@@ -38,7 +38,6 @@ void process_buttons(struct button_switch *sw)
 void process_dimmers(struct dimmer_switch *sw)
 {
    int last_level=sw->current_level;
-   int last_dim=sw->dim_level.value;
    if(sw->current_state==button_pressed)//se o botao esta premido
    {
     //  printf("STATE %u",sw->current_state);
@@ -133,7 +132,7 @@ void read_inputs()
   int x;
    for(x=0;x<mydevices.numberOfInputs;++x)
    {
-      switch (mydevices.myinputs[x].type) {
+      switch (((struct inputs)mydevices.myinputs[x]).type) {
     case dimmer_switch:
            // printf("aki");
             if (input (((struct dimmer_switch)mydevices.myinputs[x].device).realbutton)) 
@@ -183,12 +182,12 @@ void read_inputs()
 void print_inputs()
 {
    int x;
-   while(true)
+   
    {
       delay_ms (200) ;
       for(x=0;x<mydevices.numberOfInputs;++x)
       {
-         switch (mydevices.myinputs[x].type) {
+         switch (((struct inputs)mydevices.myinputs[x]).type) {
             case dimmer_switch:
                if(((struct dimmer_switch)mydevices.myinputs[0].device).dim_level.needs_update)
                {

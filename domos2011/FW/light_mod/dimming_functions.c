@@ -12,10 +12,12 @@ int16 dimmers_off_value;
 int ltlevel[N_LUZES]={10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10};
 int16 delays1[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
 int16 delays2[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
-const int16 light_pins[N_LUZES]={0b1111111011111111,0b1111110111111111,0b1111101111111111,0b1111011111111111,0b1110111111111111,0b1101111111111111,0b1011111111111111,0b0111111111111111,
-         /*<........................................................................portC..................................................................................>*/
-0b1111111111111110,0b1111111111111101,0b1111111111111011,0b1111111111110111,0b1111111111101111,0b1111111111011111,0b1111111110111111,0b1111111101111111};
-/*<.................................................................................portD.............................................................>*/
+const int16 light_pins[N_LUZES]={
+0b1111111111101111,0b1111111111011111,0b1111111110111111,0b1111111101111111,0b1111111111110111,0b1111111111111011,0b1111111111111110,0b1111111111111101,
+/*<........................................................................portD..................................................................................>*/
+0b0111111111111111,0b1011111111111111,0b1101111111111111,0b1110111111111111,0b1111011111111111,0b1111101111111111,0b1111110111111111,0b1111111011111111};
+/*<.................................................................................portC.............................................................>*/
+
 int16 lights[N_LUZES];
 const long Matrizluz[128]={
 38400,38731 , 38492 , 38253 , 38014 , 37775 , 37536 , 37297 , 37058 , 36819 , 36580
@@ -73,10 +75,10 @@ const long Matrizluz[128]={
            }
         }
      }
-      for(temp=0;temp<17;++temp)
+     /* for(temp=0;temp<used_dimmers;++temp)
    {
-      printf("%lu <-> %lu\n\r",tempd[temp][0],tempd[temp][1]);
-   }
+      printf("DIMMER:%u value=%lu <-> portWrite=%lu\n\r",temp,tempd[temp][0],tempd[temp][1]);
+   }*/
      IF(tempd[0][0] == 0)numluzes = 0;//luzes todas off
      ELSE
      {
@@ -124,7 +126,7 @@ const long Matrizluz[128]={
 
      IF(actmat)delays1[N_LUZES][0] = numluzes;
      ELSE  delays2[N_LUZES][0] = numluzes;
-     printf("numluzes=%d %lu %lu\n\r",numluzes,delays1[0][0],delays1[0][1]);
+    // printf("num luzes activas=%d valor primeira=%lu portWrite=%lu\n\r",numluzes,delays1[0][0],delays1[0][1]);
      
      organizado=1;
   }
@@ -134,7 +136,7 @@ void dimmer_outputs_init()
    int x;
    for(x=0;x<mydevices.numberOfOutputs;++x)
    {
-      switch (mydevices.myoutputs[x].type) {
+      switch (((struct outputs)mydevices.myoutputs[x]).type) {
          case dimmer:
             lights[used_dimmers]=light_pins[((struct light)mydevices.myoutputs[x].device).output_pin];
             ((struct light)mydevices.myoutputs[x].device).internal_order=used_dimmers;
@@ -165,8 +167,9 @@ void write_outputs()
    int1 update_dimmers=false;
    for(x=0;x<mydevices.numberOfOutputs;++x)
    {
-      switch (mydevices.myoutputs[x].type) {
+      switch (((struct outputs)mydevices.myoutputs[x]).type) {
          case dimmer:
+            //printf("dimmer");
             if(((struct light)mydevices.myoutputs[x].device).dim_value.needs_update)
             {
                if(((struct light)mydevices.myoutputs[x].device).out_state==_on)
@@ -203,4 +206,13 @@ void write_outputs()
    }
    if(update_dimmers)
       org();
+}
+
+void dimmer_test()
+{
+   mydevices.numberOfoutputs=1;
+   unsigned int dim_adr[8]={1,21,31,255,255,255,255,255};
+   unsigned int off_adr[8]={3,51,61,255,255,255,255,255};
+   unsigned int on_adr[8]={2,81,91,255,255,255,255,255};
+   dimmer_out_init(dim_adr,on_adr,off_adr,&mydevices.myoutputs[0],0);
 }
