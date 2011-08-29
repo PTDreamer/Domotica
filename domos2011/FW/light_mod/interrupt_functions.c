@@ -12,13 +12,13 @@ void  TIMER1_isr(void)
    flag = 1;
 }
 #int_TIMER2
-void  TIMER2_isr(void) 
+void  TIMER2_isr(void)
 {
    static unsigned int32 clockT2;
    static unsigned int clockT2temp;
    //static int lixo=0;
    ++clockT2temp;
-   if(clockT2temp==200)
+   if(clockT2temp==200)//1 second call
    {
       output_toggle(LED);
       clockT2temp=0;
@@ -47,8 +47,10 @@ void  EXT_isr(void)
 {
          
   // set_timer1 (0) ;
-         portc=0xFF;
-         portd=0xFF;
+         unsigned int16 temp= onoffsvalue | dimmers_off_value;
+         portc=MAKE8(temp,1);
+         portd=MAKE8(temp,0);
+  
          if (organizado)
          {
             organizado=0;
@@ -67,6 +69,21 @@ void  EXT_isr(void)
          CCP_1=matrizluz[fpointer(0,0)];
          mnumluzes=fpointer(N_LUZES,0);
          set_timer1(0);
+}
+
+#int_CCP1
+void CCP1_isr(void) 
+{
+   if(mnumluzes!=0)
+   {
+      int16 auxccp=fpointer(vez,1);
+     // printf("AUXCPP %lu",auxccp);
+      portc=(portc & MAKE8(auxccp,1));
+      portd=(portd & MAKE8(auxccp,0));
+      ++vez;
+      --mnumluzes;
+      CCP_1=matrizluz[fpointer(vez,0)];
+   }
 }
 
 #int_RDA
@@ -134,21 +151,6 @@ void canirx_int ( )
 void canerr_int ( ) 
 {
    // TODO: add CAN error handling code here
-}
-
-#int_CCP1
-void CCP1_isr(void) 
-{
-   if(mnumluzes!=0)
-   {
-      int16 auxccp=fpointer(vez,1);
-     // printf("AUXCPP %lu",auxccp);
-      portc=(portc & MAKE8(auxccp,1));
-      portd=(portd & MAKE8(auxccp,0));
-      ++vez;
-      --mnumluzes;
-      CCP_1=matrizluz[fpointer(vez,0)];
-   }
 }
 
 void interrupts_enable()

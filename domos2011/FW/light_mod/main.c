@@ -33,13 +33,14 @@ void main()
    button_test();
    dimmer_test();
    dimmer_outputs_init();
-   ((struct light)mydevices.myoutputs[0].device).dim_value.value=50;
+   /*((struct light)mydevices.myoutputs[0].device).dim_value.value=50;
    ((struct light)mydevices.myoutputs[0].device).dim_value.needs_update=true;
-   ((struct light)mydevices.myoutputs[0].device).on.value=1;
-   ((struct light)mydevices.myoutputs[0].device).on.needs_update=true;
- 
+   ((struct light)mydevices.myoutputs[0].device).off.value=1;
+   ((struct light)mydevices.myoutputs[0].device).off.needs_update=true;
+ */
    write_outputs();
    interrupts_enable();
+   printf("start\n\r");
    while(true){
    process_outpoints();
    write_outputs();

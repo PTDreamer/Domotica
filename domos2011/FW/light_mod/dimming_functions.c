@@ -8,17 +8,18 @@ int1 actmat=0;//matriz em uso
 int16 pointer;//apontador para matriz em uso
 int vez;//indice da matriz de dimming corrente
 int mnumluzes;//quantos valores de dimming diferentes temos
-int16 dimmers_off_value;
+unsigned int16 dimmers_off_value=0;
+unsigned int16 onoffsvalue=0xFFFF;
 int ltlevel[N_LUZES]={10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10};
 int16 delays1[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
 int16 delays2[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
-const int16 light_pins[N_LUZES]={
+const unsigned int16 light_pins[N_LUZES]={
 0b1111111111101111,0b1111111111011111,0b1111111110111111,0b1111111101111111,0b1111111111110111,0b1111111111111011,0b1111111111111110,0b1111111111111101,
 /*<........................................................................portD..................................................................................>*/
 0b0111111111111111,0b1011111111111111,0b1101111111111111,0b1110111111111111,0b1111011111111111,0b1111101111111111,0b1111110111111111,0b1111111011111111};
 /*<.................................................................................portC.............................................................>*/
 
-int16 lights[N_LUZES];
+unsigned int16 lights[N_LUZES];
 const long Matrizluz[128]={
 38400,38731 , 38492 , 38253 , 38014 , 37775 , 37536 , 37297 , 37058 , 36819 , 36580
 , 36341 , 36102 , 35863 , 35624 , 35385 , 35146 , 34907 , 34668 , 34429 , 34190 , 33951
@@ -133,6 +134,10 @@ const long Matrizluz[128]={
 
 void dimmer_outputs_init()
 {
+   portc=0xFF;
+   portd=0xFF;
+   trisc=0x00; //tudo saidas
+   trisd=0x00; //tudo saidas
    int x;
    for(x=0;x<mydevices.numberOfOutputs;++x)
    {
@@ -140,19 +145,17 @@ void dimmer_outputs_init()
          case dimmer:
             lights[used_dimmers]=light_pins[((struct light)mydevices.myoutputs[x].device).output_pin];
             ((struct light)mydevices.myoutputs[x].device).internal_order=used_dimmers;
-            ++used_dimmers;
-            
+            ++used_dimmers;          
          break;
       }
    }
-   dimmers_off_value=0xFFFF;
+   if(used_dimmers==0)
+      return;
    for(x=0;x<used_dimmers;++x)
    {
       dimmers_off_value=dimmers_off_value & lights[x];
    }
-   dimmers_off_value=!dimmers_off_value;
-   trisc=0x00; //tudo saidas
-   trisd=0x00; //tudo saidas
+   dimmers_off_value=~dimmers_off_value;
    actmat=0;
    pointer=delays1;
    org();
@@ -202,6 +205,28 @@ void write_outputs()
                ((struct light)mydevices.myoutputs[x].device).on.needs_update=false;
             }
          break;
+         case _on_off:
+            if(((struct oNoFF)mydevices.myoutputs[x].device).off.needs_update)
+            {
+               if(((struct oNoFF)mydevices.myoutputs[x].device).off.value)
+               {
+                  onoffsvalue=onoffsvalue|~light_pins[((struct oNoFF)mydevices.myoutputs[x].device).output_pin];
+                  printf("onoff off value %LX %LX",onoffsvalue,~light_pins[((struct oNoFF)mydevices.myoutputs[x].device).output_pin]);
+               }
+               ((struct oNoFF)mydevices.myoutputs[x].device).off.needs_update=false;
+            }
+            
+            if(((struct oNoFF)mydevices.myoutputs[x].device).on.needs_update)
+            {
+               printf("onoff on");
+               if(((struct oNoFF)mydevices.myoutputs[x].device).on.value)
+               {
+                  onoffsvalue=onoffsvalue & light_pins[((struct oNoFF)mydevices.myoutputs[x].device).output_pin];
+                  printf("onoff on value %LX",onoffsvalue);
+               }
+               ((struct light)mydevices.myoutputs[x].device).on.needs_update=false;
+            }
+         break;
       }
    }
    if(update_dimmers)
@@ -215,4 +240,5 @@ void dimmer_test()
    unsigned int off_adr[8]={3,51,61,255,255,255,255,255};
    unsigned int on_adr[8]={2,81,91,255,255,255,255,255};
    dimmer_out_init(dim_adr,on_adr,off_adr,&mydevices.myoutputs[0],0);
+  // onOff_out_init(on_adr,off_adr,&mydevices.myoutputs[0],0);
 }

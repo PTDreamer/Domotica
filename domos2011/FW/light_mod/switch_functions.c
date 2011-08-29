@@ -9,12 +9,16 @@ void process_onOff(struct on_off_switch *sw)
          sw->outstate=on;
          sw->on.value=1;
          sw->on.needs_update=true;
+         sw->off.value=0;
+         sw->off.needs_update=true;
       }
       else if(sw->outstate==on)
       {
          sw->outstate=off;
          sw->off.value=1;
          sw->off.needs_update=true;
+         sw->on.value=0;
+         sw->on.needs_update=true;
       }
 }
    else if(sw->current_state==button_depressed)
@@ -27,12 +31,16 @@ void process_buttons(struct button_switch *sw)
          sw->outstate=on;
          sw->on.value=1;
          sw->on.needs_update=true;
+         sw->off.value=0;
+         sw->off.needs_update=true;
    }
    else if(sw->current_state==button_depressed && sw->outstate==on)  
    {
          sw->outstate=off;
          sw->off.value=1;
          sw->off.needs_update=true;
+         sw->on.value=0;
+         sw->on.needs_update=true;
    }
 }
 void process_dimmers(struct dimmer_switch *sw)
@@ -127,7 +135,7 @@ void process_dimmers(struct dimmer_switch *sw)
    }
 }
 
-void read_inputs()
+void read_inputs()//called periodicaly to pass current phisical input (or timer values) value to structures
 {
   int x;
    for(x=0;x<mydevices.numberOfInputs;++x)

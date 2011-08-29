@@ -91,10 +91,17 @@ struct light
    int internal_order;
    int1  needs_update;
 };
-
+struct oNoFF
+{
+   struct data_point_in on;
+   struct data_point_in off;
+   unsigned int output_pin;
+   int1  needs_update;
+};
 union output
 {
    struct light;
+   struct oNoFF;
 };
 
 typedef struct outputs
@@ -119,7 +126,6 @@ void copy_array(unsigned int *origin,struct data_point_in* destination , unsigne
    for (x=0;x<n_elements;++x)
    {
       ((struct data_point_in*)destination)->adress[x]=*origin;
-      printf("%u:%u<----->%u\n\r",x,((struct data_point_in*)destination)->adress[x],*origin);
       ++origin;
    }
 }
@@ -138,10 +144,10 @@ void dimmer_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,s
       ((struct dimmer_switch)input->device).direction=up;
       ((struct dimmer_switch)input->device).dim_level.needs_update=0;
       ((struct dimmer_switch)input->device).on.needs_update=0;
-      ((struct dimmer_switch)input->device).off.needs_update=0;
+      ((struct dimmer_switch)input->device).off.needs_update=1;
       ((struct dimmer_switch)input->device).dim_level.value=0;
       ((struct dimmer_switch)input->device).on.value=0;
-      ((struct dimmer_switch)input->device).off.value=0;
+      ((struct dimmer_switch)input->device).off.value=1;
       ((struct dimmer_switch)input->device).realbutton=inputs[real_button];
       ((struct dimmer_switch)input->device).timer=0;
 }
@@ -177,24 +183,32 @@ void button_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,s
 }
 //////////////////////////////////////////////////////////////////////////////
 
-///////INPUTS INITIALIZATION//////////////////////////////////////////////////
+///////OUTPUTS INITIALIZATION//////////////////////////////////////////////////
 void dimmer_out_init(unsigned int *dim_adr,unsigned int *on_adr,unsigned int *off_adr,struct outputs* output,unsigned int output_pin)
 {
    ((struct outputs *)output)->type=dimmer;
    ((struct light)output->device).dim_value.needs_update=0;
    ((struct light)output->device).on.needs_update=0;
    ((struct light)output->device).off.needs_update=0;
-   ((struct light)output->device).dim_value.value=0;
+   ((struct light)output->device).dim_value.value=127;
    ((struct light)output->device).on.value=0;
    ((struct light)output->device).off.value=0;
    ((struct light)output->device).output_pin=output_pin;
-   ((struct light)output->device).dim_value.adress[0]=1;
-   ((struct light)output->device).dim_value.adress[1]=2;
-   printf("adress test:%u %u\n\r",((struct light)output->device).dim_value.adress[0],((struct light)output->device).dim_value.adress[1]);
-   copy_array(dim_adr,((struct light)output->device).dim_value,8);
-   copy_array(on_adr,((struct light)output->device).on,8);
-   copy_array(off_adr,((struct light)output->device).off,8);
-  ((struct light)output->device).out_state=_off;
+   copy_array(dim_adr,&((struct light)output->device).dim_value,8);
+   copy_array(on_adr,&((struct light)output->device).on,8);
+   copy_array(off_adr,&((struct light)output->device).off,8);
+   ((struct light)output->device).out_state=_off;
+}
+void onOff_out_init(unsigned int *on_adr,unsigned int *off_adr,struct outputs* output,unsigned int output_pin)
+{
+   ((struct outputs *)output)->type=_on_off;
+   ((struct oNoFF)output->device).on.needs_update=0;
+   ((struct oNoFF)output->device).off.needs_update=0;
+   ((struct oNoFF)output->device).on.value=0;
+   ((struct oNoFF)output->device).off.value=0;
+   ((struct oNoFF)output->device).output_pin=output_pin;
+   copy_array(on_adr,&((struct oNoFF)output->device).on,8);
+   copy_array(off_adr,&((struct oNoFF)output->device).off,8);
 }
 //////////////////////////////////////////////////////////////////////////////
 
