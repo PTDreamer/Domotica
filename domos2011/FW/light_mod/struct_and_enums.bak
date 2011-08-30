@@ -4,7 +4,6 @@ enum switch_direction {up, down};
 enum switch_state {button_pressed, button_depressed};
 enum output_type {_on_off, dimmer,shutter};
 enum output_state {_on, _off, _dimmed};
-enum timer_type {time_on, time_off, periodic_on};
 enum input_type {dimmer_switch,on_off_switch,button_switch,timer,none};
 
 void dimmer_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,struct inputs* input);
@@ -54,18 +53,22 @@ typedef struct button_switch
    struct data_point_out off;
    switch_state current_state;
    switch_state previous_state;
-   int32  timer;
    switch_outstate outstate;
+   int1 repeat;
    unsigned int realbutton;
 };
 
+enum timer_type {time_on, time_off, periodic_on};
 typedef struct timer
 {
    timer_type type;
-   int32 timeToAct;
+   int16  timeToAct;
    struct data_point_out on;
    struct data_point_out off;
-   int32  timer;
+   struct data_point_in start;
+   struct data_point_in stop; 
+   int16  timer;
+   int1  active;
 };
 union input
 {
@@ -98,10 +101,28 @@ struct oNoFF
    unsigned int output_pin;
    int1  needs_update;
 };
+enum shutter_state {goingUp, goingDown,goingFullUp,goingFullDown,idle,sleeping};
+struct shutter
+{
+   struct data_point_in up;
+   struct data_point_in down;
+   struct data_point_in fullup;
+   struct data_point_in fulldown;
+   unsigned int output_pin_up;
+   unsigned int output_pin_down;
+ //  unsigned int32 antiSimulCounter;
+   unsigned int internalCounter;
+   int fullTime;
+   int shortTime;
+   enum shutter_state state;
+  // int1  needs_update;
+};
+
 union output
 {
    struct light;
    struct oNoFF;
+   struct shutter;
 };
 
 typedef struct outputs
@@ -166,7 +187,7 @@ void on_off_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,s
       sw.realbutton=inputs[real_button];
       input->device=sw;
 }
-void button_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,struct inputs* input,unsigned int real_button)
+void button_init(unsigned int on_adr,unsigned int off_adr,struct inputs* input,unsigned int real_button,int1 repeat)
 {
       struct button_switch sw;
       input->type=button_switch;
@@ -178,6 +199,7 @@ void button_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,s
       sw.off.needs_update=0;
       sw.on.value=0;
       sw.off.value=0;
+      sw.repeat=repeat;
       sw.realbutton=inputs[real_button];
       input->device=sw;
 }
@@ -200,7 +222,7 @@ void dimmer_out_init(unsigned int *dim_adr,unsigned int *on_adr,unsigned int *of
    ((struct light)output->device).out_state=_off;
 }
 void onOff_out_init(unsigned int *on_adr,unsigned int *off_adr,struct outputs* output,unsigned int output_pin)
-{return;
+{
    ((struct outputs *)output)->type=_on_off;
    ((struct oNoFF)output->device).on.needs_update=0;
    ((struct oNoFF)output->device).off.needs_update=0;
@@ -210,17 +232,64 @@ void onOff_out_init(unsigned int *on_adr,unsigned int *off_adr,struct outputs* o
    copy_array(on_adr,&((struct oNoFF)output->device).on,8);
    copy_array(off_adr,&((struct oNoFF)output->device).off,8);
 }
+
+void shutter_out_init(unsigned int *up_adr,unsigned int *down_adr,unsigned int *fullup_adr,unsigned int *fulldown_adr,
+struct outputs* output,unsigned int up_output_pin,unsigned int down_output_pin,unsigned int shortMoveTime,unsigned int LongMoveTime)
+{
+   ((struct outputs *)output)->type=shutter;
+   ((struct shutter)output->device).up.needs_update=0;
+   ((struct shutter)output->device).down.needs_update=0;
+   ((struct shutter)output->device).up.value=0;
+   ((struct shutter)output->device).down.value=0;
+   ((struct shutter)output->device).fullup.needs_update=0;
+   ((struct shutter)output->device).fulldown.needs_update=0;
+   ((struct shutter)output->device).fullup.value=0;
+   ((struct shutter)output->device).fulldown.value=0;
+   ((struct shutter)output->device).output_pin_up=up_output_pin;
+   ((struct shutter)output->device).output_pin_down=down_output_pin;
+   ((struct shutter)output->device).fullTime=LongMoveTime;
+   ((struct shutter)output->device).shortTime=shortMoveTime; 
+   copy_array(up_adr,&((struct shutter)output->device).up,8);
+   copy_array(down_adr,&((struct shutter)output->device).down,8);
+   copy_array(fullup_adr,&((struct shutter)output->device).fullup,8);
+   copy_array(fulldown_adr,&((struct shutter)output->device).fulldown,8);
+   ((struct shutter)output->device).state=idle;
+}
+
+void timer_init(unsigned int *start_adr,unsigned int *stop_adr,unsigned int out_on,unsigned int out_off,struct inputs* input,timer_type type, int16  timeToAct)
+{
+   ((struct inputs *)input)->type=timer;
+   ((struct timer)input->device).on.needs_update=0;
+   ((struct timer)input->device).off.needs_update=0;
+   ((struct timer)input->device).on.value=0;
+   ((struct timer)input->device).off.value=0;
+   ((struct timer)input->device).start.needs_update=0;
+   ((struct timer)input->device).stop.needs_update=0;
+   ((struct timer)input->device).start.value=0;
+   ((struct timer)input->device).stop.value=0;
+   ((struct timer)input->device).timer=0;
+   ((struct timer)input->device).type=type;
+   ((struct timer)input->device).active=false;
+   ((struct timer)input->device).timeToAct=timeToAct;
+   ((struct timer)input->device).on.adress=out_on;
+   ((struct timer)input->device).off.adress=out_off;
+   copy_array(start_adr,&((struct timer)input->device).start,8);
+   copy_array(stop_adr,&((struct timer)input->device).stop,8);
+}
 //////////////////////////////////////////////////////////////////////////////
 
 void button_test()
-{     mydevices.numberOfInputs=1;
+{     mydevices.numberOfInputs=2;
     //  struct dimmer_switch sw;
     //  sw.dim_level.value=69;
     //  mydevices.myinputs[0].device=sw;
     //  printf("VALUE=%u\n\r",mydevices.myinputs[0].device.dim_level.value);
     //  on_off_init(1,2,3,&mydevices.myinputs[0],0);
-    //button_init(1,2,3,&mydevices.myinputs[0],0);
-      dimmer_init(1,2,3,&mydevices.myinputs[0],0);
+    button_init(2,3,&mydevices.myinputs[0],0,false);
+    unsigned int start_adr[8]={2,255,255,255,255,255,255,255};
+    unsigned int empty[8]={255,255,255,255,255,255,255,255};
+    timer_init(start_adr,empty,4,5,&mydevices.myinputs[1],time_on,5);
+     // dimmer_init(1,2,3,&mydevices.myinputs[0],0);
       //printf("VALUE=%u\n\r",mydevices.myinputs[0].device.dim_level.value);
      // while(true){};
 }

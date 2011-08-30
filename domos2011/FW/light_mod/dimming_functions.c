@@ -7,12 +7,11 @@ int1 organizado;//flag que diz se os dimmings estao organizados
 int1 actmat=0;//matriz em uso
 int16 pointer;//apontador para matriz em uso
 int vez;//indice da matriz de dimming corrente
-int mnumluzes;//quantos valores de dimming diferentes temos
-unsigned int16 dimmers_off_value=0;
+volatile int mnumluzes=0;//quantos valores de dimming diferentes temos
 unsigned int16 onoffsvalue=0xFFFF;
-int ltlevel[N_LUZES]={10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10};
-int16 delays1[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
-int16 delays2[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
+int ltlevel[N_LUZES]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+volatile int16 delays1[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
+volatile int16 delays2[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
 const unsigned int16 light_pins[N_LUZES]={
 0b1111111111101111,0b1111111111011111,0b1111111110111111,0b1111111101111111,0b1111111111110111,0b1111111111111011,0b1111111111111110,0b1111111111111101,
 /*<........................................................................portD..................................................................................>*/
@@ -47,7 +46,7 @@ const long Matrizluz[128]={
   VOID org(void)
   {
      INT16 tempd[N_LUZES][2];
-     INT numluzes;
+     INT numluzes=0;
      INT1 again = 1;
      INT fa;
      INT16 fl;
@@ -119,12 +118,12 @@ const long Matrizluz[128]={
                  delays2[afa][0] = tempd[fa][0];
                  delays2[afa][1] = tempd[fa][1];
               }
-
+               //printf("numluzes=%d used_dimmers=%d",numluzes,used_dimmers);
               ++numluzes;
            }
         }
      }
-
+     // printf("XnumluzesX=%d used_dimmers=%d",numluzes,used_dimmers);
      IF(actmat)delays1[N_LUZES][0] = numluzes;
      ELSE  delays2[N_LUZES][0] = numluzes;
     // printf("num luzes activas=%d valor primeira=%lu portWrite=%lu\n\r",numluzes,delays1[0][0],delays1[0][1]);
@@ -134,6 +133,8 @@ const long Matrizluz[128]={
 
 void dimmer_outputs_init()
 {
+   delays1[N_LUZES][0]=0;
+   delays2[N_LUZES][0]=0;
    portc=0xFF;
    portd=0xFF;
    trisc=0x00; //tudo saidas
@@ -149,19 +150,15 @@ void dimmer_outputs_init()
          break;
       }
    }
-   if(used_dimmers==0)
-      return;
-   for(x=0;x<used_dimmers;++x)
+   if(used_dimmers>0)
    {
-      dimmers_off_value=dimmers_off_value & lights[x];
-   }
-   dimmers_off_value=~dimmers_off_value;
    actmat=0;
    pointer=delays1;
    org();
    pointer=delays2;
    actmat=1;
    org();
+   }
 }
 
 void write_outputs()
@@ -172,7 +169,6 @@ void write_outputs()
    {
       switch (((struct outputs)mydevices.myoutputs[x]).type) {
          case dimmer:
-            //printf("dimmer");
             if(((struct light)mydevices.myoutputs[x].device).dim_value.needs_update)
             {
                if(((struct light)mydevices.myoutputs[x].device).out_state==_on)
@@ -211,23 +207,63 @@ void write_outputs()
                if(((struct oNoFF)mydevices.myoutputs[x].device).off.value)
                {
                   onoffsvalue=onoffsvalue|~light_pins[((struct oNoFF)mydevices.myoutputs[x].device).output_pin];
-                  printf("onoff off value %LX %LX",onoffsvalue,~light_pins[((struct oNoFF)mydevices.myoutputs[x].device).output_pin]);
                }
                ((struct oNoFF)mydevices.myoutputs[x].device).off.needs_update=false;
             }
-            
             if(((struct oNoFF)mydevices.myoutputs[x].device).on.needs_update)
             {
-               printf("onoff on");
                if(((struct oNoFF)mydevices.myoutputs[x].device).on.value)
                {
                   onoffsvalue=onoffsvalue & light_pins[((struct oNoFF)mydevices.myoutputs[x].device).output_pin];
-                  printf("onoff on value %LX",onoffsvalue);
                }
                ((struct light)mydevices.myoutputs[x].device).on.needs_update=false;
             }
          break;
-      }
+           case shutter:
+           if(((struct shutter)mydevices.myoutputs[x].device).up.needs_update && ((((struct shutter)mydevices.myoutputs[x].device).state==idle)||(((struct shutter)mydevices.myoutputs[x].device).state==goingUp)))
+            {
+                       printf("shitter");
+               if(((struct shutter)mydevices.myoutputs[x].device).up.value)
+               {
+                     ((struct shutter)mydevices.myoutputs[x].device).internalCounter=0;
+                     ((struct shutter)mydevices.myoutputs[x].device).state=goingUp;
+                     onoffsvalue=onoffsvalue & light_pins[((struct shutter)mydevices.myoutputs[x].device).output_pin_up];
+               }
+               ((struct shutter)mydevices.myoutputs[x].device).up.needs_update=false;
+            }
+            if(((struct shutter)mydevices.myoutputs[x].device).down.needs_update && ((((struct shutter)mydevices.myoutputs[x].device).state==idle)||(((struct shutter)mydevices.myoutputs[x].device).state==goingDown)))
+            {
+               if(((struct shutter)mydevices.myoutputs[x].device).down.value)
+               {
+                   ((struct shutter)mydevices.myoutputs[x].device).internalCounter=0;
+                   ((struct shutter)mydevices.myoutputs[x].device).state=goingDown;
+                   onoffsvalue=onoffsvalue & light_pins[((struct shutter)mydevices.myoutputs[x].device).output_pin_down];
+               }
+               ((struct shutter)mydevices.myoutputs[x].device).down.needs_update=false;
+            }
+            if(((struct shutter)mydevices.myoutputs[x].device).fullup.needs_update && ((((struct shutter)mydevices.myoutputs[x].device).state==idle)||(((struct shutter)mydevices.myoutputs[x].device).state==goingFullUp)))
+            {
+               if(((struct shutter)mydevices.myoutputs[x].device).fullup.value)
+               {
+                   ((struct shutter)mydevices.myoutputs[x].device).internalCounter=0;
+                   ((struct shutter)mydevices.myoutputs[x].device).state=goingFullUp;
+                   onoffsvalue=onoffsvalue & light_pins[((struct shutter)mydevices.myoutputs[x].device).output_pin_up];
+               }
+               ((struct shutter)mydevices.myoutputs[x].device).fullup.needs_update=false;
+            }
+            
+            if(((struct shutter)mydevices.myoutputs[x].device).fulldown.needs_update && ((((struct shutter)mydevices.myoutputs[x].device).state==idle)||(((struct shutter)mydevices.myoutputs[x].device).state==goingFullDown)))
+            {
+               if(((struct shutter)mydevices.myoutputs[x].device).fulldown.value)
+               {
+                   ((struct shutter)mydevices.myoutputs[x].device).internalCounter=0;
+                   ((struct shutter)mydevices.myoutputs[x].device).state=goingFullDown;
+                   onoffsvalue=onoffsvalue & light_pins[((struct shutter)mydevices.myoutputs[x].device).output_pin_down];
+               }
+               ((struct shutter)mydevices.myoutputs[x].device).fulldown.needs_update=false;
+            }
+           }
+            break;
    }
    if(update_dimmers)
       org();
@@ -239,6 +275,10 @@ void dimmer_test()
    unsigned int dim_adr[8]={1,21,31,255,255,255,255,255};
    unsigned int off_adr[8]={3,51,61,255,255,255,255,255};
    unsigned int on_adr[8]={2,81,91,255,255,255,255,255};
+   unsigned int timedon_adr[8]={4,81,91,255,255,255,255,255};
+   unsigned int empty[8]={255,255,255,255,255,255,255,255};
    dimmer_out_init(dim_adr,on_adr,off_adr,&mydevices.myoutputs[0],0);
-  // onOff_out_init(on_adr,off_adr,&mydevices.myoutputs[0],0);
+  // shutter_out_init(on_adr,empty,empty,empty,&mydevices.myoutputs[0],0,1,3,10);
+   //onOff_out_init(on_adr,off_adr,&mydevices.myoutputs[0],0);
+  //onOff_out_init(timedon_adr,off_adr,&mydevices.myoutputs[0],0);
 }

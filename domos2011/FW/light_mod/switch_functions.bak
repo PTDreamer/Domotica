@@ -53,14 +53,12 @@ void process_dimmers(struct dimmer_switch *sw)
       sw-> previous_state = button_pressed;
       if ((clock - sw->timer > reg || sw->outstate == dimming) && sw->outstate!=maxed)
       { 
-            printf("pressed");
          if(sw->outstate==off)
          {
             sw->outstate=maxed;
             sw->on.value=1;
             sw->current_level = 127;
             sw->on.needs_update=1;
-            printf("maxed");
          }
         else
         {

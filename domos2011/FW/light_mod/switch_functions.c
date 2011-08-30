@@ -1,6 +1,5 @@
 void process_onOff(struct on_off_switch *sw)
 {
-//printf("AKI1");
    if((sw->current_state==button_pressed) && (sw-> previous_state == button_depressed))
    {   
       sw-> previous_state = button_pressed;
@@ -103,7 +102,6 @@ void process_dimmers(struct dimmer_switch *sw)
          {
             if (sw->outstate == off) //se estava desligada
             {
-              // printf("on");
                sw->outstate=on;
                sw->on.value=1;
                sw->direction = down;
@@ -111,8 +109,6 @@ void process_dimmers(struct dimmer_switch *sw)
             }
             else if (sw->outstate == on)
             {
-              // printf("off");
-               //sw->current_level = 0; //senao desliga
                sw->outstate=off;
                sw->off.value=1;
                sw->direction = up;
@@ -142,7 +138,6 @@ void read_inputs()//called periodicaly to pass current phisical input (or timer 
    {
       switch (((struct inputs)mydevices.myinputs[x]).type) {
     case dimmer_switch:
-           // printf("aki");
             if (input (((struct dimmer_switch)mydevices.myinputs[x].device).realbutton)) 
             {
                ((struct dimmer_switch)mydevices.myinputs[x].device).current_state = button_depressed;
@@ -157,7 +152,6 @@ void read_inputs()//called periodicaly to pass current phisical input (or timer 
 
            break;
     case on_off_switch:
-           // printf("aki");
             if (input (((struct on_off_switch)mydevices.myinputs[x].device).realbutton)) 
             {
                ((struct on_off_switch)mydevices.myinputs[x].device).current_state = button_depressed;
@@ -169,7 +163,6 @@ void read_inputs()//called periodicaly to pass current phisical input (or timer 
             process_onOff(&mydevices.myinputs[x].device);
     break;
     case button_switch:
-           // printf("aki");
             if (input (((struct button_switch)mydevices.myinputs[x].device).realbutton)) 
             {
                ((struct button_switch)mydevices.myinputs[x].device).current_state = button_depressed;

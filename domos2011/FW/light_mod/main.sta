@@ -1,83 +1,79 @@
 
-ROM used: 17650 (18%)
-          17650 (18%) including unused fragments
+ROM used: 27138 (28%)
+          27138 (28%) including unused fragments
 
-          7 Average locations per line
-          25 Average locations per statement
+          9 Average locations per line
+          31 Average locations per statement
 
-RAM used: 1057 (32%) at main() level
-          1178 (36%) worst case
+RAM used: 1321 (40%) at main() level
+          1444 (44%) worst case
 
 Stack used: 8 worst case (out of 30 total available)
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   62    20   3  main.c
+   62    19   2  main.c
    33     0   0  main.h
   467     0   0  ..\..\..\..\..\..\..\Program Files\PICC\devices\18F4685.h
-   41     0   0  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h
-  155    62   9  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c
-  443   137  20  ..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.c
+   43     0   0  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h
+  155    62   7  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c
+  443   137  15  ..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.c
   378     0   0  ..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.h
-  229    64   9  struct_and_enums.c
-  245   126  18  dimming_functions.c
-  110    54   8  datapoints.c
-  244   162  23  switch_functions.c
-  181    50   7  interrupt_functions.c
+  298   101  11  struct_and_enums.c
+  285   155  17  dimming_functions.c
+  200   114  13  datapoints.c
+   91    62   7  timedevents.c
+  237   162  18  switch_functions.c
+  180    52   6  interrupt_functions.c
    35    23   3  hw_setup.c
 ----- -----
- 2623   698 Total
+ 2907   887 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
-0     70   0   1             @PUTCHAR_1_
+0     72   0   1             @PUTCHAR_1_
 0    340   1   1   822  4.4  can_init
 0     48   0   0   255  2.3  can_set_baud
 0     38   0   2    76  3.1  can_set_mode
 0    308   1  13  1112  6.4  can_set_id
 0    504   1  14   706  8.4  can_get_id
-0    210   1  17  1026  7.9  can_putd
+0    210   0  17  1026  7.9  can_putd
  Inline       14  1586  6.9  can_getd
-0    944   3  18  1118  7.6  canReceive
-0    538   2  21  1053  9.8  canTransmit
+0    944   2  18  1118  7.6  canReceive
+0    538   1  21  1053  9.8  canTransmit
 0     64   0   9   240  6.0  copy_array
 0    452   1  11  1540  5.4  dimmer_init
 0    386   1  13  1269  5.4  dimmer_out_init
-0     36   0   0   111  3.1  button_test
-0     52   0   0             @const516
-0    276   1   0             @const519
+0     74   0   0   388  3.9  button_test
+0     52   0   0             @const558
+0    276   1   0             @const561
  Inline        6   212  4.0  fpointer
-0   1586   4  76  3234  8.0  org
-0    430   1   6   950  9.0  dimmer_outputs_init
+0   1588   3  76  3253  8.0  org
+0    380   1   6   865  7.5  dimmer_outputs_init
 0     34   0   5             @MUL1616
-0   2496   7   9  4157 10.4  write_outputs
-0     24   0   0             @const541
-0     48   0   4             @PSTRINGCN_65
-0     70   0   2             @PRINTF_X_65
-0     10   0   0             @const547
+0   4980   9   9  9444 11.2  write_outputs
+0      8   0   0             @const583
 0     40   0   3             @PSTRINGC_65
-0     20   0   0             @const549
-0    120   0   0   538  4.2  dimmer_test
+0    160   0   0   867  4.4  dimmer_test
 0     48   0   5   236  7.0  array_contains
-0   1454   4   7  2548 10.0  process_inpoints
-0     12   0   2    54  2.3  process_outpoint_answer
-0   1358   4   7  2249  8.8  process_outpoints
+0   3184   6   7  5965 10.1  process_inpoints
+0     14   0   2    54  2.3  process_outpoint_answer
+0   3912   7   7  7278  9.0  process_outpoints
+0   3830   7   7  6697 11.3  processTimedEvents
 0    288   1   4   841  5.3  process_onOff
-0    234   1   4   671  5.3  process_buttons
-0    934   3   7  2559  8.4  process_dimmers
-0   1092   3   5  1691  9.1  read_inputs
+0    234   0   4   671  5.3  process_buttons
+0    934   2   7  2559  8.4  process_dimmers
+0   1092   2   5  1691  9.1  read_inputs
 0     66   0   6             @WRITEBITA
 0     50   0   5             @READBITA
-0     16   0   0             @const589
-0     44   0   3             @DIV88
-0    130   0   2             @PRINTF_U_65
-0     10   0   0             @const597
-0     10   0   0             @const599
-0     10   0   0             @const601
+0     16   0   0             @const630
+0     10   0   0             @const640
+0     10   0   0             @const642
+0     10   0   0             @const644
 0     36   0   0    61  2.3  TIMER0_isr
 0      8   0   0    22  1.2  TIMER1_isr
-0     40   0   0   151  3.5  TIMER2_isr
-0    352   1   4   468  4.3  EXT_isr
+0     42   0   0   125  3.0  TIMER2_isr
+0    344   1   4   480  3.8  EXT_isr
 0    308   1   2   294  5.1  CCP1_isr
 0      6   0   0     5  1.0  RDA_isr
 0      6   0   0     5  1.0  TBE_isr
@@ -90,32 +86,29 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0      8   0   0    12  0.8  cantx2_int
 0      6   0   0     3  0.0  canirx_int
 0      6   0   0     3  0.0  canerr_int
-0     30   0   0   243  1.4  interrupts_enable
+0     32   0   0   268  1.4  interrupts_enable
 0    154   0   0   751  3.4  hw_setup
-0   1148   3   4   584  4.7  MAIN
-0      8   0   0             @const627
-0     14   0   0             @const628
-0    190   1   9             @PRINTF_LU_65
-0     20   0   0             @const632
+0    570   1   0   297  2.6  MAIN
+0      8   0   0             @const668
 
 Program metrics:
-    Functions               45
-    Statements              698
-    Comments                614
-    Volume (V)              57051
-    Difficilty (D)          209.7
-    Effort to implement (E) 11960844
-    Time to implement (T)   184 hours, 35 minutes
-    Est Delivered Bugs (B)  17
-    Cyclomatic Complexity   103
-    Maintainability (MI)    62
+    Functions               46
+    Statements              887
+    Comments                608
+    Volume (V)              86308
+    Difficilty (D)          223.8
+    Effort to implement (E) 19312112
+    Time to implement (T)   298 hours, 2 minutes
+    Est Delivered Bugs (B)  24
+    Cyclomatic Complexity   149
+    Maintainability (MI)    53
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-00006     0  4  
 00008-00170   362  0  
-00172-0FFFE  17284  47882  
+00172-0FFFE  26772  38394  
 10000-17CBE     0  31936  
 
 

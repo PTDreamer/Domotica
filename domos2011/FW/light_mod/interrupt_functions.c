@@ -1,4 +1,3 @@
-int1 flag=0;//mains not detected flag
 #int_TIMER0
 void  TIMER0_isr(void) 
 {
@@ -9,20 +8,20 @@ void  TIMER0_isr(void)
 #int_TIMER1
 void  TIMER1_isr(void) 
 {
-   flag = 1;
+   syncError = 1;
 }
 #int_TIMER2
 void  TIMER2_isr(void)
 {
-   static unsigned int32 clockT2;
    static unsigned int clockT2temp;
    //static int lixo=0;
    ++clockT2temp;
    if(clockT2temp==200)//1 second call
    {
-      output_toggle(LED);
+      //output_toggle(LED);
       clockT2temp=0;
-      ++clockT2;
+      ++secClock;
+      secondFlag=true;
       /*
       if(!lixo)
       {
@@ -45,9 +44,7 @@ void  TIMER2_isr(void)
 #int_EXT
 void  EXT_isr(void) 
 {
-         
-  // set_timer1 (0) ;
-         unsigned int16 temp= onoffsvalue | dimmers_off_value;
+         unsigned int16 temp= onoffsvalue;
          portc=MAKE8(temp,1);
          portd=MAKE8(temp,0);
   
@@ -69,11 +66,12 @@ void  EXT_isr(void)
          CCP_1=matrizluz[fpointer(0,0)];
          mnumluzes=fpointer(N_LUZES,0);
          set_timer1(0);
+         syncError=false;
 }
 
 #int_CCP1
 void CCP1_isr(void) 
-{
+{  
    if(mnumluzes!=0)
    {
       int16 auxccp=fpointer(vez,1);
@@ -164,6 +162,7 @@ void interrupts_enable()
    enable_interrupts (int_canerr);
    enable_interrupts(INT_CCP1);
    enable_interrupts (int_TIMER0) ;
+   enable_interrupts (int_TIMER1) ;
    enable_interrupts (int_TIMER2) ;
    enable_interrupts (int_EXT) ;
    //enable_interrupts (int_TBE) ;

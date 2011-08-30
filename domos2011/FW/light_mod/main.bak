@@ -1,32 +1,61 @@
-#include <18F4685.h>
-#device adc=8
 
-#FUSES NOWDT                 	//No Watch Dog Timer
-#FUSES WDT128                	//Watch Dog Timer uses 1:128 Postscale
-#FUSES H4                    	//High speed osc with HW enabled 4X PLL
-#FUSES NOPROTECT             	//Code not protected from reading
-#FUSES BROWNOUT              	//Reset when brownout detected
-#FUSES BORV20                	//Brownout reset at 2.0V
-#FUSES NOPUT                 	//No Power Up Timer
-#FUSES NOCPD                 	//No EE protection
-#FUSES STVREN                	//Stack full/underflow will cause reset
-#FUSES NODEBUG               	//No Debug mode for ICD
-#FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O
-#FUSES NOWRT                 	//Program memory not write protected
-#FUSES NOWRTD                	//Data EEPROM not write protected
-#FUSES IESO                  	//Internal External Switch Over mode enabled
-#FUSES FCMEN                 	//Fail-safe clock monitor enabled
-#FUSES PBADEN                	//PORTB pins are configured as analog input channels on RESET
-#FUSES BBSIZ4K               	//4K words Boot Block size
-#FUSES NOWRTC                	//configuration not registers write protected
-#FUSES NOWRTB                	//Boot block not write protected
-#FUSES NOEBTR                	//Memory not protected from table reads
-#FUSES NOEBTRB               	//Boot block not protected from table reads
-#FUSES NOCPB                 	//No Boot Block code protection
-#FUSES LPT1OSC               	//Timer1 configured for low-power operation
-#FUSES MCLR                  	//Master Clear pin enabled
-#FUSES NOXINST               	//Extended set extension and Indexed Addressing mode disabled (Legacy mode)
+#include "main.h"
+#include "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h"
+#include "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c"
+int temp;
+#include "struct_and_enums.c"
+#include "dimming_functions.c"
 
-#use delay(clock=40000000,RESTART_WDT)
-#use rs232(baud=9600,parity=N,xmit=PIN_B5,rcv=PIN_B4,bits=8,restart_wdt)
+#include "datapoints.c"
+#include "timedevents.c"
+//////////////////////////////////////////
+//apagar
+volatile unsigned int32 clock;
+volatile unsigned int1 secondFlag;
+volatile unsigned int1 syncError;
+//dimmer constants
+static int TimeBase=0;
+static int32 reg=39;
+//dimmer end
+
+//struct switches msw;
+#include "switch_functions.c"
+#include "interrupt_functions.c"
+#include "hw_setup.c"
+//////////////////////////////////////////////////////////////////////////
+
+void main()
+{
+   clock = 0;
+      
+   hw_setup();
+   //TODO: User Code
+   //struct switches array[NUMBER_OF_SWITCHES];
+  
+   //button_test();
+   //dimmer_test();
+   dimmer_outputs_init();
+   /*((struct light)mydevices.myoutputs[0].device).dim_value.value=50;
+   ((struct light)mydevices.myoutputs[0].device).dim_value.needs_update=true;
+   ((struct light)mydevices.myoutputs[0].device).off.value=1;
+   ((struct light)mydevices.myoutputs[0].device).off.needs_update=true;
+ */
+   //write_outputs();
+   interrupts_enable();
+   printf("start\n\r");
+   while(true){
+   if(syncError)
+      output_toggle(LED);
+   //process_outpoints();
+   //write_outputs();
+   if(secondFlag)
+   {
+      secondFlag=false;
+      processTimedEvents();
+      output_toggle(LED);
+   }
+  // print_inputs(false);
+  
+}
+}
 

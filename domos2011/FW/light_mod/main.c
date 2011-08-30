@@ -7,10 +7,12 @@ int temp;
 #include "dimming_functions.c"
 
 #include "datapoints.c"
+#include "timedevents.c"
 //////////////////////////////////////////
 //apagar
 volatile unsigned int32 clock;
-
+volatile unsigned int1 secondFlag;
+volatile unsigned int1 syncError;
 //dimmer constants
 static int TimeBase=0;
 static int32 reg=39;
@@ -42,20 +44,18 @@ void main()
    interrupts_enable();
    printf("start\n\r");
    while(true){
+   if(syncError)
+      output_toggle(LED);
    process_outpoints();
    write_outputs();
-  // print_inputs(false);
-   };
-    
-
-   while(organizado==0){}
-   for(temp=0;temp<17;++temp)
+   if(secondFlag)
    {
-      printf("%lu <-> %lu\n\r",fpointer(temp,0),fpointer(temp,1));
+      secondFlag=false;
+      processTimedEvents();
+      output_toggle(LED);
    }
-    int16 auxccp=fpointer(0,1);
-      printf("%lu <-> %u <-> %u\n\r",auxccp,MAKE8(auxccp,1),MAKE8(auxccp,0));
-
+  // print_inputs(false);
+  
 }
-
+}
 
