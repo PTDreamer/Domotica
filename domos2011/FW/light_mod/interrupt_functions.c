@@ -44,10 +44,10 @@ void  TIMER2_isr(void)
 #int_EXT
 void  EXT_isr(void) 
 {
-         unsigned int16 temp= onoffsvalue;
-         portc=MAKE8(temp,1);
-         portd=MAKE8(temp,0);
-  
+         portc=MAKE8(onoffsvalue,1);
+         portd=MAKE8(onoffsvalue,0);
+  if(mnumluzes!=0)
+   {
          if (organizado)
          {
             organizado=0;
@@ -65,6 +65,8 @@ void  EXT_isr(void)
          vez=0;
          CCP_1=matrizluz[fpointer(0,0)];
          mnumluzes=fpointer(N_LUZES,0);
+         
+   }
          set_timer1(0);
          syncError=false;
 }

@@ -30,5 +30,8 @@ void hw_setup()
    setup_comparator (NC_NC_NC_NC) ;
    setup_vref (FALSE) ;
    setup_timer_3 (T3_DISABLED | T3_DIV_BY_1) ;
+   
+   setup_wdt(WDT_ON);
+
    //setup_wdt (WDT_ON) ;
    }

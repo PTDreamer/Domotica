@@ -1,8 +1,7 @@
 #include <18F4685.h>
 #device adc=8
 
-#FUSES NOWDT                    //No Watch Dog Timer
-#FUSES WDT128                   //Watch Dog Timer uses 1:128 Postscale
+#FUSES WDT1024                   //Watch Dog Timer uses 1:128 Postscale
 #FUSES H4                       //High speed osc with HW enabled 4X PLL
 #FUSES NOPROTECT                //Code not protected from reading
 #FUSES BROWNOUT                 //Reset when brownout detected
@@ -24,7 +23,7 @@
 #FUSES NOEBTRB                  //Boot block not protected from table reads
 #FUSES NOCPB                    //No Boot Block code protection
 #FUSES LPT1OSC                  //Timer1 configured for low-power operation
-#FUSES MCLR                     //Master Clear pin enabled
+#FUSES NOMCLR                     //Master Clear pin enabled
 #FUSES NOXINST                  //Extended set extension and Indexed Addressing mode disabled (Legacy mode)
 
 #use delay(clock=40000000,RESTART_WDT)

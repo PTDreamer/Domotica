@@ -28,24 +28,23 @@ void process_inpoints(unsigned int datapoint, unsigned int value)//processa os d
 
          else if (array_contains ( & ( (struct light) mydevices.myoutputs[x].device) .on, datapoint))
          {
-            //printf (" * on\n") ;
             ( (struct light) mydevices.myoutputs[x].device) .on.value = value;
             ( (struct light) mydevices.myoutputs[x].device) .on.needs_update = true;
          }
 
          else if (array_contains ( & ( (struct light) mydevices.myoutputs[x].device) .off, datapoint))
          {
-            //printf (" * off\n") ;
-            ( (struct light) mydevices.myoutputs[x].device) .off.value = value;
-            ( (struct light) mydevices.myoutputs[x].device) .off.needs_update = true;
+            ( (struct light) mydevices.myoutputs[x].device).off.value = value;
+            ( (struct light) mydevices.myoutputs[x].device).off.needs_update = true;
          }
 
          break;
          case _on_off:
          if (array_contains ( & ( (struct oNoFF) mydevices.myoutputs[x].device) .on, datapoint))
          {
-            ( (struct oNoFF) mydevices.myoutputs[x].device) .on.value = value;
-            ( (struct oNoFF) mydevices.myoutputs[x].device) .on.needs_update = true;
+           // printf("OF %d\n\r",x);
+            ( (struct oNoFF) mydevices.myoutputs[x].device).on.value = value;
+            ( (struct oNoFF) mydevices.myoutputs[x].device).on.needs_update = true;
          }
 
          else if (array_contains ( & ( (struct oNoFF) mydevices.myoutputs[x].device) .off, datapoint))
@@ -90,7 +89,6 @@ void process_inpoints(unsigned int datapoint, unsigned int value)//processa os d
       switch (( (struct inputs) mydevices.myinputs[x]) .type)
       {
          case timer:
-         // printf ("process datapoint % d with value % d\n", datapoint, value);
          if (array_contains ( & ( (struct timer) mydevices.myinputs[x].device).start, datapoint))
          {
             ( (struct timer) mydevices.myinputs[x].device).timer=0;
@@ -110,10 +108,9 @@ void process_inpoints(unsigned int datapoint, unsigned int value)//processa os d
 
 void process_outpoint_answer(unsigned int adress,unsigned int value)
 {  
-   disable_interrupts (GLOBAL) ;
-   printf ("update answer adress = %u value = %u\n\r", adress, value);
+  /* disable_interrupts (GLOBAL) ;
    delay_ms(100);
-   enable_interrupts (GLOBAL) ;
+   enable_interrupts (GLOBAL) ;*/
    process_inpoints (adress, value); //internal processing
    //TODO CAN Sending of values
 }
@@ -123,14 +120,11 @@ void process_outpoints()
    int x;
    for (x = 0; x < mydevices.numberOfInputs; ++x)
    {
-      // printf ("type = % u\n\r", ( (struct inputs) mydevices.myinputs[x]) .type);
       switch (( (struct inputs) mydevices.myinputs[x]) .type)
       {
          case dimmer_switch:
-         // printf ("dimmer_switch");
          if (( (struct dimmer_switch) mydevices.myinputs[x].device) .dim_level.needs_update)
          {
-            // printf ("dimlevel needs update\n") ;
             process_outpoint_answer (( (struct dimmer_switch) mydevices.myinputs[x].device) .dim_level.adress, ( (struct dimmer_switch) mydevices.myinputs[x].device) .dim_level.value);
             ( (struct dimmer_switch) mydevices.myinputs[x].device) .dim_level.needs_update = false;
             ( (struct dimmer_switch) mydevices.myinputs[x].device) .dim_level.value = 0;
@@ -138,7 +132,6 @@ void process_outpoints()
 
          if (( (struct dimmer_switch) mydevices.myinputs[x].device) .on.needs_update)
          {
-            // printf ("on needs update\n") ;
             process_outpoint_answer (( (struct dimmer_switch) mydevices.myinputs[x].device) .on.adress, ( (struct dimmer_switch) mydevices.myinputs[x].device) .on.value);
             ( (struct dimmer_switch) mydevices.myinputs[x].device) .on.needs_update = false;
             ( (struct dimmer_switch) mydevices.myinputs[x].device) .on.value = 0;
@@ -146,7 +139,6 @@ void process_outpoints()
 
          if (( (struct dimmer_switch) mydevices.myinputs[x].device) .off.needs_update)
          {
-            // printf ("off needs update\n") ;
             process_outpoint_answer (( (struct dimmer_switch) mydevices.myinputs[x].device) .off.adress, ( (struct dimmer_switch) mydevices.myinputs[x].device) .off.value);
             ( (struct dimmer_switch) mydevices.myinputs[x].device) .off.needs_update = false;
             ( (struct dimmer_switch) mydevices.myinputs[x].device) .off.value = 0;
@@ -172,6 +164,7 @@ void process_outpoints()
          case on_off_switch:
          if (( (struct on_off_switch) mydevices.myinputs[x].device) .on.needs_update)
          {
+           // printf("on needs update");
             process_outpoint_answer (( (struct on_off_switch) mydevices.myinputs[x].device) .on.adress, ( (struct on_off_switch) mydevices.myinputs[x].device) .on.value);
             ( (struct on_off_switch) mydevices.myinputs[x].device) .on.needs_update = false;
             ( (struct on_off_switch) mydevices.myinputs[x].device) .on.value = 0;
@@ -188,7 +181,6 @@ void process_outpoints()
          case timer:
           if (( (struct timer) mydevices.myinputs[x].device).on.needs_update)
          {
-         printf("timer needs update");
             process_outpoint_answer (( (struct timer) mydevices.myinputs[x].device).on.adress, ( (struct timer) mydevices.myinputs[x].device) .on.value);
             ( (struct timer) mydevices.myinputs[x].device) .on.needs_update = false;
             ( (struct timer) mydevices.myinputs[x].device) .on.value = 0;

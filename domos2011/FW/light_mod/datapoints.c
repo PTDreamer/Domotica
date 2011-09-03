@@ -34,16 +34,17 @@ void process_inpoints(unsigned int datapoint, unsigned int value)//processa os d
 
          else if (array_contains ( & ( (struct light) mydevices.myoutputs[x].device) .off, datapoint))
          {
-            ( (struct light) mydevices.myoutputs[x].device) .off.value = value;
-            ( (struct light) mydevices.myoutputs[x].device) .off.needs_update = true;
+            ( (struct light) mydevices.myoutputs[x].device).off.value = value;
+            ( (struct light) mydevices.myoutputs[x].device).off.needs_update = true;
          }
 
          break;
          case _on_off:
          if (array_contains ( & ( (struct oNoFF) mydevices.myoutputs[x].device) .on, datapoint))
          {
-            ( (struct oNoFF) mydevices.myoutputs[x].device) .on.value = value;
-            ( (struct oNoFF) mydevices.myoutputs[x].device) .on.needs_update = true;
+           // printf("OF %d\n\r",x);
+            ( (struct oNoFF) mydevices.myoutputs[x].device).on.value = value;
+            ( (struct oNoFF) mydevices.myoutputs[x].device).on.needs_update = true;
          }
 
          else if (array_contains ( & ( (struct oNoFF) mydevices.myoutputs[x].device) .off, datapoint))
@@ -55,7 +56,7 @@ void process_inpoints(unsigned int datapoint, unsigned int value)//processa os d
          break;
          case shutter:
          if (array_contains ( & ( (struct shutter) mydevices.myoutputs[x].device) .up, datapoint))
-         {
+         {printf("UP");
             ( (struct shutter) mydevices.myoutputs[x].device) .up.value = value;
             ( (struct shutter) mydevices.myoutputs[x].device) .up.needs_update = true;
          }
@@ -163,6 +164,7 @@ void process_outpoints()
          case on_off_switch:
          if (( (struct on_off_switch) mydevices.myinputs[x].device) .on.needs_update)
          {
+           // printf("on needs update");
             process_outpoint_answer (( (struct on_off_switch) mydevices.myinputs[x].device) .on.adress, ( (struct on_off_switch) mydevices.myinputs[x].device) .on.value);
             ( (struct on_off_switch) mydevices.myinputs[x].device) .on.needs_update = false;
             ( (struct on_off_switch) mydevices.myinputs[x].device) .on.value = 0;

@@ -2,7 +2,7 @@
 enum switch_outstate {on, off, dimming, dimmed, maxed};
 enum switch_direction {up, down};
 enum switch_state {button_pressed, button_depressed};
-enum output_type {_on_off, dimmer,shutter};
+enum output_type {_on_off=100, dimmer,shutter};
 enum output_state {_on, _off, _dimmed};
 enum input_type {dimmer_switch,on_off_switch,button_switch,timer,none};
 
@@ -136,7 +136,7 @@ typedef struct devices
       unsigned int numberOfInputs;
       unsigned int numberOfOutputs;
       struct inputs myinputs[10];
-      struct outputs myoutputs[10];
+      struct outputs myoutputs[16];
 }devicestype;
 
 devicestype mydevices;
@@ -172,7 +172,7 @@ void dimmer_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,s
       ((struct dimmer_switch)input->device).realbutton=inputs[real_button];
       ((struct dimmer_switch)input->device).timer=0;
 }
-void on_off_init(unsigned int dim_adr,unsigned int on_adr,unsigned int off_adr,struct inputs* input,unsigned int real_button)
+void on_off_init(unsigned int on_adr,unsigned int off_adr,struct inputs* input,unsigned int real_button)
 {
       struct on_off_switch sw;
       input->type=on_off_switch;
@@ -284,12 +284,13 @@ void button_test()
     //  sw.dim_level.value=69;
     //  mydevices.myinputs[0].device=sw;
     //  printf("VALUE=%u\n\r",mydevices.myinputs[0].device.dim_level.value);
-    //  on_off_init(1,2,3,&mydevices.myinputs[0],0);
+      on_off_init(1,2,&mydevices.myinputs[0],2);
    // button_init(2,3,&mydevices.myinputs[0],0,false);
     unsigned int start_adr[8]={2,255,255,255,255,255,255,255};
     unsigned int empty[8]={255,255,255,255,255,255,255,255};
    // timer_init(start_adr,empty,4,5,&mydevices.myinputs[1],time_on,5);
-      dimmer_init(1,2,3,&mydevices.myinputs[0],0);
+     // dimmer_init(1,2,3,&mydevices.myinputs[0],0);
+     
       //printf("VALUE=%u\n\r",mydevices.myinputs[0].device.dim_level.value);
      // while(true){};
 }
