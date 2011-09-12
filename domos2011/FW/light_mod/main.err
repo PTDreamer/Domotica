@@ -1,16 +1,14 @@
 >>> Warning 208 "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c" Line 132(15,23): Function not void and does not return a value  can_push
 >>> Warning 208 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\eprom.c" Line 4(1,14): Function not void and does not return a value  _write_eeprom
->>> Warning 216 "main.c" Line 110(0,1): Interrupts disabled during call to prevent re-entrancy:  (can_set_id)
->>> Warning 216 "main.c" Line 110(0,1): Interrupts disabled during call to prevent re-entrancy:  (@MUL1616)
->>> Warning 216 "main.c" Line 110(0,1): Interrupts disabled during call to prevent re-entrancy:  (@WRITEBITA)
->>> Warning 216 "main.c" Line 110(0,1): Interrupts disabled during call to prevent re-entrancy:  (@READBITA)
+>>> Warning 216 "main.c" Line 119(0,1): Interrupts disabled during call to prevent re-entrancy:  (can_set_id)
+>>> Warning 216 "main.c" Line 119(0,1): Interrupts disabled during call to prevent re-entrancy:  (@MUL1616)
 >>> Warning 202 "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c" Line 11(6,16): Variable never used:   can_rsfull
 >>> Warning 202 "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c" Line 16(6,17): Variable never used:   can_tsempty
 >>> Warning 202 "main.c" Line 5(5,9): Variable never used:   temp
 >>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\struct_and_enums.c" Line 289(18,27): Variable never used:   start_adr
 >>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\struct_and_enums.c" Line 290(18,23): Variable never used:   empty
->>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\dimming_functions.c" Line 283(17,24): Variable never used:   dim_adr
->>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\dimming_functions.c" Line 286(17,28): Variable never used:   timedon_adr
->>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\dimming_functions.c" Line 287(17,22): Variable never used:   empty
-      Memory usage:   ROM=35%      RAM=48% - 54%
-      0 Errors,  14 Warnings.
+>>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\dimming_functions.c" Line 284(17,24): Variable never used:   dim_adr
+>>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\dimming_functions.c" Line 287(17,28): Variable never used:   timedon_adr
+>>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\dimming_functions.c" Line 288(17,22): Variable never used:   empty
+      Memory usage:   ROM=33%      RAM=48% - 54%
+      0 Errors,  12 Warnings.

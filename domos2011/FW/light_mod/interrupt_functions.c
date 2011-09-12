@@ -77,7 +77,6 @@ void CCP1_isr(void)
    if(mnumluzes!=0)
    {
       int16 auxccp=fpointer(vez,1);
-     // printf("AUXCPP %lu",auxccp);
       portc=(portc & MAKE8(auxccp,1));
       portd=(portd & MAKE8(auxccp,0));
       ++vez;
@@ -104,6 +103,7 @@ void  BUSCOL_isr(void)
 #int_OSCF
 void  OSCF_isr(void) 
 {
+   oscError=1;
 }
 
 #int_canrx0
@@ -176,6 +176,6 @@ void interrupts_enable()
    //enable_interrupts (int_CANTX0) ;
    //enable_interrupts (int_CANRX1) ;
    //enable_interrupts (int_CANRX0) ;
-   //enable_interrupts (int_OSCF) ;
+   enable_interrupts (int_OSCF) ;
    enable_interrupts (GLOBAL) ;
 }

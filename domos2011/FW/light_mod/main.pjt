@@ -32,5 +32,5 @@ Count=1
 10=timedevents.c
 11=debug.c
 12=eprom.c
-13=
+13=..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.c
 14=

@@ -173,7 +173,7 @@ void write_outputs()
    int1 update_dimmers=false;
    for(x=0;x<mydevices.numberOfOutputs;++x)
    {
-      printf("%d",x);
+      //printf("%d",x);
       switch (((struct outputs)mydevices.myoutputs[x]).type) {
          case dimmer:
             if(((struct light)mydevices.myoutputs[x].device).dim_value.needs_update)

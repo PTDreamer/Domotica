@@ -56,7 +56,7 @@ void process_inpoints(unsigned int datapoint, unsigned int value)//processa os d
          break;
          case shutter:
          if (array_contains ( & ( (struct shutter) mydevices.myoutputs[x].device) .up, datapoint))
-         {printf("UP");
+         {
             ( (struct shutter) mydevices.myoutputs[x].device) .up.value = value;
             ( (struct shutter) mydevices.myoutputs[x].device) .up.needs_update = true;
          }

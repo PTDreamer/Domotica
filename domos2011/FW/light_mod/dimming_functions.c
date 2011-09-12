@@ -149,7 +149,9 @@ void dimmer_outputs_init()
    {
       switch (((struct outputs)mydevices.myoutputs[x]).type) {
          case dimmer:
+#ifdef DEBUG
          printf("used dimmer!!!\n\r");
+#endif
             lights[used_dimmers]=light_pins[((struct light)mydevices.myoutputs[x].device).output_pin];
             ((struct light)mydevices.myoutputs[x].device).internal_order=used_dimmers;
             ++used_dimmers;          
@@ -222,7 +224,7 @@ void write_outputs()
                if(((struct oNoFF)mydevices.myoutputs[x].device).on.value)
                {
                   onoffsvalue=onoffsvalue & light_pins[((struct oNoFF)mydevices.myoutputs[x].device).output_pin];
-                  printf(".X=%d %d\n\d",x,(((struct oNoFF)mydevices.myoutputs[1].device).on.needs_update));
+                 
                }
                ((struct light)mydevices.myoutputs[x].device).on.needs_update=false;
             }
@@ -230,7 +232,6 @@ void write_outputs()
            case shutter:
            if(((struct shutter)mydevices.myoutputs[x].device).up.needs_update && ((((struct shutter)mydevices.myoutputs[x].device).state==idle)||(((struct shutter)mydevices.myoutputs[x].device).state==goingUp)))
             {
-                       printf("shitter");
                if(((struct shutter)mydevices.myoutputs[x].device).up.value)
                {
                      ((struct shutter)mydevices.myoutputs[x].device).internalCounter=0;

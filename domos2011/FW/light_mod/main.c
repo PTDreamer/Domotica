@@ -3,6 +3,7 @@
 #include "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h"
 #include "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c"
 int temp;
+//#define DEBUG
 #include "struct_and_enums.c"
 #include "dimming_functions.c"
 
@@ -15,6 +16,8 @@ int temp;
 volatile unsigned int32 clock;
 volatile unsigned int1 secondFlag;
 volatile unsigned int1 syncError;
+volatile unsigned int1 oscError=0;
+
 //dimmer constants
 static int TimeBase=0;
 static int32 reg=39;
@@ -44,7 +47,7 @@ void main()
    
    ///////////////QUARTO GRANDE//////////////////////////////
    eeprom_on_off_init(1,2,2);//2
-   unsigned int off_adr[8]={2,255,255,255,255,255,255,255};
+   unsigned int off_adr[8]={2,10,255,255,255,255,255,255};
    unsigned int on_adr[8]={1,255,255,255,255,255,255,255};
    unsigned int x_adr[8]={1,255,255,255,255,255,255,255};
    eeprom_onOff_out_init(on_adr,off_adr,4);
@@ -55,14 +58,19 @@ void main()
    eeprom_button_init(5,6,0,true);//2
    eeprom_button_init(7,8,1,true);//2
    off_adr[0]=255;
+   off_adr[1]=255;
+   
    on_adr[0]=5;
    x_adr[0]=7;
-   eeprom_shutter_out_init(on_adr,x_adr,off_adr,off_adr,11,10,1,10);
+   eeprom_shutter_out_init(on_adr,x_adr,off_adr,off_adr,11,10,0,10);
+   eeprom_on_off_init(9,10,7);
    /////////////////////////////////////////////////7
    
    
    readDevices();
-   printf("inputs:%d outputs:%d %d %d\n\r",mydevices.numberOfInputs,mydevices.numberOfOutputs,((struct outputs)mydevices.myoutputs[0]).type,((struct outputs)mydevices.myoutputs[1]).type);
+#ifdef DEBUG  
+    printf("inputs:%d outputs:%d %d %d\n\r",mydevices.numberOfInputs,mydevices.numberOfOutputs,((struct outputs)mydevices.myoutputs[0]).type,((struct outputs)mydevices.myoutputs[1]).type);
+#endif
    
    dimmer_outputs_init();
    /*((struct light)mydevices.myoutputs[0].device).dim_value.value=50;
@@ -77,7 +85,7 @@ void main()
  printf("start\n\r");
    while(true){
    restart_wdt();
-   if(syncError)
+   if(syncError || oscError)
    {  
       ++ledErrorCounter;
       if(ledErrorCounter>1000)
@@ -86,20 +94,21 @@ void main()
          ledErrorCounter=0;
       }
    }
+#ifdef DEBUG
    if(kbhit())
    {
       setup_wdt(WDT_OFF);
       disable_interrupts (GLOBAL) ;
       goDebug();
    }
-   
+#endif
    process_outpoints();
    write_outputs();
    if(secondFlag)
    {
       secondFlag=false;
       processTimedEvents();
-      if(!syncError) output_toggle(LED);
+      if(!syncError && !oscError) output_toggle(LED);
    }
   // print_inputs(false);
   

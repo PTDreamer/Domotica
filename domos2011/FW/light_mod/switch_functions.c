@@ -221,12 +221,10 @@ void print_inputs(int1 disable_updates)
             case button_switch:
                if(((struct button_switch)mydevices.myinputs[0].device).on.needs_update)
                {
-                  printf("on %u\n\r",((struct button_switch)mydevices.myinputs[0].device).on.value);
                   if(disable_updates)((struct button_switch)mydevices.myinputs[0].device).on.needs_update=false;
                }           
                if(((struct button_switch)mydevices.myinputs[0].device).off.needs_update)
                {
-                  printf("off %u\n\r",((struct button_switch)mydevices.myinputs[0].device).off.value);
                   if(disable_updates)((struct button_switch)mydevices.myinputs[0].device).off.needs_update=false;
                }
             break;
