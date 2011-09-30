@@ -20,7 +20,7 @@ Link=0
 Count=1
 1=C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\main
 [Opened Files]
-1=..\light_mod\main.c
+1=main.c
 2=main.h
 3=..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h
 4=switch_functions.c

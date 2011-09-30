@@ -44,9 +44,16 @@ void  TIMER2_isr(void)
 #int_EXT
 void  EXT_isr(void) 
 {
+/*
+portc=0xFF;//MAKE8(onoffsvalue,1);
+portd=0xFF;//MAKE8(onoffsvalue,0);
+CCP_1=36819;
+set_timer1(0);
+return;*/
+
          portc=MAKE8(onoffsvalue,1);
          portd=MAKE8(onoffsvalue,0);
-  if(mnumluzes!=0)
+ 
    {
          if (organizado)
          {
@@ -73,7 +80,11 @@ void  EXT_isr(void)
 
 #int_CCP1
 void CCP1_isr(void) 
-{  
+{  /*
+portc=(portc & MAKE8(0b1111111111111110,1));
+portd=(portd & MAKE8(0b1111111111111110,0));
+return;*/
+    // while(true){};
    if(mnumluzes!=0)
    {
       int16 auxccp=fpointer(vez,1);

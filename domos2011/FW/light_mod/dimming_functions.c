@@ -1,5 +1,5 @@
 #define N_LUZES 16 //numero maximo de dimmers
-int used_dimmers=0;
+volatile int used_dimmers=0;
 #use fast_io(C)
 #use fast_io(D)
 
@@ -45,6 +45,7 @@ const long Matrizluz[128]={
   
   VOID org(void)
   {
+    // printf("org ");
      INT16 tempd[N_LUZES][2];
      INT numluzes=0;
      INT1 again = 1;
@@ -75,11 +76,16 @@ const long Matrizluz[128]={
            }
         }
      }
-     /* for(temp=0;temp<used_dimmers;++temp)
+   /*   for(temp=0;temp<used_dimmers;++temp)
    {
       printf("DIMMER:%u value=%lu <-> portWrite=%lu\n\r",temp,tempd[temp][0],tempd[temp][1]);
    }*/
-     IF(tempd[0][0] == 0)numluzes = 0;//luzes todas off
+     IF(tempd[0][0] == 0)
+     {
+         numluzes = 0;
+         //luzes todas off
+         //printf("TUDO OFF");
+     }
      ELSE
      {
         numluzes = 1;
@@ -118,7 +124,7 @@ const long Matrizluz[128]={
                  delays2[afa][0] = tempd[fa][0];
                  delays2[afa][1] = tempd[fa][1];
               }
-               //printf("numluzes=%d used_dimmers=%d",numluzes,used_dimmers);
+     //          printf("numluzes=%d used_dimmers=%d",numluzes,used_dimmers);
               ++numluzes;
            }
         }
@@ -126,8 +132,10 @@ const long Matrizluz[128]={
      // printf("XnumluzesX=%d used_dimmers=%d",numluzes,used_dimmers);
      IF(actmat)delays1[N_LUZES][0] = numluzes;
      ELSE  delays2[N_LUZES][0] = numluzes;
-    // printf("num luzes activas=%d valor primeira=%lu portWrite=%lu\n\r",numluzes,delays1[0][0],delays1[0][1]);
-     
+   //  printf("num luzes activas=%d valor primeira=%lu portWrite=%lu\n\r",numluzes,delays1[0][0],delays1[0][1]);
+   //  printf("num luzes activas=%d valor primeira=%lu portWrite=%lu\n\r",numluzes,delays2[0][0],delays2[0][1]);
+    // delays2[0][1]=27498;
+    // delays1[0][1]=27498;
      organizado=1;
   }
 
@@ -135,6 +143,8 @@ void dimmer_outputs_init()
 {
    delays1[N_LUZES][0]=0;
    delays2[N_LUZES][0]=0;
+   pointer=delays1;
+   actmat=0;
    portc=0xFF;
    portd=0xFF;
   // trisc=0x00; //tudo saidas
@@ -183,6 +193,7 @@ void write_outputs()
                if(((struct light)mydevices.myoutputs[x].device).out_state==_on)
                {
                   ltlevel[((struct light)mydevices.myoutputs[x].device).internal_order]=((struct light)mydevices.myoutputs[x].device).dim_value.value;
+                  //printf("ltlevel[%d]=%d\n\r",((struct light)mydevices.myoutputs[x].device).internal_order,((struct light)mydevices.myoutputs[x].device).dim_value.value);
                   update_dimmers=true;
                }
                ((struct light)mydevices.myoutputs[x].device).dim_value.needs_update=false;

@@ -275,6 +275,7 @@ void timer_init(unsigned int *start_adr,unsigned int *stop_adr,unsigned int out_
    ((struct timer)input->device).off.adress=out_off;
    copy_array(start_adr,&((struct timer)input->device).start,8);
    copy_array(stop_adr,&((struct timer)input->device).stop,8);
+  // printf("start %d stop %d outon %d outoff %d type %d time %Lu",((struct timer)input->device).start.adress[0],((struct timer)input->device).stop.adress[0],out_on,out_off,type,timeToAct);
 }
 //////////////////////////////////////////////////////////////////////////////
 

@@ -22,12 +22,14 @@ void process_inpoints(unsigned int datapoint, unsigned int value)//processa os d
          // printf ("process datapoint % d with value % d\n", datapoint, value);
          if (array_contains ( & ( (struct light) mydevices.myoutputs[x].device) .dim_value, datapoint))
          {
+          //  printf("DIM");
             ( (struct light) mydevices.myoutputs[x].device) .dim_value.value = value;
             ( (struct light) mydevices.myoutputs[x].device) .dim_value.needs_update = true;
          }
 
          else if (array_contains ( & ( (struct light) mydevices.myoutputs[x].device) .on, datapoint))
          {
+        // printf("DIM ON");
             ( (struct light) mydevices.myoutputs[x].device) .on.value = value;
             ( (struct light) mydevices.myoutputs[x].device) .on.needs_update = true;
          }
@@ -88,17 +90,22 @@ void process_inpoints(unsigned int datapoint, unsigned int value)//processa os d
    {
       switch (( (struct inputs) mydevices.myinputs[x]) .type)
       {
+        
+         
          case timer:
+          if(value==1)
+          {
          if (array_contains ( & ( (struct timer) mydevices.myinputs[x].device).start, datapoint))
-         {
+         {//printf("AKI1");
             ( (struct timer) mydevices.myinputs[x].device).timer=0;
             ( (struct timer) mydevices.myinputs[x].device).active=true;
          }
 
          else if (array_contains ( & ( (struct timer) mydevices.myinputs[x].device).stop, datapoint))
-         {
+         {//printf("AKI2");
             ( (struct timer) mydevices.myinputs[x].device).timer=0;
             ( (struct timer) mydevices.myinputs[x].device).active=false;
+         }
          }
          break;
       }
