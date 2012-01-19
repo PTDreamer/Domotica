@@ -31,9 +31,12 @@ void hw_setup()
    setup_vref (FALSE) ;
    setup_timer_3 (T3_DISABLED | T3_DIV_BY_1) ;
    
-   setup_wdt(WDT_ON);
+  // setup_wdt(WDT_ON);
    output_low(PIN_B1);
    output_low(PIN_B6);
    output_low(PIN_B7);
-   //setup_wdt (WDT_ON) ;
+   output_low(PIN_E3);
+   #use fast_io(C)
+   #use fast_io(D)
+   setup_wdt (WDT_ON) ;
    }

@@ -33,4 +33,5 @@ Count=1
 11=debug.c
 12=eprom.c
 13=..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.c
-14=
+14=..\..\..\..\..\..\..\Program Files\PICC\devices\18F4685.h
+15=

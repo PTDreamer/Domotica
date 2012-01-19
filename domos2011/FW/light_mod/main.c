@@ -88,7 +88,7 @@ void main()
    /////////////////////////////////////////////////7
    
    ///////////////QUARTO GRANDE//////////////////////////////
-   eeprom_on_off_init(1,2,2);//2
+   eeprom_on_off_init(1,2,2);//2 on_adr off_adr real_button inicia botao
    unsigned int on_adr[8]={1,255,255,255,255,255,255,255};
    unsigned int off_adr[8]={2,10,255,255,255,255,255,255};
  
@@ -96,31 +96,43 @@ void main()
    unsigned int ventax_off_adr[8]={16,255,255,255,255,255,255,255};
 
    unsigned int x_adr[8]={1,255,255,255,255,255,255,255};
-   eeprom_onOff_out_init(on_adr,off_adr,4);
+   eeprom_onOff_out_init(on_adr,off_adr,4);//SANCA?
    
-   eeprom_on_off_init(3,4,4);
-   
+   //outputs 4=sanca 3=casabanho 2=casa de banho 9=ventax 1=corredor
+   ///casa de banho
+   eeprom_on_off_init(3,4,4);//interruptor casa de banho??  
    off_adr[0]=4;
    on_adr[0]=3;
    eeprom_timer_init(off_adr,on_adr,15,16,time_off,60);
-   eeprom_onOff_out_init(on_adr,off_adr,3);
-   eeprom_onOff_out_init(on_adr,off_adr,2);
+   eeprom_onOff_out_init(on_adr,off_adr,3); //luz casa de banho
+   eeprom_onOff_out_init(on_adr,off_adr,2); //luz2 casa de banho
    eeprom_onOff_out_init(on_adr,ventax_off_adr,9);//VENTAX
+   ///fim casa de banho
    
-   eeprom_on_off_init(17,18,5);//corredor
+   //corredor
+   eeprom_on_off_init(17,18,5);//interruptor luz corredor
    unsigned int corredor_on_adr[8]={17,255,255,255,255,255,255,255};
    unsigned int corredor_off_adr[8]={18,255,255,255,255,255,255,255};
-   eeprom_onOff_out_init(corredor_on_adr,corredor_off_adr,1);
-   eeprom_button_init(5,6,0,true);//2
+   eeprom_onOff_out_init(corredor_on_adr,corredor_off_adr,1); //luz corredor
+   //fim corredor
+   
+   eeprom_button_init(5,6,0,true);//2 //estores
    eeprom_button_init(7,8,1,true);//2
+   
    off_adr[0]=255;
    off_adr[1]=255;
-   
    on_adr[0]=5;
    x_adr[0]=7;
-   eeprom_shutter_out_init(on_adr,x_adr,off_adr,off_adr,11,10,0,10);
-   eeprom_on_off_init(9,10,7);
+   eeprom_shutter_out_init(on_adr,x_adr,off_adr,off_adr,11,10,0,10);//up down fullup full down
    
+   eeprom_on_off_init(9,10,6);
+   eeprom_on_off_init(20,21,7);
+   unsigned int cama_on_adr[8]={9,255,255,255,255,255,255,255};
+   unsigned int cama_off_adr[8]={10,255,255,255,255,255,255,255};
+   eeprom_onOff_out_init(cama_on_adr,cama_off_adr,7);
+   cama_on_adr[0]=20;
+   cama_off_adr[0]=21;
+   eeprom_onOff_out_init(cama_on_adr,cama_off_adr,6);
    /////////////////////////////////////////////////7
    
    readDevices();
@@ -136,7 +148,7 @@ void main()
  */
  
    write_outputs();
- printf("start %Lu\n\r",fpointer(N_LUZES,0)); 
+// printf("start %Lu\n\r",fpointer(N_LUZES,0)); 
  interrupts_enable();
 
    while(true){

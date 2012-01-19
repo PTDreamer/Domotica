@@ -7,7 +7,7 @@
 #FUSES BROWNOUT                 //Reset when brownout detected
 #FUSES BORV45                   //Brownout reset at 2.0V
 #FUSES PUT                    //No Power Up Timer
-#FUSES NOCPD                    //No EE protection
+#FUSES CPD                    //No EE protection
 #FUSES STVREN                   //Stack full/underflow will cause reset
 #FUSES NODEBUG                  //No Debug mode for ICD
 #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O

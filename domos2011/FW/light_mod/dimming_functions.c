@@ -1,7 +1,6 @@
 #define N_LUZES 16 //numero maximo de dimmers
 volatile int used_dimmers=0;
-#use fast_io(C)
-#use fast_io(D)
+
 
 int1 organizado;//flag que diz se os dimmings estao organizados
 int1 actmat=0;//matriz em uso

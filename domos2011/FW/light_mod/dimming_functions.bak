@@ -143,6 +143,8 @@ void dimmer_outputs_init()
 {
    delays1[N_LUZES][0]=0;
    delays2[N_LUZES][0]=0;
+   pointer=delays1;
+   actmat=0;
    portc=0xFF;
    portd=0xFF;
   // trisc=0x00; //tudo saidas

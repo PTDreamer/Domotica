@@ -1,18 +1,18 @@
 
-ROM used: 33018 (34%)
-          33018 (34%) including unused fragments
+ROM used: 33054 (34%)
+          33054 (34%) including unused fragments
 
           10 Average locations per line
           28 Average locations per statement
 
-RAM used: 1609 (49%) at main() level
-          1828 (55%) worst case
+RAM used: 1607 (48%) at main() level
+          1846 (56%) worst case
 
 Stack used: 8 worst case (out of 30 total available)
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  174    49   4  main.c
+  186    54   5  main.c
    32     0   0  main.h
   467     0   0  ..\..\..\..\..\..\..\Program Files\PICC\devices\18F4685.h
    43     0   0  ..\..\..\..\..\..\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h
@@ -20,16 +20,16 @@ Lines Stmts  %   Files
   443   137  12  ..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.c
   378     0   0  ..\..\..\..\..\..\..\Program Files\PICC\drivers\can-18xxx8.h
   300   101   9  struct_and_enums.c
-  307   159  14  dimming_functions.c
+  306   159  14  dimming_functions.c
   209   116  10  datapoints.c
    93    62   5  timedevents.c
   122    82   7  debug.c
   260   152  13  eprom.c
   235   160  14  switch_functions.c
   193    55   5  interrupt_functions.c
-   40    27   2  hw_setup.c
+   43    28   2  hw_setup.c
 ----- -----
- 3451  1162 Total
+ 3465  1168 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
@@ -41,28 +41,28 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0    504   1  14   706  8.4  can_get_id
 0    210   0  17  1026  7.9  can_putd
  Inline       14  1586  6.9  can_getd
-0    990   1  18  1118  7.6  canReceive
-0    546   1  21  1053  9.8  canTransmit
-0     64   0   9   240  6.0  copy_array
+0    944   1  18  1118  7.6  canReceive
+0    538   1  21  1053  9.8  canTransmit
+0     70   0   9   240  6.0  copy_array
 0    452   1  11  1540  5.4  dimmer_init
 0     90   0  20   605  4.8  on_off_init
 0     98   0  18   671  4.7  button_init
-0    388   1  13  1269  5.4  dimmer_out_init
-0    246   0  11   804  5.3  onOff_out_init
-0    578   1  18  2054  5.6  shutter_out_init
-0    502   1  15  1823  5.3  timer_init
+0    396   1  13  1269  5.4  dimmer_out_init
+0    252   0  11   804  5.3  onOff_out_init
+0    588   1  18  2054  5.6  shutter_out_init
+0    506   1  15  1823  5.3  timer_init
 0     52   0   0             @const557
 0    276   0   0             @const560
  Inline        6   212  4.0  fpointer
 0   1588   2  76  3260  8.0  org
-0    404   1   6   987  7.5  dimmer_outputs_init
+0    410   1   6   987  7.5  dimmer_outputs_init
 0     34   0   5             @MUL1616
-0   4962   8   9  9410 11.2  write_outputs
+0   5070   8   9  9410 11.2  write_outputs
 0     48   0   5   236  7.0  array_contains
-0   3188   5   7  6025 10.6  process_inpoints
+0   3216   5   7  6025 10.6  process_inpoints
 0     14   0   2    54  2.3  process_outpoint_answer
-0   3912   6   7  7278  9.0  process_outpoints
-0   3830   6   7  6697 11.3  processTimedEvents
+0   3978   6   7  7278  9.0  process_outpoints
+0   3918   6   7  6697 11.3  processTimedEvents
 0     10   0   0             @const604
 0     18   0   0             @const606
 0     66   0   6             @WRITEBITA
@@ -76,17 +76,17 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0     50   0   3    52  1.8  _write_eeprom
 0     76   0  11   194  5.0  memToArray
 0     68   0   9   194  5.0  ArrayToMem
-0   2050   3   8  5040 10.5  readDevices
+0   2064   3   8  5040 10.5  readDevices
 0    102   0   3   197  2.9  eeprom_on_off_init
 0    126   0   4   257  2.8  eeprom_button_init
 0    122   0   5   290  3.8  eeprom_onOff_out_init
 0    264   0  12   732  4.3  eeprom_shutter_out_init
 0    276   0  10   658  4.2  eeprom_timer_init
 0     14   0   0             @const718
-0     48   0   4             @PSTRINGCN_65
+0     50   0   4             @PSTRINGCN_65
 0    288   0   4   841  5.3  process_onOff
 0    234   0   4   671  5.3  process_buttons
-0    996   2   7  2559  8.4  process_dimmers
+0    994   2   7  2559  8.4  process_dimmers
 0   1096   2   5  1691  9.1  read_inputs
 0     16   0   0             @const740
 0     10   0   0             @const745
@@ -108,29 +108,27 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0      6   0   0     3  0.0  canirx_int
 0      6   0   0     3  0.0  canerr_int
 0     34   0   0   293  1.4  interrupts_enable
-0    168   0   0   871  3.4  hw_setup
-0   1314   2   2  3286  7.3  MAIN
-0     12   0   0             @const777
-0    192   0   9             @PRINTF_LU_65
+0    178   0   0   901  3.4  hw_setup
+0   1254   2   0  3944  7.4  MAIN
 
 Program metrics:
     Functions               58
-    Statements              1162
-    Comments                707
-    Volume (V)              115921
-    Difficilty (D)          288.9
-    Effort to implement (E) 33485186
-    Time to implement (T)   516 hours, 45 minutes
+    Statements              1168
+    Comments                719
+    Volume (V)              116942
+    Difficilty (D)          289.2
+    Effort to implement (E) 33814271
+    Time to implement (T)   521 hours, 50 minutes
     Est Delivered Bugs (B)  35
     Cyclomatic Complexity   161
-    Maintainability (MI)    44
+    Maintainability (MI)    45
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-00006     0  4  
 00008-00170   362  0  
-00172-0FFFE  32652  32514  
+00172-0FFFE  32688  32478  
 10000-17CBE     0  31936  
 
 
