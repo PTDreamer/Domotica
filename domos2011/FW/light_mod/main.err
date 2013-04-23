@@ -18,5 +18,5 @@
 >>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\dimming_functions.c" Line 298(17,28): Variable never used:   timedon_adr
 >>> Warning 202 "C:\Users\Xapo\Documents\Electronica\domos2011\FW\light_mod\dimming_functions.c" Line 299(17,22): Variable never used:   empty
 >>> Warning 202 "main.c" Line 20(24,35): Variable never used:   misscounter
-      Memory usage:   ROM=36%      RAM=49% - 54%
+      Memory usage:   ROM=38%      RAM=48% - 54%
       0 Errors,  20 Warnings.

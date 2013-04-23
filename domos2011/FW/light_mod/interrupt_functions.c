@@ -44,7 +44,7 @@ void  TIMER2_isr(void)
    }
 }
 
-#int_EXT
+#int_EXT fast
 void  EXT_isr(void) 
 {
 /*

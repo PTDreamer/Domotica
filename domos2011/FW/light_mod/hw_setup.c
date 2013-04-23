@@ -14,9 +14,9 @@ void hw_setup()
    can_set_mode (CAN_OP_NORMAL) ;
       
    ////TIMERS SETUP
-   setup_timer_0 (RTCC_INTERNAL | RTCC_DIV_4); //div16 1.6us thick 104ms overflow
-   setup_timer_1(T1_INTERNAL|T1_DIV_BY_2);
-   setup_timer_2(T2_DIV_BY_16,241,13);
+   setup_timer_0 (RTCC_INTERNAL | RTCC_DIV_4); //div16 1.6us thick 104ms overflow / input reading
+   setup_timer_1(T1_INTERNAL|T1_DIV_BY_2); //capture and compare and sync check 
+   setup_timer_2(T2_DIV_BY_16,241,13);//seconds counter
    setup_ccp1(CCP_COMPARE_INT);
    ////OTHERS
    ext_int_edge(l_to_h);
@@ -30,8 +30,6 @@ void hw_setup()
    setup_comparator (NC_NC_NC_NC) ;
    setup_vref (FALSE) ;
    setup_timer_3 (T3_DISABLED | T3_DIV_BY_1) ;
-   
-  // setup_wdt(WDT_ON);
    output_low(PIN_B1);
    output_low(PIN_B6);
    output_low(PIN_B7);

@@ -1,6 +1,6 @@
 #include <18F4685.h>
 #device adc=8
-
+#device high_ints=true
 #FUSES WDT256                  //Watch Dog Timer uses 1:128 Postscale
 #FUSES H4                       //High speed osc with HW enabled 4X PLL
 #FUSES NOPROTECT                //Code not protected from reading
