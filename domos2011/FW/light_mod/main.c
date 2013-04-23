@@ -3,7 +3,7 @@
 #include "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\global_defs.h"
 #include "C:\Users\Programacao\Documents\CCS_Projects\18F\LightMod\can_functions.c"
 int temp;
-//#define DEBUG
+#define DEBUG TRUE
 #include "struct_and_enums.c"
 #include "dimming_functions.c"
 
@@ -17,7 +17,7 @@ volatile unsigned int32 clock;
 volatile unsigned int1 secondFlag;
 volatile unsigned int1 syncError;
 volatile unsigned int1 oscError=0;
-
+volatile unsigned long misscounter;
 //dimmer constants
 static int TimeBase=0;
 static int32 reg=39;
@@ -87,6 +87,7 @@ void main()
    */
    /////////////////////////////////////////////////7
    
+   /*
    ///////////////QUARTO GRANDE//////////////////////////////
    eeprom_on_off_init(1,2,2);//2 on_adr off_adr real_button inicia botao
    unsigned int on_adr[8]={1,255,255,255,255,255,255,255};
@@ -134,7 +135,60 @@ void main()
    cama_off_adr[0]=21;
    eeprom_onOff_out_init(cama_on_adr,cama_off_adr,6);
    /////////////////////////////////////////////////7
+   */ 
+   /////////////////////QUARTO RENATA///////////////
+   //
+   // INPUTS 
+   // 0,1 cozinha
+   // 2,3 quarto
+   //
+   // OUTPUTS
+   // 5 quarto renata economica
+   // 6 janela hologeneo
+   // 7 entrada
+   // 2 cozinha fluorescente
+   // 3 cima balcao halogeneo
+   // 4 divisoria halogeneo
+   // 10 balcao baixo verde
+   // 11 balcao cima verde
+   // 12 balcao cima vermelho
+   // 13 balcao cima azul
+   // 14 balcao baixo azul
+   // 15 balcao baixo vermelho
+   //INPUT INIT
+   eeprom_on_off_init(60,61,0);//on_adr off_adr real_btn interruptor cozinha 1
+   eeprom_on_off_init(62,63,1);//on_adr off_adr real_btn interruptor cozinha 2  
+// eeprom_dimmer_init(68,62,63,1);//dim_adr on_adr off_adr
+   eeprom_on_off_init(64,65,2);//on_adr off_adr real_btn interruptor quarto renata 1
+//   eeprom_on_off_init(66,67,3);//on_adr off_adr real_btn interruptor quarto renata 2  
+   eeprom_dimmer_init(68,66,67,3);//dim_adr on_adr off_adr
+  
+   //OUTPUT INIT
+   unsigned int on_adr[8]={60,255,255,255,255,255,255,255};
+   unsigned int off_adr[8]={61,10,255,255,255,255,255,255};
+   unsigned int dim_adr[8]={68,255,255,255,255,255,255,255};
+   eeprom_onOff_out_init(on_adr,off_adr,2); //luz cozinha fluorescente
+   on_adr[0]=62;
+   off_adr[0]=63;
+   eeprom_onOff_out_init(on_adr,off_adr,3); //luz cozinha cima balcao halogeneo
+   eeprom_onOff_out_init(on_adr,off_adr,4); //luz cozinha divisoria
+   eeprom_onOff_out_init(on_adr,off_adr,15); //luz balcao baixo vermelho
+   eeprom_onOff_out_init(on_adr,off_adr,12); //luz balcao cima vermelho
+   //eeprom_dimmer_out_init(dim_adr,on_adr,off_adr,3); //luz cozinha cima balcao halogeneo
+   //eeprom_dimmer_out_init(dim_adr,on_adr,off_adr,4); //luz cozinha divisoria
+   //eeprom_dimmer_out_init(dim_adr,on_adr,off_adr,15); //luz cozinha divisoria
    
+   on_adr[0]=64;
+   off_adr[0]=65;
+   eeprom_onOff_out_init(on_adr,off_adr,5); //luz quarto renata economica
+   on_adr[0]=66;
+   off_adr[0]=67;
+  // eeprom_onOff_out_init(on_adr,off_adr,7); //luz quarto renata entrada
+  // eeprom_onOff_out_init(on_adr,off_adr,6); //luz quarto renata janela
+   eeprom_dimmer_out_init(dim_adr,on_adr,off_adr,7); //luz quarto renata entrada
+   eeprom_dimmer_out_init(dim_adr,on_adr,off_adr,6); //luz quarto renata janela
+   
+  
    readDevices();
 #ifdef DEBUG  
     printf("inputs:%d outputs:%d %d %d\n\r",mydevices.numberOfInputs,mydevices.numberOfOutputs,((struct outputs)mydevices.myoutputs[0]).type,((struct outputs)mydevices.myoutputs[1]).type);

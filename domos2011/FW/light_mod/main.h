@@ -1,7 +1,7 @@
 #include <18F4685.h>
 #device adc=8
 
-#FUSES WDT1024                   //Watch Dog Timer uses 1:128 Postscale
+#FUSES WDT256                  //Watch Dog Timer uses 1:128 Postscale
 #FUSES H4                       //High speed osc with HW enabled 4X PLL
 #FUSES NOPROTECT                //Code not protected from reading
 #FUSES BROWNOUT                 //Reset when brownout detected
@@ -27,5 +27,5 @@
 //#FUSES NOXINST                  //Extended set extension and Indexed Addressing mode disabled (Legacy mode)
 
 #use delay(clock=40000000,RESTART_WDT)
-#use rs232(baud=115200,parity=N,xmit=PIN_B5,rcv=PIN_B4,bits=8,restart_wdt)
+#use rs232(baud=9600,parity=N,xmit=PIN_B5,rcv=PIN_B4,bits=8,restart_wdt)
 

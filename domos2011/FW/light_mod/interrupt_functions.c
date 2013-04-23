@@ -9,6 +9,9 @@ void  TIMER0_isr(void)
 void  TIMER1_isr(void) 
 {
    syncError = 1;
+      portc=MAKE8(onoffsvalue,1);
+         portd=MAKE8(onoffsvalue,0);
+         printf("MISS");
 }
 #int_TIMER2
 void  TIMER2_isr(void)
@@ -45,15 +48,15 @@ void  TIMER2_isr(void)
 void  EXT_isr(void) 
 {
 /*
-portc=0xFF;//MAKE8(onoffsvalue,1);
-portd=0xFF;//MAKE8(onoffsvalue,0);
+portc=MAKE8(onoffsvalue,1);
+portd=MAKE8(onoffsvalue,0);
 CCP_1=36819;
+mnumluzes=0;
 set_timer1(0);
-return;*/
-
+return;
+*/
          portc=MAKE8(onoffsvalue,1);
          portd=MAKE8(onoffsvalue,0);
- 
    {
          if (organizado)
          {
@@ -92,7 +95,7 @@ return;*/
       portd=(portd & MAKE8(auxccp,0));
       ++vez;
       --mnumluzes;
-      CCP_1=matrizluz[fpointer(vez,0)];
+      if(mnumluzes!=0) CCP_1=matrizluz[fpointer(vez,0)];
    }
 }
 
@@ -166,13 +169,13 @@ void canerr_int ( )
 
 void interrupts_enable()
 {
-   enable_interrupts (int_canrx0);
-   enable_interrupts (int_canrx1);
-   enable_interrupts (int_cantx0);
-   enable_interrupts (int_cantx1);
-   enable_interrupts (int_cantx2);
-   enable_interrupts (int_canirx);
-   enable_interrupts (int_canerr);
+   //enable_interrupts (int_canrx0);
+   //enable_interrupts (int_canrx1);
+   //enable_interrupts (int_cantx0);
+   //enable_interrupts (int_cantx1);
+   //enable_interrupts (int_cantx2);
+   //enable_interrupts (int_canirx);
+   //enable_interrupts (int_canerr);
    enable_interrupts(INT_CCP1);
    enable_interrupts (int_TIMER0) ;
    enable_interrupts (int_TIMER1) ;
@@ -187,6 +190,6 @@ void interrupts_enable()
    //enable_interrupts (int_CANTX0) ;
    //enable_interrupts (int_CANRX1) ;
    //enable_interrupts (int_CANRX0) ;
-   enable_interrupts (int_OSCF) ;
+   //enable_interrupts (int_OSCF) ;
    enable_interrupts (GLOBAL) ;
 }

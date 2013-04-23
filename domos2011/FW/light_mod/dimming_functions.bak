@@ -1,15 +1,14 @@
 #define N_LUZES 16 //numero maximo de dimmers
 volatile int used_dimmers=0;
-#use fast_io(C)
-#use fast_io(D)
 
+#define printf_ printf
 int1 organizado;//flag que diz se os dimmings estao organizados
 int1 actmat=0;//matriz em uso
 int16 pointer;//apontador para matriz em uso
 int vez;//indice da matriz de dimming corrente
 volatile int mnumluzes=0;//quantos valores de dimming diferentes temos
 volatile unsigned int16 onoffsvalue=0xFFFF;
-int ltlevel[N_LUZES]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int ltlevel[N_LUZES]={50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50};
 volatile int16 delays1[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
 volatile int16 delays2[N_LUZES+1][2]={0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15};
 const unsigned int16 light_pins[N_LUZES]={
@@ -185,7 +184,7 @@ void write_outputs()
    int1 update_dimmers=false;
    for(x=0;x<mydevices.numberOfOutputs;++x)
    {
-      //printf("%d",x);
+     // printf_("%d",x);
       switch (((struct outputs)mydevices.myoutputs[x]).type) {
          case dimmer:
             if(((struct light)mydevices.myoutputs[x].device).dim_value.needs_update)
@@ -193,7 +192,7 @@ void write_outputs()
                if(((struct light)mydevices.myoutputs[x].device).out_state==_on)
                {
                   ltlevel[((struct light)mydevices.myoutputs[x].device).internal_order]=((struct light)mydevices.myoutputs[x].device).dim_value.value;
-                  //printf("ltlevel[%d]=%d\n\r",((struct light)mydevices.myoutputs[x].device).internal_order,((struct light)mydevices.myoutputs[x].device).dim_value.value);
+                //  printf_("ltlevel[%d]=%d\n\r",((struct light)mydevices.myoutputs[x].device).internal_order,((struct light)mydevices.myoutputs[x].device).dim_value.value);
                   update_dimmers=true;
                }
                ((struct light)mydevices.myoutputs[x].device).dim_value.needs_update=false;

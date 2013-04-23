@@ -1,7 +1,10 @@
+
+
 void process_onOff(struct on_off_switch *sw)
 {
    if((sw->current_state==button_pressed) && (sw-> previous_state == button_depressed))
-   {   
+   {
+      printf_("STATE %u",sw->current_state);
       sw-> previous_state = button_pressed;
       if(sw->outstate==off)
       {
@@ -47,9 +50,9 @@ void process_dimmers(struct dimmer_switch *sw)
    int last_level=sw->current_level;
    if(sw->current_state==button_pressed)//se o botao esta premido
    {
-    //  printf("STATE %u",sw->current_state);
-     // printf("DIF %LU",clock - sw->timer);
-      sw-> previous_state = button_pressed;
+      printf_("STATE %u",sw->current_state);
+      printf_("DIF %LU",clock - sw->timer);
+      sw->previous_state = button_pressed;
       if ((clock - sw->timer > reg || sw->outstate == dimming) && sw->outstate!=maxed)
       { 
          if(sw->outstate==off)
